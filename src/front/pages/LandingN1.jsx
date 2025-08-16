@@ -1,7 +1,28 @@
 import { Link } from "react-router-dom";
 import { Navbar } from "../components/Navbar";
+import { useState, useEffect } from 'react';
+import { Spaces } from "../components/Spaces";
 
 export const LandingN1 = () => {
+
+
+    const fullText = "Elimina el caos de la gestión médica, permitiéndote enfocarte en lo que realmente importa: TUS PACIENTES.";
+    const [displayedText, setDisplayedText] = useState("");
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        if (currentIndex < fullText.length) {
+            const timeout = setTimeout(() => {
+                setDisplayedText(prev => prev + fullText[currentIndex]);
+                setCurrentIndex(prev => prev + 1);
+            }, 40); // Velocidad de escritura (50ms por carácter)
+
+            return () => clearTimeout(timeout);
+        }
+    }, [currentIndex, fullText]);
+
+
+
     return (
         <div style={{
             backgroundColor: 'black',
@@ -14,17 +35,24 @@ export const LandingN1 = () => {
             <div className="px-4 py-5 my-5 text-center">
                 <img className="bg-white mb-3" src="/src/front/assets/img/calendar_5276602.png" alt="logoClinicoo" style={{ width: '40px', height: 'auto' }} />
                 <div className="col-lg-6 mx-auto">
-                    <p className="lead mb-4 text-white">
-                        Elimina el caos de la gestión médica, permitiéndote enfocarte en lo que realmente importa: tus pacientes.
+                    <p className="lead mb-4 text-white mt-5">
+                        {displayedText}
                     </p>
-                    <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
                         <button type="button" className="btn btn-light btn-lg px-4 gap-3">Iniciar sesión</button>
                         <button type="button" className="btn btn-outline-secondary btn-lg px-4">Registrarse</button>
                     </div>
                 </div>
 
+                <Spaces />
+
+
+
+                {/* Vistas web */}
+
                 <div className="container">
-                    <div className="container-fluid d-flex flex-colunm justify-content-evenly my-5 ">
+                    <div className="container-fluid row row-cols-1 row-cols-md-3 mb-3 d-flex flex-colunm justify-content-evenly my-5 ">
+                        
                         <div className="card border border-white" style={{ width: '18rem' }}>
                             <img src="/src/front/assets/img/vistasWeb.png" className="card-img-top" alt="..." />
                         </div>
@@ -34,31 +62,19 @@ export const LandingN1 = () => {
                         <div className="card" style={{ width: '18rem' }}>
                             <img src="/src/front/assets/img/vistasWeb.png" className="card-img-top" alt="..." />
                         </div>
+
                     </div>
                 </div>
             </div>
 
-            <div className="divider py-3 my-5 position-relative">
-                <div
-                    className="divider-fill bg-dark opacity-10"
-                    style={{ height: "25px" }}
-                ></div>
-                <div
-                    className="divider-shadow"
-                    style={{
-                        height: "3px",
-                        background: "linear-gradient(rgba(0,0,0,0.1), transparent)",
-                        marginTop: "-2px"
-                    }}
-                ></div>
-            </div>
+           <Spaces />
 
 
             {/* icon grid */}
 
 
             <div className="container text-white">
-                <h2 className="pb-2 border-bottom text-center">Icon grid</h2>
+                <h2 className="pb-2 border-bottom text-center">Características</h2>
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center py-5 text-center w-auto h-auto">
 
                     <div className="d-flex flex-column">
@@ -144,139 +160,89 @@ export const LandingN1 = () => {
                 </div>
             </div>
 
-            <div className="divider py-3 my-5 position-relative">
-                <div
-                    className="divider-fill bg-dark opacity-10"
-                    style={{ height: "25px" }}
-                ></div>
-                <div
-                    className="divider-shadow"
-                    style={{
-                        height: "3px",
-                        background: "linear-gradient(rgba(0,0,0,0.1), transparent)",
-                        marginTop: "-2px"
-                    }}
-                ></div>
-            </div>
+            <Spaces />
 
             {/* Planes */}
 
-            <div className="container opacity-75 bg-black">        
+            <div className="container">
 
-                <div className=" pricing-header p-3 pb-md-4 mx-auto text-center">
+                <div className=" pricing-header p-3 pb-md-4 mx-auto text-center ">
                     <h1 className="display-4 fw-normal text-white">
-                        Pricing
+                        Planes disponibles
                     </h1>
-                    <p className="fs-5 text-white">
-                        Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.
-                    </p>
                 </div>
 
-                <div className="row row-cols-1 row-cols-md-3 mb-3 text-center"> 
-                    <div className="col"> 
-                        <div className="card mb-4 rounded-3 shadow-sm"> 
-                            <div className="card-header py-3"> 
+                <div className="row row-cols-1 row-cols-md-3 mb-3 text-center  d-flex justify-content-center">
+                    <div className="col">
+                        <div className="card mb-4 rounded-3 shadow-sm">
+                            <div className="card-header py-3 bg-dark text-white">
                                 <h4 className="my-0 fw-normal">
                                     Free
-                                </h4> 
-                            </div> 
-                            <div className="card-body"> 
+                                </h4>
+                            </div>
+                            <div className="card-body">
                                 <h1 className="card-title pricing-card-title">
                                     $0
                                     <small className="text-body-secondary fw-light">
                                         /mo
                                     </small>
-                                </h1> 
-                                <ul className="list-unstyled mt-3 mb-4"> 
+                                </h1>
+                                <ul className="list-unstyled mt-3 mb-4">
                                     <li>
                                         10 users included
-                                    </li> 
+                                    </li>
                                     <li>
                                         2 GB of storage
-                                    </li> 
+                                    </li>
                                     <li>
                                         Email support
-                                    </li> 
+                                    </li>
                                     <li>
                                         Help center access
-                                    </li> 
-                                </ul> 
-                                <button type="button" className="w-100 btn btn-lg btn-outline-primary">
+                                    </li>
+                                </ul>
+                                <button type="button" className="w-100 btn btn-lg btn-outline-dark">
                                     Sign up for free
-                                </button> 
-                            </div> 
-                        </div> 
-                    </div> 
-                    <div className="col"> 
-                        <div className="card mb-4 rounded-3 shadow-sm"> 
-                            <div className="card-header py-3"> 
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col">
+                        <div className="card mb-4 rounded-3 shadow-sm">
+                            <div className="card-header bg-dark text-white py-3">
                                 <h4 className="my-0 fw-normal">
                                     Pro
-                                </h4> 
-                            </div> 
+                                </h4>
+                            </div>
                             <div className="card-body">
                                 <h1 className="card-title pricing-card-title">
                                     $15
                                     <small className="text-body-secondary fw-light">
                                         /mo
                                     </small>
-                                </h1> 
-                                <ul className="list-unstyled mt-3 mb-4"> 
+                                </h1>
+                                <ul className="list-unstyled mt-3 mb-4">
                                     <li>
                                         20 users included
-                                    </li> 
+                                    </li>
                                     <li>
                                         10 GB of storage
-                                    </li> 
+                                    </li>
                                     <li>
                                         Priority email support
-                                    </li> 
+                                    </li>
                                     <li>
                                         Help center access
-                                    </li> 
-                                </ul> 
-                                <button type="button" className="w-100 btn btn-lg btn-primary">
+                                    </li>
+                                </ul>
+                                <button type="button" className="w-100 btn btn-lg btn-outline-dark">
                                     Get started
-                                </button> 
-                            </div> 
-                        </div> 
-                    </div> 
-                    <div className="col"> 
-                        <div className="card mb-4 rounded-3 shadow-sm border-primary"> 
-                            <div className="card-header py-3 text-bg-primary border-primary"> 
-                                <h4 className="my-0 fw-normal">
-                                    Enterprise
-                                </h4> 
-                            </div> 
-                            <div className="card-body"> 
-                                <h1 className="card-title pricing-card-title">
-                                    $29
-                                        <small className="text-body-secondary fw-light">
-                                            /mo
-                                        </small>
-                                </h1> 
-                                <ul className="list-unstyled mt-3 mb-4"> 
-                                    <li>
-                                        30 users included
-                                        </li> 
-                                    <li>
-                                        15 GB of storage
-                                    </li> 
-                                    <li>
-                                        Phone and email support
-                                    </li> 
-                                    <li>
-                                        Help center access
-                                    </li> 
-                                </ul> 
-                                <button type="button" className="w-100 btn btn-lg btn-primary">
-                                    Contact us
-                                </button> 
-                            </div> 
-                        </div> 
-                    </div> 
-                </div> 
-                
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
 
             </div>
@@ -284,3 +250,4 @@ export const LandingN1 = () => {
         </div>
     )
 }
+

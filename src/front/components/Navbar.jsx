@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export const Navbar = () => {
 
 	return (
-		<div className="pt-3 opacity-75">
+		<div className="pt-3">
 			<nav className="navbar bg-body-tertiary container rounded-5 ">
 				<div className="container-fluid justify-content-between">
 					<div className="d-flex ">
