@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Navbar } from "../components/Navbar";
 import { useState, useEffect } from 'react';
 import { Spaces } from "../components/Spaces";
+import { Footer } from "../components/Footer";
 
 export const LandingN1 = () => {
 
@@ -75,7 +76,7 @@ export const LandingN1 = () => {
 
             <div className="container text-white">
                 <h2 className="pb-2 border-bottom text-center">Características</h2>
-                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center py-5 text-center w-auto h-auto">
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center pt-5 text-center w-auto h-auto">
 
                     <div className="d-flex flex-column">
                         <div>
@@ -243,7 +244,7 @@ export const LandingN1 = () => {
                     </div>
                 </div>
 
-
+                <Footer />
 
             </div>
 
