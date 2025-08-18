@@ -75,7 +75,7 @@ export const LandingN1 = () => {
 
 
             <div className="container text-white">
-                <h2 className="pb-2 border-bottom text-center">Características</h2>
+                <h2 id="caracteristicas" className="pb-2 border-bottom text-center">Características</h2>
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center pt-5 text-center w-auto h-auto">
 
                     <div className="d-flex flex-column">
@@ -167,8 +167,8 @@ export const LandingN1 = () => {
 
             <div className="container">
 
-                <div className=" pricing-header p-3 pb-md-4 mx-auto text-center ">
-                    <h1 className="display-4 fw-normal text-white">
+                <div  className=" pricing-header p-3 pb-md-4 mx-auto text-center ">
+                    <h1 id="planes" className="display-4 fw-normal text-white">
                         Planes disponibles
                     </h1>
                 </div>
