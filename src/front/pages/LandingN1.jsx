@@ -43,17 +43,23 @@ export const LandingN1 = () => {
                             {displayedText}
                         </p>
                         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
-                            <button type="button" className="btn btn-light btn-lg px-4 gap-3">Iniciar sesión</button>
-                            <button type="button" className="btn btn-outline-secondary btn-lg px-4">Registrarse</button>
+                            
+                            <Link to="">
+                                <button type="button" className="btn btn-light btn-lg px-4 gap-3">Iniciar sesión</button>
+                            </Link>    
+                                <button type="button" className="btn btn-outline-secondary btn-lg px-4">Registrarse</button>
                         </div>
                     </div>
                 </div>
-                    <Spaces />
+                   
            
 
+            </div>
+                <Spaces />
 
                 {/* Vistas web */}
-
+            
+            <div>
                 <div className="container">
                     <div className="container-fluid row row-cols-1 row-cols-md-3 mb-3 d-flex flex-colunm justify-content-evenly my-5 ">
                         
@@ -64,14 +70,13 @@ export const LandingN1 = () => {
                     </div>
                 </div>
             </div>
-
            <Spaces />
 
 
             {/* icon grid */}
 
 
-            <div id="caracteristicas" className=" mx-4 py-5 text-white  bg-dark rounded-5">
+            <div id="caracteristicas" className="container py-5 text-white  bg-dark rounded-5">
                 <h2  className="pb-2 border-bottom text-center">Características</h2>
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center pt-5 text-center w-auto h-auto">
 
