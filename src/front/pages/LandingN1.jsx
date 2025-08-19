@@ -32,15 +32,15 @@ export const LandingN1 = () => {
         }}>
             <Navbar />
 
-            <div className="px-4 py-5 my-5 text-center">
-                <img className="bg-white mb-3" src="/src/front/assets/img/calendar_5276602.png" alt="logoClinicoo" style={{ width: '40px', height: 'auto' }} />
-                <div className="col-lg-6 mx-auto">
-                    <p className="lead mb-4 text-white mt-5">
+            <div classNameName="px-4 py-5 my-5 text-center">
+                <img classNameName="bg-white mb-3" src="/src/front/assets/img/calendar_5276602.png" alt="logoClinicoo" style={{ width: '40px', height: 'auto' }} />
+                <div classNameName="col-lg-6 mx-auto">
+                    <p classNameName="lead mb-4 text-white mt-5">
                         {displayedText}
                     </p>
-                    <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
-                        <button type="button" className="btn btn-light btn-lg px-4 gap-3">Iniciar sesión</button>
-                        <button type="button" className="btn btn-outline-secondary btn-lg px-4">Registrarse</button>
+                    <div classNameName="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
+                        <button type="button" classNameName="btn btn-light btn-lg px-4 gap-3">Iniciar sesión</button>
+                        <button type="button" classNameName="btn btn-outline-secondary btn-lg px-4">Registrarse</button>
                     </div>
                 </div>
 
@@ -50,40 +50,40 @@ export const LandingN1 = () => {
 
                 {/* Vistas web */}
 
-                <div className="container">
-                    <div className="container-fluid row row-cols-1 row-cols-md-3 mb-3 d-flex flex-colunm justify-content-evenly my-5 ">
-                        
-                        <div className="card border border-white" style={{ width: '18rem' }}>
-                            <img src="/src/front/assets/img/vistasWeb.png" className="card-img-top" alt="..." />
+                <div classNameName="container">
+                    <div classNameName="container-fluid row row-cols-1 row-cols-md-3 mb-3 d-flex flex-colunm justify-content-evenly my-5 ">
+
+                        <div classNameName="card border border-white" style={{ width: '18rem' }}>
+                            <img src="/src/front/assets/img/vistasWeb.png" classNameName="card-img-top" alt="..." />
                         </div>
-                        <div className="card" style={{ width: '18rem' }}>
-                            <img src="/src/front/assets/img/vistasWeb.png" className="card-img-top" alt="..." />
+                        <div classNameName="card" style={{ width: '18rem' }}>
+                            <img src="/src/front/assets/img/vistasWeb.png" classNameName="card-img-top" alt="..." />
                         </div>
-                        <div className="card" style={{ width: '18rem' }}>
-                            <img src="/src/front/assets/img/vistasWeb.png" className="card-img-top" alt="..." />
+                        <div classNameName="card" style={{ width: '18rem' }}>
+                            <img src="/src/front/assets/img/vistasWeb.png" classNameName="card-img-top" alt="..." />
                         </div>
 
                     </div>
                 </div>
             </div>
 
-           <Spaces />
+            <Spaces />
 
 
             {/* icon grid */}
 
 
-            <div className="container text-white">
-                <h2 className="pb-2 border-bottom text-center">Características</h2>
-                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center py-5 text-center w-auto h-auto">
+            <div classNameName="container text-white">
+                <h2 classNameName="pb-2 border-bottom text-center">Características</h2>
+                <div classNameName="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center py-5 text-center w-auto h-auto">
 
-                    <div className="d-flex flex-column">
+                    <div classNameName="d-flex flex-column">
                         <div>
-                            <i className="fa-solid fa-swatchbook fa-2xl " ></i>
+                            <i classNameName="fa-solid fa-swatchbook fa-2xl " ></i>
                         </div>
-                        <div className="col d-flex align-items-start">
+                        <div classNameName="col d-flex align-items-start">
                             <div>
-                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                <h3 classNameName="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Organiza
                                 </h3>
                                 <p>Reorganiza citas en segundos, incluso sobre la marcha. Olvídate de perder tiempo reescribiendo horarios.</p>
@@ -91,65 +91,65 @@ export const LandingN1 = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex flex-column">
+                    <div classNameName="d-flex flex-column">
                         <div>
-                            <i className="fa-solid fa-hospital-user fa-2xl"></i>
+                            <i classNameName="fa-solid fa-hospital-user fa-2xl"></i>
                         </div>
-                        <div className="col d-flex align-items-start">
+                        <div classNameName="col d-flex align-items-start">
                             <div>
-                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                <h3 classNameName="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Crear pacientes
                                 </h3>
-                                <p className="my-3">Registra un nuevo paciente en 15 segundos: solo nombre, teléfono y correo. Completa su ficha después si es necesario."</p>
+                                <p classNameName="my-3">Registra un nuevo paciente en 15 segundos: solo nombre, teléfono y correo. Completa su ficha después si es necesario."</p>
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex flex-column">
+                    <div classNameName="d-flex flex-column">
                         <div>
-                            <i className="fa-solid fa-users-viewfinder fa-2xl"></i>
+                            <i classNameName="fa-solid fa-users-viewfinder fa-2xl"></i>
                         </div>
-                        <div className="col d-flex align-items-start">
+                        <div classNameName="col d-flex align-items-start">
                             <div>
-                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                <h3 classNameName="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Busqueda al instante
                                 </h3>
                                 <p>Encuentra cualquier paciente con búsqueda en tiempo real (por nombre, teléfono o diagnóstico). Filtra por últimos atendidos, frecuentes o morosos.</p>
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex flex-column">
+                    <div classNameName="d-flex flex-column">
                         <div>
-                            <i className="fa-solid fa-swatchbook fa-2xl " ></i>
+                            <i classNameName="fa-solid fa-swatchbook fa-2xl " ></i>
                         </div>
-                        <div className="col d-flex align-items-start">
+                        <div classNameName="col d-flex align-items-start">
                             <div>
-                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                <h3 classNameName="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Compara
                                 </h3>
                                 <p>Compara semana vs semana: pacientes atendidos. Identifica tendencias con gráficos de líneas/barras.</p>
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex flex-column">
-                        <div className="text-center">
-                            <i className="fa-solid fa-swatchbook fa-2xl " ></i>
+                    <div classNameName="d-flex flex-column">
+                        <div classNameName="text-center">
+                            <i classNameName="fa-solid fa-swatchbook fa-2xl " ></i>
                         </div>
-                        <div className="col d-flex align-items-start">
+                        <div classNameName="col d-flex align-items-start">
                             <div>
-                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                <h3 classNameName="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Organiza
                                 </h3>
                                 <p>Reorganiza citas en segundos, incluso sobre la marcha. Olvídate de perder tiempo reescribiendo horarios.</p>
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex flex-column">
+                    <div classNameName="d-flex flex-column">
                         <div>
-                            <i className="fa-solid fa-swatchbook fa-2xl " ></i>
+                            <i classNameName="fa-solid fa-swatchbook fa-2xl " ></i>
                         </div>
-                        <div className="col d-flex align-items-start">
+                        <div classNameName="col d-flex align-items-start">
                             <div>
-                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                <h3 classNameName="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Organiza
                                 </h3>
                                 <p>Reorganiza citas en segundos, incluso sobre la marcha. Olvídate de perder tiempo reescribiendo horarios.</p>
@@ -164,30 +164,30 @@ export const LandingN1 = () => {
 
             {/* Planes */}
 
-            <div className="container">
+            <div classNameName="container">
 
-                <div className=" pricing-header p-3 pb-md-4 mx-auto text-center ">
-                    <h1 className="display-4 fw-normal text-white">
+                <div classNameName=" pricing-header p-3 pb-md-4 mx-auto text-center ">
+                    <h1 classNameName="display-4 fw-normal text-white">
                         Planes disponibles
                     </h1>
                 </div>
 
-                <div className="row row-cols-1 row-cols-md-3 mb-3 text-center  d-flex justify-content-center">
-                    <div className="col">
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                            <div className="card-header py-3 bg-dark text-white">
-                                <h4 className="my-0 fw-normal">
+                <div classNameName="row row-cols-1 row-cols-md-3 mb-3 text-center  d-flex justify-content-center">
+                    <div classNameName="col">
+                        <div classNameName="card mb-4 rounded-3 shadow-sm">
+                            <div classNameName="card-header py-3 bg-dark text-white">
+                                <h4 classNameName="my-0 fw-normal">
                                     Free
                                 </h4>
                             </div>
-                            <div className="card-body">
-                                <h1 className="card-title pricing-card-title">
+                            <div classNameName="card-body">
+                                <h1 classNameName="card-title pricing-card-title">
                                     $0
-                                    <small className="text-body-secondary fw-light">
+                                    <small classNameName="text-body-secondary fw-light">
                                         /mo
                                     </small>
                                 </h1>
-                                <ul className="list-unstyled mt-3 mb-4">
+                                <ul classNameName="list-unstyled mt-3 mb-4">
                                     <li>
                                         10 users included
                                     </li>
@@ -201,27 +201,27 @@ export const LandingN1 = () => {
                                         Help center access
                                     </li>
                                 </ul>
-                                <button type="button" className="w-100 btn btn-lg btn-outline-dark">
+                                <button type="button" classNameName="w-100 btn btn-lg btn-outline-dark">
                                     Sign up for free
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div className="col">
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                            <div className="card-header bg-dark text-white py-3">
-                                <h4 className="my-0 fw-normal">
+                    <div classNameName="col">
+                        <div classNameName="card mb-4 rounded-3 shadow-sm">
+                            <div classNameName="card-header bg-dark text-white py-3">
+                                <h4 classNameName="my-0 fw-normal">
                                     Pro
                                 </h4>
                             </div>
-                            <div className="card-body">
-                                <h1 className="card-title pricing-card-title">
+                            <div classNameName="card-body">
+                                <h1 classNameName="card-title pricing-card-title">
                                     $15
-                                    <small className="text-body-secondary fw-light">
+                                    <small classNameName="text-body-secondary fw-light">
                                         /mo
                                     </small>
                                 </h1>
-                                <ul className="list-unstyled mt-3 mb-4">
+                                <ul classNameName="list-unstyled mt-3 mb-4">
                                     <li>
                                         20 users included
                                     </li>
@@ -235,7 +235,7 @@ export const LandingN1 = () => {
                                         Help center access
                                     </li>
                                 </ul>
-                                <button type="button" className="w-100 btn btn-lg btn-outline-dark">
+                                <button type="button" classNameName="w-100 btn btn-lg btn-outline-dark">
                                     Get started
                                 </button>
                             </div>

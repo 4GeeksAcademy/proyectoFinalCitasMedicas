@@ -1,6 +1,6 @@
 from flask import jsonify, url_for
 
-class APIException(Exception):
+className APIException(Exception):
     status_code = 400
 
     def __init__(self, message, status_code=None, payload=None):
