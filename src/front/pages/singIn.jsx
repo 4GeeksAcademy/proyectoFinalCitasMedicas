@@ -3,7 +3,7 @@ import React from "react"
 
 const SingIn = () => {
     return (
-        <div className="container bg-light rounded-5 pe-5">
+        <div className="container bg-light rounded-5 pe-5 pt-2 my-5">
             <div className="row">
                 <nav className="navbar bg-dark rounded-4 ms-3 me-3 my-3 px-4">
                     <div className="container d-flex justify-content-between align-items-center ">
