@@ -2,7 +2,7 @@ export const Spaces = () => {
 
     return (
 
-        <div classNameName="divider position-relative" style={{ margin: "4rem 0" }}>
+        <div className="divider position-relative" style={{ margin: "4rem 0" }}>
             <div
                 style={{
                     height: "30px",

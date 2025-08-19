@@ -386,7 +386,7 @@
           }),
           [
             ["acceptCharset", "accept-charset"],
-            ["classNameName", "className"],
+            ["className", "className"],
             ["htmlFor", "for"],
             ["httpEquiv", "http-equiv"],
           ].forEach(function (e) {
@@ -9821,12 +9821,12 @@
             e.actions,
             t.createElement(
               "div",
-              { classNameName: "text-center mt-5" },
+              { className: "text-center mt-5" },
               t.createElement("h1", null, "Hello Rigo!!"),
               t.createElement("p", null, t.createElement("img", { src: ve })),
               t.createElement(
                 "div",
-                { classNameName: "alert alert-info" },
+                { className: "alert alert-info" },
                 n.message ||
                   "Loading message from the backend (make sure your python backend is running)..."
               ),
@@ -9852,16 +9852,16 @@
             r = e.actions;
           return t.createElement(
             "div",
-            { classNameName: "container" },
+            { className: "container" },
             t.createElement(
               "ul",
-              { classNameName: "list-group" },
+              { className: "list-group" },
               n.demo.map(function (e, n) {
                 return t.createElement(
                   "li",
                   {
                     key: n,
-                    classNameName:
+                    className:
                       "list-group-item d-flex justify-content-between",
                     style: { background: e.background },
                   },
@@ -9880,7 +9880,7 @@
                   t.createElement(
                     "button",
                     {
-                      classNameName: "btn btn-success",
+                      className: "btn btn-success",
                       onClick: function () {
                         return r.changeColor(n, "orange");
                       },
@@ -9896,7 +9896,7 @@
               { to: "/" },
               t.createElement(
                 "button",
-                { classNameName: "btn btn-primary" },
+                { className: "btn btn-primary" },
                 "Back home"
               )
             )
@@ -9914,22 +9914,22 @@
               })());
           return t.createElement(
             "div",
-            { classNameName: "jumbotron" },
+            { className: "jumbotron" },
             t.createElement(
               "h1",
-              { classNameName: "display-4" },
+              { className: "display-4" },
               "This will show the demo element: ",
               r.demo[l.theid].title
             ),
             t.createElement("img", { src: ve }),
-            t.createElement("hr", { classNameName: "my-4" }),
+            t.createElement("hr", { className: "my-4" }),
             t.createElement(
               X,
               { to: "/" },
               t.createElement(
                 "span",
                 {
-                  classNameName: "btn btn-primary btn-lg",
+                  className: "btn btn-primary btn-lg",
                   href: "#",
                   role: "button",
                 },
@@ -9942,28 +9942,28 @@
       var Ee = function () {
           return t.createElement(
             "nav",
-            { classNameName: "navbar navbar-light bg-light" },
+            { className: "navbar navbar-light bg-light" },
             t.createElement(
               "div",
-              { classNameName: "container" },
+              { className: "container" },
               t.createElement(
                 X,
                 { to: "/" },
                 t.createElement(
                   "span",
-                  { classNameName: "navbar-brand mb-0 h1" },
+                  { className: "navbar-brand mb-0 h1" },
                   "React Boilerplate"
                 )
               ),
               t.createElement(
                 "div",
-                { classNameName: "ml-auto" },
+                { className: "ml-auto" },
                 t.createElement(
                   X,
                   { to: "/demo" },
                   t.createElement(
                     "button",
-                    { classNameName: "btn btn-primary" },
+                    { className: "btn btn-primary" },
                     "Check the Context in action"
                   )
                 )
@@ -9974,13 +9974,13 @@
         xe = function () {
           return t.createElement(
             "footer",
-            { classNameName: "footer mt-auto py-3 text-center" },
+            { className: "footer mt-auto py-3 text-center" },
             t.createElement(
               "p",
               null,
               "Made with ",
               t.createElement("i", {
-                classNameName: "fa fa-heart text-danger",
+                className: "fa fa-heart text-danger",
               }),
               " by",
               " ",

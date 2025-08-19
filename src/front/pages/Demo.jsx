@@ -7,14 +7,14 @@ export const Demo = () => {
   const { store, dispatch } = useGlobalReducer()
 
   return (
-    <div classNameName="container">
-      <ul classNameName="list-group">
+    <div className="container">
+      <ul className="list-group">
         {/* Map over the 'todos' array from the store and render each item as a list element */}
         {store && store.todos?.map((item) => {
           return (
             <li
               key={item.id}  // React key for list items.
-              classNameName="list-group-item d-flex justify-content-between"
+              className="list-group-item d-flex justify-content-between"
               style={{ background: item.background }}>
 
               {/* Link to the detail page of this todo. */}
@@ -22,7 +22,7 @@ export const Demo = () => {
 
               <p>Open file ./store.js to see the global store that contains and updates the list of colors</p>
 
-              <button classNameName="btn btn-success"
+              <button className="btn btn-success"
                 onClick={() => dispatch({
                   type: "add_task",
                   payload: { id: item.id, color: '#ffa500' }
@@ -36,7 +36,7 @@ export const Demo = () => {
       <br />
 
       <Link to="/">
-        <button classNameName="btn btn-primary">Back home</button>
+        <button className="btn btn-primary">Back home</button>
       </Link>
     </div>
   );

@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import { Navbar } from "../components/Navbar";
 import { useState, useEffect } from 'react';
 import { Spaces } from "../components/Spaces";
-import { Footer } from "../components/Footer";
+
 
 export const LandingN1 = () => {
 
@@ -44,7 +43,7 @@ export const LandingN1 = () => {
                         </p>
                         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
                             
-                            <Link to="/singIn">
+                            <Link to="/sing-in">
                                 <button type="button" className="btn btn-light btn-lg px-4 gap-3">Iniciar sesión</button>
                             </Link>    
                                 <button type="button" className="btn btn-outline-secondary btn-lg px-4">Registrarse</button>

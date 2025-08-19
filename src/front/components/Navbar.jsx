@@ -9,7 +9,7 @@ export const Navbar = () => {
 					<div className="d-flex">
 						<img className="my-3 mx-3" src="/src/front/assets/img/calendar_5276602.png" alt="logoClinicoo" style={{ width: '40px', height: '40px' }} />
 						
-						<Link to="/LandingN1" className="text-decoration-none text-dark">
+						<Link to="/Landing-n1" className="text-decoration-none text-dark">
 							<h3 className="d-flex my-3 mx-3 ">Clinicoo</h3>
 						</Link>
 					</div>
