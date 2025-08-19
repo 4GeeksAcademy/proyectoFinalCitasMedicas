@@ -25,28 +25,31 @@ export const LandingN1 = () => {
 
 
     return (
-        <div style={{
-            backgroundColor: 'black',
-            margin: 0,
-            padding: 0,
-            minHeight: '100vh'
-        }}>
+        <div 
+            style={{
+                backgroundColor: 'black',
+                margin: 0,
+                padding: 0,
+                minHeight: '100vh'
+            }}
+            >
             <Navbar />
-
-            <div className="px-4 py-5 my-5 text-center">
-                <img className="bg-white mb-3" src="/src/front/assets/img/calendar_5276602.png" alt="logoClinicoo" style={{ width: '40px', height: 'auto' }} />
-                <div className="col-lg-6 mx-auto">
-                    <p className="lead mb-4 text-white mt-5">
-                        {displayedText}
-                    </p>
-                    <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
-                        <button type="button" className="btn btn-light btn-lg px-4 gap-3">Iniciar sesión</button>
-                        <button type="button" className="btn btn-outline-secondary btn-lg px-4">Registrarse</button>
+            
+            <div className="container px-4 py-5 my-5 text-center">
+                 <div className="rounded-5 bg-dark py-5">   
+                    <img className="bg-white mb-3" src="/src/front/assets/img/calendar_5276602.png" alt="logoClinicoo" style={{ width: '40px', height: 'auto' }} />
+                    <div className="col-lg-6 mx-auto">
+                        <p className="lead mb-4 text-white mt-5">
+                            {displayedText}
+                        </p>
+                        <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
+                            <button type="button" className="btn btn-light btn-lg px-4 gap-3">Iniciar sesión</button>
+                            <button type="button" className="btn btn-outline-secondary btn-lg px-4">Registrarse</button>
+                        </div>
                     </div>
                 </div>
-
-                <Spaces />
-
+                    <Spaces />
+           
 
 
                 {/* Vistas web */}
@@ -54,16 +57,10 @@ export const LandingN1 = () => {
                 <div className="container">
                     <div className="container-fluid row row-cols-1 row-cols-md-3 mb-3 d-flex flex-colunm justify-content-evenly my-5 ">
                         
-                        <div className="card border border-white" style={{ width: '18rem' }}>
+                        <div className="card border border-white" style={{ width: '58rem' }}>
                             <img src="/src/front/assets/img/vistasWeb.png" className="card-img-top" alt="..." />
                         </div>
-                        <div className="card" style={{ width: '18rem' }}>
-                            <img src="/src/front/assets/img/vistasWeb.png" className="card-img-top" alt="..." />
-                        </div>
-                        <div className="card" style={{ width: '18rem' }}>
-                            <img src="/src/front/assets/img/vistasWeb.png" className="card-img-top" alt="..." />
-                        </div>
-
+                        
                     </div>
                 </div>
             </div>
@@ -74,8 +71,8 @@ export const LandingN1 = () => {
             {/* icon grid */}
 
 
-            <div className="container text-white">
-                <h2 id="caracteristicas" className="pb-2 border-bottom text-center">Características</h2>
+            <div id="caracteristicas" className=" mx-4 py-5 text-white  bg-dark rounded-5">
+                <h2  className="pb-2 border-bottom text-center">Características</h2>
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center pt-5 text-center w-auto h-auto">
 
                     <div className="d-flex flex-column">
@@ -178,32 +175,32 @@ export const LandingN1 = () => {
                         <div className="card mb-4 rounded-3 shadow-sm">
                             <div className="card-header py-3 bg-dark text-white">
                                 <h4 className="my-0 fw-normal">
-                                    Free
+                                    Clinicoo Pro
                                 </h4>
                             </div>
                             <div className="card-body">
                                 <h1 className="card-title pricing-card-title">
-                                    $0
+                                    $10
                                     <small className="text-body-secondary fw-light">
                                         /mo
                                     </small>
                                 </h1>
                                 <ul className="list-unstyled mt-3 mb-4">
                                     <li>
-                                        10 users included
+                                        <i className="fa-regular fa-calendar-check me-2"></i>Calendario con tus citas organizadas
                                     </li>
                                     <li>
-                                        2 GB of storage
+                                        <i className="fa-solid fa-hospital-user me-2"></i> Perfiles de pacientes
                                     </li>
                                     <li>
-                                        Email support
+                                        <i className="fa-solid fa-user-plus me-2"></i>Creación de pacientes 
                                     </li>
                                     <li>
-                                        Help center access
+                                        <i className="fa-solid fa-user-check me-2"></i>Creación y edición de citas
                                     </li>
                                 </ul>
                                 <button type="button" className="w-100 btn btn-lg btn-outline-dark">
-                                    Sign up for free
+                                    Empezar gratis
                                 </button>
                             </div>
                         </div>
@@ -212,32 +209,32 @@ export const LandingN1 = () => {
                         <div className="card mb-4 rounded-3 shadow-sm">
                             <div className="card-header bg-dark text-white py-3">
                                 <h4 className="my-0 fw-normal">
-                                    Pro
+                                    Clinicoo hospitales
                                 </h4>
                             </div>
                             <div className="card-body">
                                 <h1 className="card-title pricing-card-title">
-                                    $15
+                                    $10
                                     <small className="text-body-secondary fw-light">
                                         /mo
                                     </small>
                                 </h1>
                                 <ul className="list-unstyled mt-3 mb-4">
                                     <li>
-                                        20 users included
+                                        <i className="fa-solid fa-user-group me-2"></i>Múltiples usuarios 
                                     </li>
                                     <li>
-                                        10 GB of storage
+                                        <i className="fa-solid fa-book-medical me-2"></i>Agenda compartida
                                     </li>
                                     <li>
-                                        Priority email support
+                                        <i className="fa-solid fa-coins me-2"></i>Reporte financiero
                                     </li>
                                     <li>
-                                        Help center access
+                                        <i className="fa-solid fa-user-shield me-2"></i>Control de permisos
                                     </li>
                                 </ul>
-                                <button type="button" className="w-100 btn btn-lg btn-outline-dark">
-                                    Get started
+                                <button type="button" disabled className="w-100 btn btn-lg btn-outline-dark">
+                                    Próximamente
                                 </button>
                             </div>
                         </div>

@@ -6,7 +6,7 @@ export const Navbar = () => {
 		<div className="pt-3">
 			<nav className="navbar navbar-expand-lg bg-body-tertiary container rounded-5 fixed-top">
 				<div className="container-fluid justify-content-around">
-					<div className="d-flex ">
+					<div className="d-flex">
 						<img className="my-3 mx-3" src="/src/front/assets/img/calendar_5276602.png" alt="logoClinicoo" style={{ width: '40px', height: '40px' }} />
 						<h3 className="d-flex my-3 mx-3 ">Clinicoo</h3>
 					</div>
