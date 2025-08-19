@@ -70,7 +70,8 @@ export const LandingN1 = () => {
                     </div>
                 </div>
             </div>
-           <Spaces />
+
+            <Spaces />
 
 
             {/* icon grid */}
@@ -80,13 +81,13 @@ export const LandingN1 = () => {
                 <h2  className="pb-2 border-bottom text-center">Características</h2>
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center pt-5 text-center w-auto h-auto">
 
-                    <div className="d-flex flex-column">
+                    <div classNameName="d-flex flex-column">
                         <div>
-                            <i className="fa-solid fa-swatchbook fa-2xl " ></i>
+                            <i classNameName="fa-solid fa-swatchbook fa-2xl " ></i>
                         </div>
-                        <div className="col d-flex align-items-start">
+                        <div classNameName="col d-flex align-items-start">
                             <div>
-                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                <h3 classNameName="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Organiza
                                 </h3>
                                 <p>Reorganiza citas en segundos, incluso sobre la marcha. Olvídate de perder tiempo reescribiendo horarios.</p>
@@ -94,65 +95,65 @@ export const LandingN1 = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex flex-column">
+                    <div classNameName="d-flex flex-column">
                         <div>
-                            <i className="fa-solid fa-hospital-user fa-2xl"></i>
+                            <i classNameName="fa-solid fa-hospital-user fa-2xl"></i>
                         </div>
-                        <div className="col d-flex align-items-start">
+                        <div classNameName="col d-flex align-items-start">
                             <div>
-                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                <h3 classNameName="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Crear pacientes
                                 </h3>
-                                <p className="my-3">Registra un nuevo paciente en 15 segundos: solo nombre, teléfono y correo. Completa su ficha después si es necesario."</p>
+                                <p classNameName="my-3">Registra un nuevo paciente en 15 segundos: solo nombre, teléfono y correo. Completa su ficha después si es necesario."</p>
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex flex-column">
+                    <div classNameName="d-flex flex-column">
                         <div>
-                            <i className="fa-solid fa-users-viewfinder fa-2xl"></i>
+                            <i classNameName="fa-solid fa-users-viewfinder fa-2xl"></i>
                         </div>
-                        <div className="col d-flex align-items-start">
+                        <div classNameName="col d-flex align-items-start">
                             <div>
-                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                <h3 classNameName="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Busqueda al instante
                                 </h3>
                                 <p>Encuentra cualquier paciente con búsqueda en tiempo real (por nombre, teléfono o diagnóstico). Filtra por últimos atendidos, frecuentes o morosos.</p>
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex flex-column">
+                    <div classNameName="d-flex flex-column">
                         <div>
-                            <i className="fa-solid fa-swatchbook fa-2xl " ></i>
+                            <i classNameName="fa-solid fa-swatchbook fa-2xl " ></i>
                         </div>
-                        <div className="col d-flex align-items-start">
+                        <div classNameName="col d-flex align-items-start">
                             <div>
-                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                <h3 classNameName="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Compara
                                 </h3>
                                 <p>Compara semana vs semana: pacientes atendidos. Identifica tendencias con gráficos de líneas/barras.</p>
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex flex-column">
-                        <div className="text-center">
-                            <i className="fa-solid fa-swatchbook fa-2xl " ></i>
+                    <div classNameName="d-flex flex-column">
+                        <div classNameName="text-center">
+                            <i classNameName="fa-solid fa-swatchbook fa-2xl " ></i>
                         </div>
-                        <div className="col d-flex align-items-start">
+                        <div classNameName="col d-flex align-items-start">
                             <div>
-                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                <h3 classNameName="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Organiza
                                 </h3>
                                 <p>Reorganiza citas en segundos, incluso sobre la marcha. Olvídate de perder tiempo reescribiendo horarios.</p>
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex flex-column">
+                    <div classNameName="d-flex flex-column">
                         <div>
-                            <i className="fa-solid fa-swatchbook fa-2xl " ></i>
+                            <i classNameName="fa-solid fa-swatchbook fa-2xl " ></i>
                         </div>
-                        <div className="col d-flex align-items-start">
+                        <div classNameName="col d-flex align-items-start">
                             <div>
-                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                <h3 classNameName="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Organiza
                                 </h3>
                                 <p>Reorganiza citas en segundos, incluso sobre la marcha. Olvídate de perder tiempo reescribiendo horarios.</p>
@@ -167,7 +168,7 @@ export const LandingN1 = () => {
 
             {/* Planes */}
 
-            <div className="container">
+            <div classNameName="container">
 
                 <div  className=" pricing-header p-3 pb-md-4 mx-auto text-center ">
                     <h1 id="planes" className="display-4 fw-normal text-white">
@@ -190,7 +191,7 @@ export const LandingN1 = () => {
                                         /mo
                                     </small>
                                 </h1>
-                                <ul className="list-unstyled mt-3 mb-4">
+                                <ul classNameName="list-unstyled mt-3 mb-4">
                                     <li>
                                         <i className="fa-regular fa-calendar-check me-2"></i>Calendario con tus citas organizadas
                                     </li>
@@ -224,7 +225,7 @@ export const LandingN1 = () => {
                                         /mo
                                     </small>
                                 </h1>
-                                <ul className="list-unstyled mt-3 mb-4">
+                                <ul classNameName="list-unstyled mt-3 mb-4">
                                     <li>
                                         <i className="fa-solid fa-user-group me-2"></i>Múltiples usuarios 
                                     </li>
