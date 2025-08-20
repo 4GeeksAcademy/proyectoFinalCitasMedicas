@@ -3,6 +3,14 @@ import React from "react"
 
 const SingIn = () => {
     return (
+        <div 
+                style={{
+                backgroundColor: 'black',
+                margin: 0,
+                padding: 0,
+                minHeight: '100vh'
+            }}
+        >
     <div className="container bg-light rounded-5 pe-5">
         <div className="row">
             <nav className="navbar bg-dark rounded-4 ms-3 me-3 my-3 px-4">
@@ -64,6 +72,7 @@ const SingIn = () => {
             <p>@ 2025</p>
         </div>
     </div>
+</div>
 
     )
 }
