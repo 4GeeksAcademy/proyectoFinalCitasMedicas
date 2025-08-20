@@ -19,75 +19,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clinicoo</title>
   </head>
-  <body class="bg-black">
-    <h1 class=" text-white ms-5 mt-4">Registrate</h1>
-
-      <nav class="navbar navbar-expand-lg bg-white text-black rounded-4 mb-4 mx-4">
-        <div class="container-fluid d-flex justify-content-between mx-5">
-          <a class="navbar-brand" href="#">Logo</a>
-          <a class="navbar-brand " href="#">Slogan</a>
-        </div>
-      </nav>
-      <div class="container rounded-4">
-        <form class="needs-validation" novalidate>
-          <div class="mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              name="name"
-              placeholder="Nombre completo"
-              required
-            />
-            <div class="invalid-feedback">Ingresa tu nombre completo.</div>
-          </div>
-
-          <div class="mb-3">
-            <input
-              type="tel"
-              class="form-control"
-              id="phone"
-              name="phone"
-              placeholder="Teléfono"
-              required
-            />
-            <div class="invalid-feedback">Ingresa tu número de teléfono.</div>
-          </div>
-
-          <div class="mb-3">
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              name="email"
-              placeholder="Correo electrónico"
-              required
-            />
-            <div class="invalid-feedback">Ingresa un correo válido.</div>
-          </div>
-
-          <div class="mb-3">
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              name="password"
-              placeholder="Contraseña"
-              minlength="8"
-              required
-            />
-            <div class="invalid-feedback">
-              La contraseña debe tener al menos 8 caracteres.
-            </div>
-          </div>
-
-          <div class="d-grid mt-4">
-            <button class="btn btn-primary btn-lg" type="submit">
-              Registrarse
-            </button>
-          </div>
-        </form>
-      </div>
+  <body>
+    <div id="root"></div>
     
     <script type="module" src="/src/front/main.jsx"></script>
     <script
