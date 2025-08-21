@@ -29,7 +29,7 @@ export const LandingN1 = () => {
                 backgroundColor: 'black',
                 margin: 0,
                 paddingTop: '120px',
-                minHeight: '100vh'
+                minHeight: '100vh',
             }}
             >
             
@@ -44,10 +44,10 @@ export const LandingN1 = () => {
                         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
                             
                             <Link to="/sing-in">
-                                <button type="button" className="btn btn-light btn-lg px-4 gap-3">Iniciar sesión</button>
+                                <button type="button" className="btn btn-light btn-lg px-4 gap-3 rounded-5">Iniciar sesión</button>
                             </Link>
                             <Link to="/register">    
-                                <button type="button" className="btn btn-outline-secondary btn-lg px-4">Registrarse</button>
+                                <button type="button" className="btn btn-outline-secondary btn-lg px-4 rounded-5">Registrarse</button>
                             </Link>    
                         </div>
                     </div>
