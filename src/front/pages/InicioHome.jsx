@@ -15,12 +15,11 @@ export const InicioHome = () => {
             style={{
                 backgroundColor: 'black',
                 margin: 0,
-                paddingTop: '20px',
+                paddingTop: '15px',
                 minHeight: '100vh'
             }}
         >
-            {/* Módulo usuario */}
-            <div className="container-fluid vh-100">
+            <div className="container-fluid vh-100 p-0 pe-3">
                 <div className="row h-50 g-3 ">
                     {/* Navbar - Sidebar */}
                     <div className="col-12 col-md-3 col-lg-2 ps-0 ms-0">
@@ -28,7 +27,7 @@ export const InicioHome = () => {
                     </div>
 
                     {/* Contenido Principal */}
-                    <div className="col-12 col-md-6 col-lg-8 ps-3 ">
+                    <div className="col-12 col-md-6 col-lg-8 ps-5 ">
                         <div className="bg-dark rounded-5 h-100 p-3 p-md-4">
                             <div className="row g-0 text-white h-100">
                                 {/* Header */}
@@ -75,7 +74,7 @@ export const InicioHome = () => {
                                                         <small className="text-black fw-bold mb-1">{item.value}</small>
                                                         <div
                                                             className="bg-dark rounded-5 w-100 mb-2"
-                                                            style={{ height: `${(item.value / 10) * 80}%`, minHeight: '8px' }}
+                                                            style={{ height: `${(item.value / 10) * 100}%`, minHeight: '8px' }}
                                                         ></div>
                                                         <small className="text-muted fw-bold">{item.label}</small>
                                                     </div>
@@ -92,7 +91,7 @@ export const InicioHome = () => {
                     {/* Panel lateral - Resumen */}
                     <div className="col-12 col-md-3 col-lg-2">
                         <div className="h-50 d-flex flex-column">
-                            <h2 className="text-center text-white mb-3 fs-4 fs-md-3 pt-5 pb-3">
+                            <h2 className="text-center text-white mb-3 fs-4 fs-md-3 pt-3 pb-3">
                                 Resumen de la semana
                             </h2>
 
@@ -101,14 +100,14 @@ export const InicioHome = () => {
                                 <div className="col-12">
                                     <div className="bg-white rounded-5 p-3 text-dark h-75 text-center">
                                         <small className="text-muted d-block">Citas esta semana</small>
-                                        <h4 className="mb-0 fw-bold text-info">24</h4>
+                                        <h4 className="mb-0 fw-bold text-info">36</h4>
                                         <small className="text-end">+9</small>
                                     </div>
                                 </div>
                                 <div className="col-12">
                                     <div className="bg-white rounded-5 p-3 text-dark h-75 text-center">
                                         <small className="text-muted d-block">Semana anterior</small>
-                                        <h4 className="mb-0 fw-bold text-warning">15</h4>
+                                        <h4 className="mb-0 fw-bold text-warning">27</h4>
                                     </div>
                                 </div>
                             </div>

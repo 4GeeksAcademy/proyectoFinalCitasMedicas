@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 export const Navbar2 = () => {
     return (
         
-        <div className="d-flex flex-column flex-shrink-0 ps-0  text-white bg-dark rounded-5 pt-5" style={{ width: "280px", height: "95vh" }}>
+        <div className="d-flex flex-column flex-shrink-0 text-white bg-dark rounded-5 pt-5" style={{ width: "280px", height: "95vh" }}>
             <Link to="/Landing-n1" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <svg className="bi me-2" width="40" height="32">
-                    <use xlinkHref="#bootstrap"></use>
-                </svg>
-                    <img className="mb-1" src="/src/front/assets/img/logo-white.png" alt="logomedAgend" style={{ width: '120px', height: 'auto' }} />
+                
+                <div className="ps-5">
+                    <img className="mb-1 mx-auto" src="/src/front/assets/img/logo-white.png" alt="logomedAgend" style={{ width: '120px', height: 'auto' }} />
+                </div>
             </Link>
             <hr />
             <div className="btn-group-vertical" role="group" aria-label="Vertical button group">
@@ -48,7 +48,7 @@ export const Navbar2 = () => {
                     </li>
                     <span className="fs-5 mt-3 ms-3">Opciones</span>
                     <li>
-                        <Link to="" className="nav-link text-white">
+                        <Link to="/agregar-cita" className="nav-link text-white">
                             <svg className="bi me-2" width="16" height="16">
                                 <use xlinkHref="#people-circle"></use>
                             </svg>
@@ -56,7 +56,7 @@ export const Navbar2 = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="" className="nav-link text-white">
+                        <Link to="/agregar-paciente" className="nav-link text-white">
                             <svg className="bi me-2" width="16" height="16">
                                 <use xlinkHref="#people-circle"></use>
                             </svg>

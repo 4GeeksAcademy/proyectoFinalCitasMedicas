@@ -15,6 +15,8 @@ import PaginaRegistrate from './pages/PaginaRegistrate';
 import SingIn from "./pages/singIn"
 import Pacientes from "./pages/Pacientes"
 import { InicioHome } from "./pages/InicioHome";
+import { AgregarCita } from "./pages/AgregarCita";
+import { AgregarPaciente } from "./pages/AgregarPaciente";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -36,6 +38,8 @@ export const router = createBrowserRouter(
         <Route path="/landing-n1" element={<LandingN1 />} />
         <Route path="/sing-in" element={<SingIn />} />
         <Route path="/inicio-home" element={<InicioHome />} />
+        <Route path="/agregar-cita" element={<AgregarCita />} />
+        <Route path="/agregar-paciente" element={<AgregarPaciente />} />
       </Route>
     )
 );

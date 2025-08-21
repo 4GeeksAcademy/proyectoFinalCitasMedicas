@@ -11,7 +11,7 @@ const SingIn = () => {
                 minHeight: '100vh'
             }}
         >
-    <div className="container bg-dark rounded-5" style={{marginTop: "120px",}}>
+    <div className="container bg-dark rounded-5" style={{marginTop: "20px",}}>
         <div className="row">
                 <div className="row">
                     <div className="container col-5 bg-white rounded-5 mt-5 pb-2 ">
