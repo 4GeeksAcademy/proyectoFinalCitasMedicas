@@ -45,8 +45,10 @@ export const LandingN1 = () => {
                             
                             <Link to="/sing-in">
                                 <button type="button" className="btn btn-light btn-lg px-4 gap-3">Iniciar sesión</button>
-                            </Link>    
+                            </Link>
+                            <Link to="/register">    
                                 <button type="button" className="btn btn-outline-secondary btn-lg px-4">Registrarse</button>
+                            </Link>    
                         </div>
                     </div>
                 </div>
