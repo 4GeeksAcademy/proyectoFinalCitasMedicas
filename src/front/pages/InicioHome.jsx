@@ -23,13 +23,13 @@ export const InicioHome = () => {
             <div className="container-fluid vh-100">
                 <div className="row h-100 g-3">
                     {/* Navbar - Sidebar */}
-                    <div className="col-12 col-md-3 col-lg-2">
+                    <div className="col-12 col-md-3 col-lg-2 ps-0">
                         <Navbar2 />
                     </div> 
 
                     {/* Contenido Principal */}
-                    <div className="col-12 col-md-6 col-lg-8">  
-                        <div className="bg-dark rounded-4 h-100 p-3 p-md-4">
+                    <div className="col-12 col-md-6 col-lg-8 ps-3">  
+                        <div className="bg-dark rounded-5 h-100 p-3 p-md-4">
                             <div className="row g-0 text-white h-100">
                                 {/* Header */}
                                 <div className="col-12">
@@ -41,14 +41,14 @@ export const InicioHome = () => {
                                 <div className="col-12">
                                     <div className="row g-3 mb-4">
                                         <div className="col-12 col-sm-6 col-lg-6">
-                                            <div className="bg-white rounded-4 p-3 text-dark h-100">
+                                            <div className="bg-white rounded-5 p-3 text-dark h-100">
                                                 <small className="text-muted d-block">Hoy tienes</small>
                                                 <h5 className="mb-0 fw-bold">1 cita</h5>
                                             </div>
                                         </div>
                                         
                                         <div className="col-12 col-sm-6 col-lg-6">
-                                            <div className="bg-white rounded-4 p-3 text-dark h-100">
+                                            <div className="bg-white rounded-5 p-3 text-dark h-100">
                                                 <small className="text-muted d-block">Tu próxima cita</small>
                                                 <h5 className="mb-1 fw-bold">24 abr, 9:00am</h5>
                                                 <h4 className="mb-0">Samuel</h4>
@@ -62,21 +62,22 @@ export const InicioHome = () => {
 
                     {/* Panel lateral - Resumen */}
                     <div className="col-12 col-md-3 col-lg-2">
-                        <div className="h-100 d-flex flex-column">
-                            <h2 className="text-center text-white mb-3 fs-4 fs-md-3">
+                        <div className="h-50 d-flex flex-column">
+                            <h2 className="text-center text-white mb-3 fs-4 fs-md-3 pt-5 pb-3">
                                 Resumen de la semana
                             </h2>
                             
                             {/* Contenido del resumen */}
                             <div className="row g-3 flex-grow-1">
                                 <div className="col-12">
-                                    <div className="bg-white rounded-5 p-3 text-dark h-100 text-center">
+                                    <div className="bg-white rounded-5 p-3 text-dark h-50 text-center">
                                         <small className="text-muted d-block">Citas esta semana</small>
                                         <h4 className="mb-0 fw-bold text-info">24</h4>
+                                        <small className="text-end">+9</small>
                                     </div>
                                 </div>
                                 <div className="col-12">
-                                    <div className="bg-white rounded-5 p-3 text-dark h-100 text-center">
+                                    <div className="bg-white rounded-5 p-3 text-dark h-50 text-center">
                                         <small className="text-muted d-block">Semana anterior</small>
                                         <h4 className="mb-0 fw-bold text-warning">15</h4>
                                     </div>
