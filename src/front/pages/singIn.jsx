@@ -3,7 +3,25 @@ import React from "react"
 
 const SingIn = () => {
     return (
-        <div className="container bg-light rounded-5 pe-5 pt-2 my-5">
+        <div 
+                style={{
+                backgroundColor: 'black',
+                margin: 0,
+                padding: 0,
+                minHeight: '100vh'
+            }}
+        >
+    <div className="container bg-light rounded-5 pe-5">
+        <div className="row">
+            <nav className="navbar bg-dark rounded-4 ms-3 me-3 my-3 px-4">
+                <div className="container d-flex justify-content-between align-items-center ">
+                    <a className="navbar-brand text-white" href="">
+                        <h3>Logo</h3>
+                    </a>
+                    <h3 className="text-white fw-bold">MedicaAgend</h3>
+                    <h4 className="text-white"><i>Organizando la salud</i></h4>
+                </div>
+            </nav>
             <div className="row">
                 <nav className="navbar bg-dark rounded-4 ms-3 me-3 my-3 px-4">
                     <div className="container d-flex justify-content-between align-items-center ">
@@ -63,6 +81,11 @@ const SingIn = () => {
                 </div>
             </div>
         </div>
+        <div className="d-flex justify-content-center text-black fs-5">
+            <p>@ 2025</p>
+        </div>
+    </div>
+</div>
 
     )
 }
