@@ -1,23 +1,17 @@
 import React from "react";
 
 const PaginaRegistrate = () => {
-    return (
-        <>
-        <h1 className=" text-black ms-5 mt-4">Registrate</h1>
+    return ( 
 
-      <nav className="navbar navbar-expand-lg bg-black rounded-4 mb-4 mx-4">
-        <div className="container-fluid d-flex justify-content-between mx-5">
-          <a className="navbar-brand text-white" href="#">Logo</a>
-          <a className="navbar-brand text-white" href="#">Slogan</a>
-        </div>
-      </nav>
-      <div className="container rounded-4">
+      <div className=" container bg-light pt-5 pb-5">
+        
+      <div className="container bg-dark col-5 rounded-5 pt-5 pb-5 mt-5">
         <form className="needs-validation">
           <div className="mb-3">
             
             <input
               type="text"
-              className="form-control"
+              className="form-control bg-white"
               id="name"
               name="name"
               placeholder="Nombre completo"
@@ -29,7 +23,7 @@ const PaginaRegistrate = () => {
           <div className="mb-3">
             <input
               type="tel"
-              className="form-control"
+              className="form-control bg-white"
               id="phone"
               name="phone"
               placeholder="Teléfono"
@@ -41,7 +35,7 @@ const PaginaRegistrate = () => {
           <div className="mb-3">
             <input
               type="email"
-              className="form-control"
+              className="form-control bg-white"
               id="email"
               name="email"
               placeholder="Correo electrónico"
@@ -53,7 +47,7 @@ const PaginaRegistrate = () => {
           <div className="mb-3">
             <input
               type="password"
-              className="form-control"
+              className="form-control bg-white"
               id="password"
               name="password"
               placeholder="Contraseña"
@@ -67,13 +61,14 @@ const PaginaRegistrate = () => {
           </div>
 
           <div className="d-grid mt-4">
-            <button className="btn btn-primary btn-lg" type="submit">
+            <button className="btn btn-light rounded-4 " type="submit">
               Registrarse
             </button>
           </div>
         </form>
       </div>
-      </>
+      </div>
+      
     );
 }
 export default PaginaRegistrate;
