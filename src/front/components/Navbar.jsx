@@ -21,7 +21,7 @@ export const Navbar = () => {
 						<a className="nav-link active" aria-current="planes" href="#planes">Planes</a>
 					</h5>
 				
-					<button className="btn btn-lg btn-outline-secondary rounded-3 me-3" type="button">
+					<button className="btn btn-lg btn-outline-secondary rounded-5 me-3" type="button">
 						Solicitar demo
 					</button>
 				</div>
