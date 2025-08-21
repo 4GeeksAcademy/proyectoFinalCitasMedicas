@@ -3,17 +3,18 @@ import React from "react";
 const PaginaRegistrate = () => {
     return (
         <>
-        <h1 className=" text-white ms-5 mt-4">Registrate</h1>
+        <h1 className=" text-black ms-5 mt-4">Registrate</h1>
 
-      <nav className="navbar navbar-expand-lg bg-white text-black rounded-4 mb-4 mx-4">
+      <nav className="navbar navbar-expand-lg bg-black rounded-4 mb-4 mx-4">
         <div className="container-fluid d-flex justify-content-between mx-5">
-          <a className="navbar-brand" href="#">Logo</a>
-          <a className="navbar-brand " href="#">Slogan</a>
+          <a className="navbar-brand text-white" href="#">Logo</a>
+          <a className="navbar-brand text-white" href="#">Slogan</a>
         </div>
       </nav>
       <div className="container rounded-4">
         <form className="needs-validation">
           <div className="mb-3">
+            
             <input
               type="text"
               className="form-control"

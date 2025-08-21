@@ -1,11 +1,28 @@
 export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
-		<p>
-			Check the <a target="_blank" href="https://4geeks.com/docs/start/react-flask-template">template documentation</a> <i className="fa-solid fa-file"></i> for help.
-		</p>
-		<p>
-			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			<a href="http://www.4geeksacademy.com">4Geeks Academy</a>
-		</p>
+
+	<footer className="mt-auto" style={{
+		backgroundColor: 'black',
+	}}>
+		<div className=" container d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
+			<div className=" col-md-4 d-flex align-items-center">
+				<i className="fa-solid fa-calendar text-white fa-2xl"></i>
+				<span className="mb-3 mb-md-0 text-white ms-3">© 2025 Clinicoo, Inc</span>
+			</div>
+			<div>
+
+			</div>
+			<ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
+				<li className="ms-3">
+					<a className="text-body-secondary" aria-label="Instagram">
+						<i className="fa-brands fa-instagram fa-bounce fa-2xl text-white"></i>
+					</a>
+				</li>
+				<li className="ms-3 mb-0">
+					<a className="text-body-secondary" aria-label="Facebook">
+						<i className="fa-brands fa-facebook fa-bounce fa-2xl text-white"></i>
+					</a>
+				</li>
+			</ul>
+		</div>
 	</footer>
 );

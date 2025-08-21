@@ -12,6 +12,8 @@ import { Demo } from "./pages/Demo";
 import { LandingN1 } from "./pages/LandingN1";
 import PaginaRegistrate from './pages/PaginaRegistrate';
 
+import SingIn from "./pages/singIn"
+import { InicioHome } from "./pages/InicioHome";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -30,6 +32,9 @@ export const router = createBrowserRouter(
         <Route path="/demo" element={<Demo />} />
         <Route path="/landingN1" element={<LandingN1 />} />
         <Route path="/register" element={<PaginaRegistrate />} />
+        <Route path="/landing-n1" element={<LandingN1 />} />
+        <Route path="/sing-in" element={<SingIn />} />
+        <Route path="/inicio-home" element={<InicioHome />} />
       </Route>
     )
 );
