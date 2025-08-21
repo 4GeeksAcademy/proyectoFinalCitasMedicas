@@ -1,4 +1,5 @@
 import React from "react";
+import { Navbar2 } from "../components/Navbar2";
 
 const Pacientes = () =>
 {
@@ -13,7 +14,7 @@ const Pacientes = () =>
         > {/*Sidebar*/} 
             <div className="container">
                 <div className="row">
-                    
+                    <Navbar2/>
                 </div>
                 
             </div>

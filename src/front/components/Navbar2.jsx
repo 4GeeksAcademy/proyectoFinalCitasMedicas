@@ -14,7 +14,7 @@ export const Navbar2 = () => {
             <div className="btn-group-vertical" role="group" aria-label="Vertical button group">
                 <ul className="nav nav-pills flex-column mb-auto">
                     <li className="nav-item">
-                        <Link to="" className="nav-link active" aria-current="page">
+                        <Link to="" className="nav-link " aria-current="page">
                             <svg className="bi me-2" width="16" height="16">
                                 <use xlinkHref="#home"></use>
                             </svg>
