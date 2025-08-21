@@ -10,8 +10,15 @@ const Pacientes = () =>
                 padding: 0,
                 minHeight: '100vh'
             }}
-        >
-
+        > {/*Sidebar*/} 
+            <div className="container">
+                <div className="row">
+                    
+                </div>
+                
+            </div>
         </div>
     )
 }
+
+export default Pacientes;
