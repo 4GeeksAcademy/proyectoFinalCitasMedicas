@@ -34,9 +34,9 @@ export const LandingN1 = () => {
             >
             
             
-            <div className="container pt-2 my-5 mt-0 text-center">
+            <div className="container pt-3 my-5 mt-0 text-center">
                  <div className="rounded-5 bg-dark py-5">   
-                    <img className="bg-white mb-3" src="/src/front/assets/img/calendar_5276602.png" alt="logoClinicoo" style={{ width: '40px', height: 'auto' }} />
+                    <img className="mb-1" src="/src/front/assets/img/logo-white.png" alt="logoClinicoo" style={{ width: '140px', height: 'auto' }} />
                     <div className="col-lg-6 mx-auto">
                         <p className="lead mb-4 text-white mt-5">
                             {displayedText}

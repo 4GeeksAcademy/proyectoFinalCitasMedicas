@@ -20,10 +20,10 @@ export const InicioHome = () => {
             }}
         >
             {/* Módulo usuario */}
-            <div className="container-fluid vh-100 ">
-                <div className="row h-50 g-3">
+            <div className="container-fluid vh-100">
+                <div className="row h-50 g-3 ">
                     {/* Navbar - Sidebar */}
-                    <div className="col-12 col-md-3 col-lg-2 ps-0">
+                    <div className="col-12 col-md-3 col-lg-2 ps-0 ms-0">
                         <Navbar2 />
                     </div>
 
