@@ -29,14 +29,14 @@ export const LandingN1 = () => {
                 backgroundColor: 'black',
                 margin: 0,
                 paddingTop: '120px',
-                minHeight: '100vh'
+                minHeight: '100vh',
             }}
             >
             
             
-            <div className="container pt-2 my-5 mt-0 text-center">
+            <div className="container pt-3 my-5 mt-0 text-center">
                  <div className="rounded-5 bg-dark py-5">   
-                    <img className="bg-white mb-3" src="/src/front/assets/img/calendar_5276602.png" alt="logoClinicoo" style={{ width: '40px', height: 'auto' }} />
+                    <img className="mb-1" src="/src/front/assets/img/logo-white.png" alt="logoClinicoo" style={{ width: '140px', height: 'auto' }} />
                     <div className="col-lg-6 mx-auto">
                         <p className="lead mb-4 text-white mt-5">
                             {displayedText}
@@ -44,10 +44,10 @@ export const LandingN1 = () => {
                         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
                             
                             <Link to="/sing-in">
-                                <button type="button" className="btn btn-light btn-lg px-4 gap-3">Iniciar sesión</button>
+                                <button type="button" className="btn btn-light btn-lg px-4 gap-3 rounded-5">Iniciar sesión</button>
                             </Link>
                             <Link to="/register">    
-                                <button type="button" className="btn btn-outline-secondary btn-lg px-4">Registrarse</button>
+                                <button type="button" className="btn btn-outline-secondary btn-lg px-4 rounded-5">Registrarse</button>
                             </Link>    
                         </div>
                     </div>
