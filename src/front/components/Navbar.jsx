@@ -10,7 +10,7 @@ export const Navbar = () => {
 						<img className="my-3 mx-3" src="/src/front/assets/img/calendar_5276602.png" alt="logoClinicoo" style={{ width: '40px', height: '40px' }} />
 						
 						<Link to="/Landing-n1" className="text-decoration-none text-dark">
-							<h3 className="d-flex my-3 mx-3 ">Clinicoo</h3>
+							<h3 className="d-flex my-3 mx-3 ">MedAgend</h3>
 						</Link>
 					</div>
 				

@@ -8,17 +8,14 @@ export const Navbar2 = () => {
                 <svg className="bi me-2" width="40" height="32">
                     <use xlinkHref="#bootstrap"></use>
                 </svg>
-                <span className="fs-4">Clinicoo</span>
+                <span className="fs-4">MedAgend</span>
             </Link>
             <hr />
             <div className="btn-group-vertical" role="group" aria-label="Vertical button group">
                 <ul className="nav nav-pills flex-column mb-auto">
                     <li className="nav-item">
-<<<<<<< HEAD
-                        <Link to="" className="nav-link " aria-current="page">
-=======
-                        <Link to="" className="nav-link" aria-current="page">
->>>>>>> 95e9a4952b382d42e17366a0124f392ed74ed9a2
+                        <Link to="" className="nav-link " aria-current="page"/>
+                        <Link to="/inicio-home" className="nav-link" aria-current="page">
                             <svg className="bi me-2" width="16" height="16">
                                 <use xlinkHref="#home"></use>
                             </svg>
@@ -26,7 +23,7 @@ export const Navbar2 = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="" className="nav-link text-white">
+                        <Link to="/pacientes" className="nav-link text-white">
                             <svg className="bi me-2" width="16" height="16">
                                 <use xlinkHref="#speedometer2"></use>
                             </svg>

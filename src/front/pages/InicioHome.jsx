@@ -20,33 +20,33 @@ export const InicioHome = () => {
             }}
         >
             {/* Módulo usuario */}
-            <div className="container-fluid vh-100">
-                <div className="row h-100 g-3">
+            <div className="container-fluid vh-100 ">
+                <div className="row h-50 g-3">
                     {/* Navbar - Sidebar */}
                     <div className="col-12 col-md-3 col-lg-2 ps-0">
                         <Navbar2 />
-                    </div> 
+                    </div>
 
                     {/* Contenido Principal */}
-                    <div className="col-12 col-md-6 col-lg-8 ps-3">  
+                    <div className="col-12 col-md-6 col-lg-8 ps-3 ">
                         <div className="bg-dark rounded-5 h-100 p-3 p-md-4">
                             <div className="row g-0 text-white h-100">
                                 {/* Header */}
-                                <div className="col-12">
+                                <div className="col-12" style={{ height: '10%' }}>
                                     <h2 className="mb-1">Hola, usuario</h2>
-                                    <p className="mb-4 text-light">{fechaFormateada}</p>
+                                    <p className="text-light">{fechaFormateada}</p>
                                 </div>
-                                
+
                                 {/* Cards de información */}
-                                <div className="col-12">
-                                    <div className="row g-3 mb-4">
+                                <div className="col-12 mt-0" style={{ height: '20%' }}>
+                                    <div className="row g-3">
                                         <div className="col-12 col-sm-6 col-lg-6">
                                             <div className="bg-white rounded-5 p-3 text-dark h-100">
                                                 <small className="text-muted d-block">Hoy tienes</small>
                                                 <h5 className="mb-0 fw-bold">1 cita</h5>
                                             </div>
                                         </div>
-                                        
+
                                         <div className="col-12 col-sm-6 col-lg-6">
                                             <div className="bg-white rounded-5 p-3 text-dark h-100">
                                                 <small className="text-muted d-block">Tu próxima cita</small>
@@ -56,6 +56,35 @@ export const InicioHome = () => {
                                         </div>
                                     </div>
                                 </div>
+
+                                <div className="col-12 d-flex flex-column" style={{ height: '70%' }}>
+                                    <div className="bg-white rounded-5 p-4 text-dark h-100 d-flex flex-column">
+                                        <h6 className="mb-3 fw-bold">Citas de la semana</h6>
+                                        <div className="row g-2 flex-grow-1 align-items-end">
+                                            {[
+                                                { day: 'Lun', value: 5, label: 'L' },
+                                                { day: 'Mar', value: 8, label: 'M' },
+                                                { day: 'Mié', value: 3, label: 'X' },
+                                                { day: 'Jue', value: 6, label: 'J' },
+                                                { day: 'Vie', value: 9, label: 'V' },
+                                                { day: 'Sáb', value: 2, label: 'S' },
+                                                { day: 'Dom', value: 1, label: 'D' }
+                                            ].map((item, index) => (
+                                                <div key={index} className="col text-center h-100 d-flex align-items-end">
+                                                    <div className="d-flex flex-column align-items-center justify-content-end w-100 h-100">
+                                                        <small className="text-black fw-bold mb-1">{item.value}</small>
+                                                        <div
+                                                            className="bg-dark rounded-5 w-100 mb-2"
+                                                            style={{ height: `${(item.value / 10) * 80}%`, minHeight: '8px' }}
+                                                        ></div>
+                                                        <small className="text-muted fw-bold">{item.label}</small>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -66,18 +95,18 @@ export const InicioHome = () => {
                             <h2 className="text-center text-white mb-3 fs-4 fs-md-3 pt-5 pb-3">
                                 Resumen de la semana
                             </h2>
-                            
+
                             {/* Contenido del resumen */}
                             <div className="row g-3 flex-grow-1">
                                 <div className="col-12">
-                                    <div className="bg-white rounded-5 p-3 text-dark h-50 text-center">
+                                    <div className="bg-white rounded-5 p-3 text-dark h-75 text-center">
                                         <small className="text-muted d-block">Citas esta semana</small>
                                         <h4 className="mb-0 fw-bold text-info">24</h4>
                                         <small className="text-end">+9</small>
                                     </div>
                                 </div>
                                 <div className="col-12">
-                                    <div className="bg-white rounded-5 p-3 text-dark h-50 text-center">
+                                    <div className="bg-white rounded-5 p-3 text-dark h-75 text-center">
                                         <small className="text-muted d-block">Semana anterior</small>
                                         <h4 className="mb-0 fw-bold text-warning">15</h4>
                                     </div>
