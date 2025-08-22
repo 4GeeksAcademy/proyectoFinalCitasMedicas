@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Navbar2 } from "../components/Navbar2"
+import { Link } from "react-router-dom";
 
 
 export const AgregarCita = () => {
@@ -18,9 +19,7 @@ export const AgregarCita = () => {
             <div className="d-flex">
                 <div className=" ">
                     {/* Navbar - Sidebar */}
-                    <div className="">
-                        <Navbar2 />
-                    </div>
+                    <Navbar2 />
                 </div>
                 {/* Contenido Principal */}
                 <div className="col-12 col-md-6 col-lg-8 ps-5 ">
@@ -31,14 +30,13 @@ export const AgregarCita = () => {
                                 <h2 className="mb-1">Agregar cita</h2>
                                 <p className="text-light"></p>                                
                             </div>
-
                              {/* Campos Info*/}
                         <div className="d-flex flex-column align-items-start">       
                             <div className="col-12 mt-1" >    
                                 <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                    <div className="form-floating">
+                                    <div className="form-floating ">
                                         <select 
-                                        className="form-select" 
+                                        className="form-select rounded-5" 
                                         id="floatingSelect" 
                                         aria-label="Floating label select example"
                                         value={pacienteSeleccionado}
@@ -54,19 +52,31 @@ export const AgregarCita = () => {
                                 </div>
                             </div>
                             <div className="col-12 mt-1" >    
-                                <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                <div className="d-flex justify-content-between align-items-center bg-white rounded-5 p-3 text-dark h-100">
                                     <h5 className="mb-0 fw-bold">Seleccionar fecha</h5>
+                                    <i className="fa-solid fa-calendar-days fa-2xl me-2 text-center"></i>
                                 </div>
                             </div>
                             <div className="col-12 mt-1" >    
-                                <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                <div className="d-flex justify-content-between align-items-center bg-white rounded-5 p-3 text-dark h-100">
                                     <h5 className="mb-0 fw-bold">Horario</h5>
+                                    <i className="fa-solid fa-clock fa-2xl me-2"></i>
                                 </div>
                             </div>
                             <div className="col-12 mt-1" >    
                                 <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                    <small className="text-muted d-block">Modalidad</small>
-                                    <h5 className="mb-0 fw-bold">1 cita</h5>
+                                    <div className="form-floating ">
+                                        <select 
+                                        className="form-select rounded-5" 
+                                        id="floatingSelect" 
+                                        aria-label="Floating label select example"
+                                        >   
+                                            <option value="">Lugar</option>
+                                            <option value="1">Precensial</option>
+                                            <option value="2">Virtual</option>
+                                        </select>
+                                        <label htmlFor="floatingSelect">Modalidad</label>
+                                    </div>
                                 </div>
                             </div>
                             <div className="col-12 mt-1" >    
@@ -77,8 +87,18 @@ export const AgregarCita = () => {
                             </div>
                             <div className="col-12 mt-1" >    
                                 <div className="bg-white rounded-5 p-3 text-dark h-100"style={{height: '50px'}}>
-                                    <small className="text-muted d-block">Estado de pago</small>
-                                    <h5 className="mb-0 fw-bold">1 cita</h5>
+                                    <div className="form-floating ">
+                                        <select 
+                                        className="form-select rounded-5" 
+                                        id="floatingSelect" 
+                                        aria-label="Floating label select example"
+                                        >   
+                                            <option value=""></option>
+                                            <option value="1">Cancelado</option>
+                                            <option value="2">Pendiente</option>
+                                        </select>
+                                        <label htmlFor="floatingSelect">Estado del pago</label>
+                                    </div>
                                 </div>
                             </div>
                             <div className="col-12 mt-1" >    
@@ -88,6 +108,11 @@ export const AgregarCita = () => {
                                         <label htmlFor="floatingTextarea2">Nota</label>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="d-flex justify-content-end w-100">
+                                <Link to="">    
+                                    <button type="button" className=" btn btn-outline-secondary btn-lg px-4 rounded-5 mt-3 me-3">Crear</button>
+                                </Link> 
                             </div>
                         </div>
                         </div>
