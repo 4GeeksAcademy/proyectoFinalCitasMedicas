@@ -36,12 +36,12 @@ export const AgregarCita = () => {
                                 <div className="bg-white rounded-5 p-3 text-dark h-100">
                                     <div className="form-floating ">
                                         <select 
-                                        className="form-select rounded-5" 
-                                        id="floatingSelect" 
-                                        aria-label="Floating label select example"
-                                        value={pacienteSeleccionado}
-                                        onChange={(e)=> setPaceinteSelecionado(e.target.value)}
-                                        >   
+                                            className="form-select rounded-5" 
+                                            id="floatingSelect" 
+                                            aria-label="Floating label select example"
+                                            value={pacienteSeleccionado}
+                                            onChange={(e)=> setPaceinteSelecionado(e.target.value)}
+                                            >   
                                             <option value="">Paciente</option>
                                             <option value="1">Samuel</option>
                                             <option value="2">Sebastian</option>
@@ -53,13 +53,13 @@ export const AgregarCita = () => {
                             </div>
                             <div className="col-12 mt-1" >    
                                 <div className="d-flex justify-content-between align-items-center bg-white rounded-5 p-3 text-dark h-100">
-                                    <h5 className="mb-0 fw-bold">Seleccionar fecha</h5>
+                                    <h5 className="ps-2 my-3 fw-bold">Seleccionar fecha</h5>
                                     <i className="fa-solid fa-calendar-days fa-2xl me-2 text-center"></i>
                                 </div>
                             </div>
                             <div className="col-12 mt-1" >    
                                 <div className="d-flex justify-content-between align-items-center bg-white rounded-5 p-3 text-dark h-100">
-                                    <h5 className="mb-0 fw-bold">Horario</h5>
+                                    <h5 className="ps-2 my-3 fw-bold">Horario</h5>
                                     <i className="fa-solid fa-clock fa-2xl me-2"></i>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@ export const AgregarCita = () => {
                                         id="floatingSelect" 
                                         aria-label="Floating label select example"
                                         >   
-                                            <option value=""></option>
+                                            <option value="">¿Ya fue cancelado?</option>
                                             <option value="1">Cancelado</option>
                                             <option value="2">Pendiente</option>
                                         </select>
