@@ -1,7 +1,12 @@
 import { Navbar2 } from "../components/Navbar2"
 import { Link } from "react-router-dom"
+import { useState } from "react"
 
 export const AgregarPaciente = () => {
+
+    const [estadoPaciente, SetEstadoPaciente] = useState('')
+    console.log(estadoPaciente)
+
     return (
         <div
             style={{
@@ -17,8 +22,9 @@ export const AgregarPaciente = () => {
                     <Navbar2 />
                 </div>
                 {/* Contenido Principal */}
-                <div className="col-12 col-md-6 col-lg-8 ps-5 ">
-                    <div className="bg-dark rounded-5 h-100 p-3 p-md-4">
+                <div className="col-12 col-md-6 col-lg-8 ps-5">
+                    <div className="bg-dark rounded-5 h-100 p-3 p-md-4 
+                    ">
                         <div className="row g-0 text-white h-50">
                             {/* Header */}
                             <div className="col-12" >
@@ -59,8 +65,21 @@ export const AgregarPaciente = () => {
                                 </div>
                                 <div className="col-12 mt-1" >
                                     <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                        <small className="text-muted d-block">Profesión</small>
-                                        <input type="text" className="form-control rounded-5" placeholder="Ingeniero" aria-label="Amount (to the nearest dollar)" />
+                                        <div className="form-floating ">
+                                            <select 
+                                            className="form-select rounded-5" 
+                                            id="floatingSelect" 
+                                            aria-label="Floating label select example"
+                                            value={estadoPaciente}
+                                            onChange={(e)=> SetEstadoPaciente(e.target.value)}
+                                            >   
+                                                <option value=""></option>
+                                                <option value="1">Activo</option>
+                                                <option value="2">De alta</option>
+                                                <option value="3">Inactivo</option>
+                                            </select>
+                                            <label htmlFor="floatingSelect">Estado del paciente</label>
+                                    </div>
                                     </div>
                                 </div>
                                 <div className="col-12 mt-1" >
