@@ -17,30 +17,67 @@ export const AgregarCita = () => {
                         <Navbar2 />
                     </div>
                 </div>
-            </div>
-            {/* Contenido Principal */}
-            <div className="col-12 col-md-6 col-lg-8 ps-5">
-                <div className="bg-dark rounded-5 h-100 p-3 p-md-4">
-                    <div className="row g-0 text-white h-100">
-                        {/* Header */}
-                        <div className="col-12" style={{ height: '10%' }}>
-                            <h2 className="mb-1">Agregar cita</h2>
-                            <p className="text-light"></p>
-                        </div>
+                {/* Contenido Principal */}
+                <div className="col-12 col-md-6 col-lg-8 ps-5 ">
+                        <div className="bg-dark rounded-5 h-100 p-3 p-md-4">
+                            <div className="row g-0 text-white h-100">
+                                {/* Header */}
+                                <div className="col-12" style={{ height: '10%' }}>
+                                    <h2 className="mb-1">Hola, usuario</h2>
+                                    <p className="text-light"></p>
+                                </div>
 
-                        {/* Cards de información */}
-                        <div className="col-12 mt-0" style={{ height: '20%' }}>
-                            <div className="row g-3">
-                                <div className="col-12 col-sm-6 col-lg-6">
-                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                        <small className="text-muted d-block">Hoy tienes</small>
-                                        <h5 className="mb-0 fw-bold">1 cita</h5>
+                                {/* Cards de información */}
+                                <div className="col-12 mt-0" style={{ height: '20%' }}>
+                                    <div className="row g-3">
+                                        <div className="col-12 col-sm-6 col-lg-6">
+                                            <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                                <small className="text-muted d-block">Hoy tienes</small>
+                                                <h5 className="mb-0 fw-bold">1 cita</h5>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-12 col-sm-6 col-lg-6">
+                                            <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                                <small className="text-muted d-block">Tu próxima cita</small>
+                                                <h5 className="mb-1 fw-bold">24 abr, 9:00am</h5>
+                                                <h4 className="mb-0">Samuel</h4>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div className="col-12 d-flex flex-column" style={{ height: '70%' }}>
+                                    <div className="bg-white rounded-5 p-4 text-dark h-100 d-flex flex-column">
+                                        <h6 className="mb-3 fw-bold">Citas de la semana</h6>
+                                        <div className="row g-2 flex-grow-1 align-items-end">
+                                            {[
+                                                { day: 'Lun', value: 5, label: 'L' },
+                                                { day: 'Mar', value: 8, label: 'M' },
+                                                { day: 'Mié', value: 3, label: 'X' },
+                                                { day: 'Jue', value: 6, label: 'J' },
+                                                { day: 'Vie', value: 9, label: 'V' },
+                                                { day: 'Sáb', value: 2, label: 'S' },
+                                                { day: 'Dom', value: 1, label: 'D' }
+                                            ].map((item, index) => (
+                                                <div key={index} className="col text-center h-100 d-flex align-items-end">
+                                                    <div className="d-flex flex-column align-items-center justify-content-end w-100 h-100">
+                                                        <small className="text-black fw-bold mb-1">{item.value}</small>
+                                                        <div
+                                                            className="bg-dark rounded-5 w-100 mb-2"
+                                                            style={{ height: `${(item.value / 10) * 100}%`, minHeight: '8px' }}
+                                                        ></div>
+                                                        <small className="text-muted fw-bold">{item.label}</small>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     )

@@ -12,10 +12,10 @@ const Pacientes = () =>
                 minHeight: '100vh'
             }}
         > {/*Sidebar*/} 
-           <div className="container-fluid vh-100 p-0 pe-3">
-                <div className="row h-50 g-3 ">
+           <div className="">
+                <div className="">
                                 {/* Navbar - Sidebar */}
-                    <div className="col-12 col-md-3 col-lg-2 ps-0 ms-0">
+                    <div className="">
                         <Navbar2 />
                     </div>
                 </div>
