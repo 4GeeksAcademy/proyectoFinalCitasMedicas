@@ -31,6 +31,7 @@ export const AgregarPaciente = () => {
                                 <h2 className="mb-1">Agregar paciente</h2>
                                 <p className="text-light"></p>
                             </div>
+                            
                             {/* Campos Info*/}
                             <div className="d-flex flex-column align-items-start ">
                                 <div className="col-12 mt-1" >
@@ -92,7 +93,7 @@ export const AgregarPaciente = () => {
                                 </div>
                                 <div className="d-flex justify-content-end w-100">
                                     <Link to="">
-                                        <button type="button" className=" btn btn-outline-secondary btn-lg px-4 rounded-5 mt-3 me-3">Crear</button>
+                                        <button type="button" className=" btn btn-outline-light btn-lg px-4 rounded-5 mt-3 me-3">Crear</button>
                                     </Link>
                                 </div>
                             </div>

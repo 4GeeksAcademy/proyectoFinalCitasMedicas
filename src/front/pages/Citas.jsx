@@ -24,7 +24,7 @@ export const Citas = () => {
             <div className="d-flex">
                 {/* Navbar - Sidebar */}
                 <Navbar2 />
-                <div className="col-12 col-md-6 col-lg-8 ps-5 ">
+                <div className="col-12 col-md-6 col-lg-8 ps-5">
                     <div className="bg-dark rounded-5 h-100 p-3 p-md-4 ">
                         <div className="row g-0 text-white h-25 ">
                             <div className=" d-flex  justify-content-between">
@@ -34,7 +34,11 @@ export const Citas = () => {
                                         <input className="form-control mr-sm-2 rounded-5" type="search" placeholder="Search" aria-label="Search"/>
                                     </div>
                                     <div>
-                                        <button type="button" className="btn btn-outline-secondary rounded-5">Agregar paciente</button>
+                                        <Link to ="/agregar-paciente">    
+                                            <button type="button" className="btn btn-outline-light rounded-5">
+                                                <i className="fa-solid fa-user-plus me-2"></i>Agregar paciente
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -117,8 +121,37 @@ export const Citas = () => {
                             </div>
 
                             {/* lista pacientes */}
-                            <div>
-
+                            <div className="d-flex flex-column align-items-start overflow-auto" >
+                                <div className="col-12 mt-2 px-3 " >
+                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                        <small className="text-muted d-block ">Camilo Betancurth</small>
+                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
+                                    </div>
+                                </div>
+                                <div className="col-12 mt-1 px-3" >
+                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                        <small className="text-muted d-block ">Camilo Betancurth</small>
+                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
+                                    </div>
+                                </div>
+                                <div className="col-12 mt-1 px-3" >
+                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                        <small className="text-muted d-block ">Camilo Betancurth</small>
+                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
+                                    </div>
+                                </div>
+                                <div className="col-12 mt-1 px-3" >
+                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                        <small className="text-muted d-block ">Camilo Betancurth</small>
+                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
+                                    </div>
+                                </div>
+                                <div className="col-12 mt-1 px-3" >
+                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                        <small className="text-muted d-block ">Camilo Betancurth</small>
+                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
+                                    </div>
+                                </div>                            
                             </div>
                         </div>
                     </div>

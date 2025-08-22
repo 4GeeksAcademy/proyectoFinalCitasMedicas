@@ -33,10 +33,19 @@ export const AgregarCita = () => {
                     <div className="bg-dark rounded-5 h-100 p-3 p-md-4">
                         <div className="row g-0 text-white h-50">
                             {/* Header */}
-                            <div className="col-12" >
-                                <h2 className="mb-1">Agregar cita</h2>
-                                <p className="text-light"></p>                                
-                            </div>
+                            <div className="d-flex justify-content-between">
+                                <div className="col-6" >
+                                    <h2 className="mb-1">Agregar cita</h2>
+                                    <p className="text-light"></p>                                
+                                </div>
+                                <div>
+                                    <Link to="/agregar-paciente">
+                                        <button type="button" className="btn btn-outline-light rounded-5">
+                                            <i className="fa-solid fa-user-plus me-2"></i>Agregar paciente
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>    
                              {/* Campos Info*/}
                         <div className="d-flex flex-column align-items-start">       
                             <div className="col-12 mt-1" >    
@@ -142,7 +151,7 @@ export const AgregarCita = () => {
                             </div>
                             <div className="d-flex justify-content-end w-100">
                                 <Link to="">    
-                                    <button type="button" className=" btn btn-outline-secondary btn-lg px-4 rounded-5 mt-3 me-3">Crear</button>
+                                    <button type="button" className=" btn btn-outline-light btn-lg rounded-5 mt-3 me-3">Crear</button>
                                 </Link> 
                             </div>
                         </div>
