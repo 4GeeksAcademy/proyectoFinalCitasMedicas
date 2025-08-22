@@ -94,7 +94,7 @@ export const Citas = () => {
                                             <option value="2">De alta</option>
                                             <option value="3">Inactivo</option>
                                         </select>
-                                        <label htmlFor="floatingSelect">Orden</label>
+                                        <label htmlFor="floatingSelect">por nombre</label>
                                     </div>
                                 </div>
                                 <div className="bg-white rounded-5 p-3 text-dark">
@@ -111,10 +111,14 @@ export const Citas = () => {
                                             <option value="2">De alta</option>
                                             <option value="3">Inactivo</option>
                                         </select>
-                                        <label htmlFor="floatingSelect">Orden</label>
+                                        <label htmlFor="floatingSelect">ascendente</label>
                                     </div>
-                                </div>
-                                
+                                </div>                                
+                            </div>
+
+                            {/* lista pacientes */}
+                            <div>
+
                             </div>
                         </div>
                     </div>
