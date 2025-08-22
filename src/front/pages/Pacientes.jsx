@@ -11,8 +11,8 @@ const Pacientes = () =>
                 paddingTop: '15px',
                 minHeight: '100vh'
             }}
-        > {/*Sidebar*/} 
-           <div className="">
+        > 
+           <div className="d-flex">
                 <div className="">
                                 {/* Navbar - Sidebar */}
                     <div className="">

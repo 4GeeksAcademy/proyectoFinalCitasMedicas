@@ -1,6 +1,11 @@
+import { useState } from "react"
 import { Navbar2 } from "../components/Navbar2"
 
+
 export const AgregarCita = () => {
+
+    const [pacienteSeleccionado, setPaceinteSelecionado] = useState("");
+    console.log(pacienteSeleccionado)
     return (
         <div
             style={{
@@ -10,74 +15,84 @@ export const AgregarCita = () => {
                 minHeight: '100vh'
             }}
         >
-            <div className="container-fluid vh-100 p-0 pe-3">
-                <div className="row h-50 g-3 ">
+            <div className="d-flex">
+                <div className=" ">
                     {/* Navbar - Sidebar */}
-                    <div className="col-12 col-md-3 col-lg-2 ps-0 ms-0">
+                    <div className="">
                         <Navbar2 />
                     </div>
                 </div>
                 {/* Contenido Principal */}
                 <div className="col-12 col-md-6 col-lg-8 ps-5 ">
-                        <div className="bg-dark rounded-5 h-100 p-3 p-md-4">
-                            <div className="row g-0 text-white h-100">
-                                {/* Header */}
-                                <div className="col-12" style={{ height: '10%' }}>
-                                    <h2 className="mb-1">Hola, usuario</h2>
-                                    <p className="text-light"></p>
-                                </div>
+                    <div className="bg-dark rounded-5 h-100 p-3 p-md-4">
+                        <div className="row g-0 text-white h-50">
+                            {/* Header */}
+                            <div className="col-12" >
+                                <h2 className="mb-1">Agregar cita</h2>
+                                <p className="text-light"></p>                                
+                            </div>
 
-                                {/* Cards de información */}
-                                <div className="col-12 mt-0" style={{ height: '20%' }}>
-                                    <div className="row g-3">
-                                        <div className="col-12 col-sm-6 col-lg-6">
-                                            <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                                <small className="text-muted d-block">Hoy tienes</small>
-                                                <h5 className="mb-0 fw-bold">1 cita</h5>
-                                            </div>
-                                        </div>
-
-                                        <div className="col-12 col-sm-6 col-lg-6">
-                                            <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                                <small className="text-muted d-block">Tu próxima cita</small>
-                                                <h5 className="mb-1 fw-bold">24 abr, 9:00am</h5>
-                                                <h4 className="mb-0">Samuel</h4>
-                                            </div>
-                                        </div>
+                             {/* Campos Info*/}
+                        <div className="d-flex flex-column align-items-start">       
+                            <div className="col-12 mt-1" >    
+                                <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                    <div className="form-floating">
+                                        <select 
+                                        className="form-select" 
+                                        id="floatingSelect" 
+                                        aria-label="Floating label select example"
+                                        value={pacienteSeleccionado}
+                                        onChange={(e)=> setPaceinteSelecionado(e.target.value)}
+                                        >   
+                                            <option value="">Paciente</option>
+                                            <option value="1">Samuel</option>
+                                            <option value="2">Sebastian</option>
+                                            <option value="3">Leonardo</option>
+                                        </select>
+                                        <label htmlFor="floatingSelect">Selecione un paciente</label>
                                     </div>
                                 </div>
-
-                                <div className="col-12 d-flex flex-column" style={{ height: '70%' }}>
-                                    <div className="bg-white rounded-5 p-4 text-dark h-100 d-flex flex-column">
-                                        <h6 className="mb-3 fw-bold">Citas de la semana</h6>
-                                        <div className="row g-2 flex-grow-1 align-items-end">
-                                            {[
-                                                { day: 'Lun', value: 5, label: 'L' },
-                                                { day: 'Mar', value: 8, label: 'M' },
-                                                { day: 'Mié', value: 3, label: 'X' },
-                                                { day: 'Jue', value: 6, label: 'J' },
-                                                { day: 'Vie', value: 9, label: 'V' },
-                                                { day: 'Sáb', value: 2, label: 'S' },
-                                                { day: 'Dom', value: 1, label: 'D' }
-                                            ].map((item, index) => (
-                                                <div key={index} className="col text-center h-100 d-flex align-items-end">
-                                                    <div className="d-flex flex-column align-items-center justify-content-end w-100 h-100">
-                                                        <small className="text-black fw-bold mb-1">{item.value}</small>
-                                                        <div
-                                                            className="bg-dark rounded-5 w-100 mb-2"
-                                                            style={{ height: `${(item.value / 10) * 100}%`, minHeight: '8px' }}
-                                                        ></div>
-                                                        <small className="text-muted fw-bold">{item.label}</small>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
+                            </div>
+                            <div className="col-12 mt-1" >    
+                                <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                    <h5 className="mb-0 fw-bold">Seleccionar fecha</h5>
+                                </div>
+                            </div>
+                            <div className="col-12 mt-1" >    
+                                <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                    <h5 className="mb-0 fw-bold">Horario</h5>
+                                </div>
+                            </div>
+                            <div className="col-12 mt-1" >    
+                                <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                    <small className="text-muted d-block">Modalidad</small>
+                                    <h5 className="mb-0 fw-bold">1 cita</h5>
+                                </div>
+                            </div>
+                            <div className="col-12 mt-1" >    
+                                <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                    <small className="text-muted d-block">Precio cita</small>
+                                    <input type="text" className="form-control rounded-5" placeholder="150 USD" aria-label="Amount (to the nearest dollar)"/>
+                                </div>
+                            </div>
+                            <div className="col-12 mt-1" >    
+                                <div className="bg-white rounded-5 p-3 text-dark h-100"style={{height: '50px'}}>
+                                    <small className="text-muted d-block">Estado de pago</small>
+                                    <h5 className="mb-0 fw-bold">1 cita</h5>
+                                </div>
+                            </div>
+                            <div className="col-12 mt-1" >    
+                                <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                    <div className="form-floating">
+                                        <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{height: '50px'}}></textarea>
+                                        <label htmlFor="floatingTextarea2">Nota</label>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
+                        </div>
                     </div>
+                </div>
             </div>
         </div>
     )

@@ -10,7 +10,7 @@ export const AgregarPaciente = () => {
                 minHeight: '100vh'
         }}
         >
-            <div className="">
+            <div className="d-flex">
                 <div className="">
                                 {/* Navbar - Sidebar */}
                     <div className="">
