@@ -32,7 +32,7 @@ export const AgregarPaciente = () => {
                                 <p className="text-light"></p>
                             </div>
                             {/* Campos Info*/}
-                            <div className="d-flex flex-column align-items-start">
+                            <div className="d-flex flex-column align-items-start ">
                                 <div className="col-12 mt-1" >
                                     <div className="bg-white rounded-5 p-3 text-dark h-100">
                                         <small className="text-muted d-block">Nombre</small>
@@ -79,7 +79,7 @@ export const AgregarPaciente = () => {
                                                 <option value="3">Inactivo</option>
                                             </select>
                                             <label htmlFor="floatingSelect">Estado del paciente</label>
-                                    </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="col-12 mt-1" >
