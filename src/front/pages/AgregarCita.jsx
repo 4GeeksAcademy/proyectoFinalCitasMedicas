@@ -151,7 +151,7 @@ export const AgregarCita = () => {
                             </div>
                             <div className="d-flex justify-content-end w-100">
                                 <Link to="">    
-                                    <button type="button" className=" btn btn-outline-light btn-lg rounded-5 mt-3 me-3">Crear</button>
+                                    <button type="button" className=" btn btn-outline-light btn-lg rounded-5 px-4 mt-3 me-3">Crear</button>
                                 </Link> 
                             </div>
                         </div>
