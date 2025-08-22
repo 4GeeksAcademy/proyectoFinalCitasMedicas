@@ -7,6 +7,13 @@ export const AgregarCita = () => {
 
     const [pacienteSeleccionado, setPaceinteSelecionado] = useState("");
     console.log(pacienteSeleccionado)
+
+    const [fecha, setFecha] = useState('');
+    console.log(fecha)
+
+    const [hora, setHora] = useState('');
+    console.log(hora)
+
     return (
         <div
             style={{
@@ -53,14 +60,38 @@ export const AgregarCita = () => {
                             </div>
                             <div className="col-12 mt-1" >    
                                 <div className="d-flex justify-content-between align-items-center bg-white rounded-5 p-3 text-dark h-100">
-                                    <h5 className="ps-2 my-3 fw-bold">Seleccionar fecha</h5>
-                                    <i className="fa-solid fa-calendar-days fa-2xl me-2 text-center"></i>
+                                    <h5 className="ps-2 my-2 fw-bold">Seleccionar fecha</h5>
+                                    <div >
+                                        <input 
+                                            type="date"
+                                            className="form-control rounded-5"
+                                            id="fecha"
+                                            value={fecha}
+                                            onChange={(e)=> setFecha(e.target.value)}
+                                        >   
+                                            {/* <i className="fa-solid fa-calendar-days fa-2xl me-2 text-center"></i> */}
+                                        </input>
+                                    </div>
                                 </div>
                             </div>
                             <div className="col-12 mt-1" >    
                                 <div className="d-flex justify-content-between align-items-center bg-white rounded-5 p-3 text-dark h-100">
-                                    <h5 className="ps-2 my-3 fw-bold">Horario</h5>
-                                    <i className="fa-solid fa-clock fa-2xl me-2"></i>
+                                    <h5 className="ps-2 my-2 fw-bold">Horario</h5>
+                                    <div>
+                                        <input 
+                                        type="time"
+                                        className="form-control rounded-5"
+                                        id="hora"
+                                        value={hora}
+                                        onChange={(e)=> setHora(e.target.value)}
+                                        min="8:00"
+                                        max="18:00"
+                                        step="900"
+
+                                        >
+                                            {/* <i className="fa-solid fa-clock fa-2xl me-2"></i> */}
+                                        </input>
+                                    </div>
                                 </div>
                             </div>
                             <div className="col-12 mt-1" >    
@@ -81,7 +112,7 @@ export const AgregarCita = () => {
                             </div>
                             <div className="col-12 mt-1" >    
                                 <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                    <small className="text-muted d-block">Precio cita</small>
+                                    <small className="text-muted d-block ps-2">Precio cita</small>
                                     <input type="text" className="form-control rounded-5" placeholder="150 USD" aria-label="Amount (to the nearest dollar)"/>
                                 </div>
                             </div>
@@ -104,7 +135,7 @@ export const AgregarCita = () => {
                             <div className="col-12 mt-1" >    
                                 <div className="bg-white rounded-5 p-3 text-dark h-100">
                                     <div className="form-floating">
-                                        <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{height: '50px'}}></textarea>
+                                        <textarea className="form-control rounded-5" placeholder="Leave a comment here" id="floatingTextarea2" style={{height: '50px'}}></textarea>
                                         <label htmlFor="floatingTextarea2">Nota</label>
                                     </div>
                                 </div>

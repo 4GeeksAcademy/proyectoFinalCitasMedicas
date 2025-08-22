@@ -60,13 +60,13 @@ export const AgregarPaciente = () => {
                                 <div className="col-12 mt-1" >
                                     <div className="bg-white rounded-5 p-3 text-dark h-100">
                                         <small className="text-muted d-block">Profesión</small>
-                                        <input type="text" className="form-control rounded-5" placeholder="150 USD" aria-label="Amount (to the nearest dollar)" />
+                                        <input type="text" className="form-control rounded-5" placeholder="Ingeniero" aria-label="Amount (to the nearest dollar)" />
                                     </div>
                                 </div>
                                 <div className="col-12 mt-1" >
                                     <div className="bg-white rounded-5 p-3 text-dark h-100">
                                         <div className="form-floating">
-                                            <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: '50px' }}></textarea>
+                                            <textarea className="form-control rounded-5" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: '50px' }}></textarea>
                                             <label htmlFor="floatingTextarea2">Nota</label>
                                         </div>
                                     </div>
