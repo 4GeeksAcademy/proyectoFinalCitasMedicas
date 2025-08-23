@@ -15,8 +15,13 @@ const SingIn = () => {
         <div className="row">
                 <div className="row">
                     <div className="container col-5 bg-white rounded-5 mt-5 pb-2 ">
-                        <div className="Logo text-black d-flex justify-content-center pt-4 pb-4">
-                            <h1>Logo</h1>
+                        <div className="text-black d-flex justify-content-center flex-column pt-4 pb-4">
+                            <div className="d-flex justify-content-center">
+                            <img className="my-3 mx-3" src="/src/front/assets/img/logo-black.png" alt="logomedAgend" style={{ width: '50px', height: 'auto', }} />
+                            </div>
+
+                            <div style={{textAlign: "center", fontSize:"28px", fontFamily:"cursive"}}> <strong>Bienvenido/a</strong></div>
+                            <div style={{textAlign: "center", fontSize:"28px"}}> <strong>Inciar Sesión</strong></div>
                         </div>
                         
                         <div className="row d-flex justify-content-center mt-5">
@@ -47,18 +52,17 @@ const SingIn = () => {
                 </div>
             </div>
             <div className="mt-2 pb-3 d-flex justify-content-center">
-                <button type="button" className="btn btn-light btn-lg w-50 rounded-5">Sing In</button>
+                <button type="button" className="btn btn-light rounded-5" style={{width:"350px"}}>Sing In</button>
             </div>
 
             <div className="pb-4">
                 <div className="d-flex justify-content-center text-white col-12 mb-2 fs-5">
-                    <input className="form-check-input" type="checkbox" value="" id="checkDefault" />
-                    <label className="form-check-label ps-3 text-white" htmlFor="checkDefault">Acepto términos, condiciones y
-                        políticas de privacidad</label>
+                <p className="me-2">¿Olvidaste tu contraseña?</p>
+                <p><a href="#" style={{color:"#7bacffff"}}>Da click aquí</a></p>
                 </div>
-                <div className="d-flex justify-content-center text-white ms-4 col-10 mb-4 fs-5">
-                    <input className="form-check-input" type="checkbox" value="" id="checkDefault" />
-                    <label className="form-check-label ps-3 text-white" htmlFor="checkDefault">Deseo recibir promociones y ofertas</label>
+                <div className="d-flex justify-content-center text-white col-12 mb-2 fs-5">
+                <p className="me-2">¿Eres nuevo/a?</p>
+                <p><a href="/register" style={{color:"#7bacffff"}}>Registrate aquí</a></p>
                 </div>
             </div>
         </div>

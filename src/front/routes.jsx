@@ -18,6 +18,7 @@ import Pacientes from "./pages/Pacientes"
 import { InicioHome } from "./pages/InicioHome";
 import { AgregarCita } from "./pages/AgregarCita";
 import { AgregarPaciente } from "./pages/AgregarPaciente";
+import { Citas } from "./pages/Citas";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -42,6 +43,7 @@ export const router = createBrowserRouter(
         <Route path="/inicio-home" element={<InicioHome />} />
         <Route path="/agregar-cita" element={<AgregarCita />} />
         <Route path="/agregar-paciente" element={<AgregarPaciente />} />
+        <Route path="/citas" element={<Citas />} />
       </Route>
     )
 );
