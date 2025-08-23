@@ -34,9 +34,9 @@ export const LandingN1 = () => {
             >
             
             
-            <div className="container pt-2 my-5 mt-0 text-center">
+            <div className="container pt-3 my-5 mt-0 text-center">
                  <div className="rounded-5 bg-dark py-5">   
-                    <img className="bg-white mb-3" src="/src/front/assets/img/calendar_5276602.png" alt="logoClinicoo" style={{ width: '40px', height: 'auto' }} />
+                    <img className="mb-1" src="/src/front/assets/img/logo-white.png" alt="logoClinicoo" style={{ width: '140px', height: 'auto' }} />
                     <div className="col-lg-6 mx-auto">
                         <p className="lead mb-4 text-white mt-5">
                             {displayedText}
@@ -121,7 +121,7 @@ export const LandingN1 = () => {
                     </div>
                     <div className="d-flex flex-column">
                         <div>
-                            <i className="fa-solid fa-swatchbook fa-2xl " ></i>
+                            <i className="fa-solid fa-code-compare fa-2xl" style={{color:"#fafafa"}}></i>
                         </div>
                         <div className="col d-flex align-items-start">
                             <div>
@@ -134,27 +134,27 @@ export const LandingN1 = () => {
                     </div>
                     <div className="d-flex flex-column">
                         <div className="text-center">
-                            <i className="fa-solid fa-swatchbook fa-2xl " ></i>
+                            <i class="fa-regular fa-folder-open fa-2xl"></i>
                         </div>
                         <div className="col d-flex align-items-start">
                             <div>
                                 <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
-                                    Organiza
+                                    Agenda visual
                                 </h3>
-                                <p>Reorganiza citas en segundos, incluso sobre la marcha. Olvídate de perder tiempo reescribiendo horarios.</p>
+                                <p>Ve tu día completo de un vistazo. Identifica espacios libres y tipos de cita al instante.</p>   
                             </div>
                         </div>
                     </div>
                     <div className="d-flex flex-column">
                         <div>
-                            <i className="fa-solid fa-swatchbook fa-2xl " ></i>
+                            <i className="fa-solid fa-box-archive fa-2xl" style={{color:"#ffffff"}}></i>
                         </div>
                         <div className="col d-flex align-items-start">
                             <div>
                                 <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
-                                    Organiza
+                                    Backup automático
                                 </h3>
-                                <p>Reorganiza citas en segundos, incluso sobre la marcha. Olvídate de perder tiempo reescribiendo horarios.</p>
+                                <p>Tu información se respalda automáticamente en la nube. Nunca pierdas datos importantes por fallas técnicas.</p>
                             </div>
                         </div>
                     </div>
