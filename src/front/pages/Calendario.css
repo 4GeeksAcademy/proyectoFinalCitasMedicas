@@ -1,0 +1,38 @@
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.calendar-grid.header {
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.day {
+  border: 1px solid #ddd;
+  min-height: 100px;
+  padding: 5px;
+  background: #fafafa;
+  border-radius: 6px;
+  position: relative;
+}
+
+.day-number {
+  font-weight: bold;
+  font-size: 14px;
+  position: relative;
+  top: 5px;
+  right: 5px;
+}
+
+.event {
+  padding: 2px 4px;
+  margin-top: 3px;
+  border-radius: 4px;
+  font-size: 12px;
+}
