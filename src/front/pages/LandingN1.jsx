@@ -179,7 +179,7 @@ export const LandingN1 = () => {
                         <div className="card mb-4 rounded-3 shadow-sm">
                             <div className="card-header py-3 bg-dark text-white">
                                 <h4 className="my-0 fw-normal">
-                                    Clinicoo Pro
+                                    MedAgend Pro
                                 </h4>
                             </div>
                             <div className="card-body">
@@ -213,7 +213,7 @@ export const LandingN1 = () => {
                         <div className="card mb-4 rounded-3 shadow-sm">
                             <div className="card-header bg-dark text-white py-3">
                                 <h4 className="my-0 fw-normal">
-                                    Clinicoo hospitales
+                                    MedAgend hospitales
                                 </h4>
                             </div>
                             <div className="card-body">
