@@ -134,7 +134,7 @@ export const LandingN1 = () => {
                     </div>
                     <div className="d-flex flex-column">
                         <div className="text-center">
-                            <i class="fa-regular fa-folder-open fa-2xl"></i>
+                            <i className="fa-regular fa-folder-open fa-2xl"></i>
                         </div>
                         <div className="col d-flex align-items-start">
                             <div>

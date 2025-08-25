@@ -3,7 +3,7 @@ import { Navbar2 } from "../components/Navbar2";
 
 const Pacientes = () => {
     return (
-        <div
+        <div className="pt-3"
             style={{
                 backgroundColor: 'black',
                 margin: 0,

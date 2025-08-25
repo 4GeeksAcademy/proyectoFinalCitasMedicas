@@ -14,9 +14,9 @@ const PaginaRegistrate = () => {
       <div className=" container bg-dark py-5 mt-4 rounded-5">
 
         <div className="container bg-light col-5 rounded-5 pt-5 pb-5 mt-5 mb-5">
-          <div className="text-black d-
-          flex justify-content-center mb-4">
-            <h1>Logo</h1>
+          <div className="text-black text-center d-flex flex-column mb-4">
+            <img className="mx-auto" src="/src/front/assets/img/logo-black.png" alt="logomedAgend" style={{ width: '50px', height: 'auto' }} />
+            <h1>Regístrate</h1>
           </div>
           <form className="needs-validation">
             <div className="mb-3">

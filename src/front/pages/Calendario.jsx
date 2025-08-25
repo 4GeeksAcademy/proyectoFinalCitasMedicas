@@ -2,13 +2,14 @@ import React from "react";
 import { useState } from "react"
 import "./Calendario.css";
 import { Link } from "react-router-dom";
+import { Navbar2 } from "../components/Navbar2";
 
 const Calendario = () => {
   return (
-    <div className="calendario-container">
+    <div className="calendario-container pt-3">
 
       {/* Sidebar */}
-      <div className="sidebar rounded-5 bg-dark">
+      <div className="sidebar">
         <Link to="/Landing-n1" className="d-flex align-items-center mb-3 text-white text-decoration-none">
           <div className="ps-5">
             <img
@@ -64,7 +65,7 @@ const Calendario = () => {
           <div className="calendar-header">
             <h5>Calendario</h5>
             <div>
-              <select className="form-select d-inline w-auto me-2">
+              <select className="form-select d-inline w-auto me-2 rounded-5">
                 <option>Enero</option>
                 <option>Febrero</option>
                 <option>Marzo</option>
@@ -78,7 +79,7 @@ const Calendario = () => {
                 <option>Noviembre</option>
                 <option>Diciembre</option>
               </select>
-              <select className="form-select d-inline w-auto">
+              <select className="form-select d-inline w-auto rounded-5">
                 <option>2025</option>
                 <option>2026</option>
               </select>

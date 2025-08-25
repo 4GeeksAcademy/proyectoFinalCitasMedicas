@@ -65,7 +65,7 @@ export const Citas = () => {
                             </div>  
 
                             {/* Filtros */}
-                            <div className="d-flex justify-content-around mt-3 h-50">
+                            <div className="d-flex justify-content-around my-3 h-50">
                                 
                                 <div className="bg-white rounded-5 p-3 text-dark">
                                     <div className="form-floating ">
@@ -121,8 +121,15 @@ export const Citas = () => {
                             </div>
 
                             {/* lista pacientes */}
-                            <div className="d-flex flex-column align-items-start overflow-auto" >
-                                <div className="col-12 mt-2 px-3 " >
+                            <div className="d-flex flex-column mx-auto justify-content-center" style={{ maxWidth:"750px", maxHeight: "500px", overflowY: "auto", border: "3px solid #ccc" }}>
+                                <div className="col-12 mt-1 px-3 " >
+                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                        <small className="text-muted d-block ">Camilo Betancurth</small>
+                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="col-12 mt-1 px-3" >
                                     <div className="bg-white rounded-5 p-3 text-dark h-100">
                                         <small className="text-muted d-block ">Camilo Betancurth</small>
                                         <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
@@ -152,6 +159,12 @@ export const Citas = () => {
                                         <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
                                     </div>
                                 </div>                            
+                                <div className="col-12 mt-1 px-3" >
+                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                        <small className="text-muted d-block ">Camilo Betancurth</small>
+                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
+                                    </div>
+                                </div>                         
                             </div>
                         </div>
                     </div>

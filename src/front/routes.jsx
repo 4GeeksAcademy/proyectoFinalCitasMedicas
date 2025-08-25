@@ -21,6 +21,7 @@ import { AgregarCita } from "./pages/AgregarCita";
 import { AgregarPaciente } from "./pages/AgregarPaciente";
 import { Citas } from "./pages/Citas";
 
+
 export const router = createBrowserRouter(
     createRoutesFromElements(
     // CreateRoutesFromElements function allows you to build route elements declaratively.
@@ -46,6 +47,7 @@ export const router = createBrowserRouter(
         <Route path="/agregar-cita" element={<AgregarCita />} />
         <Route path="/agregar-paciente" element={<AgregarPaciente />} />
         <Route path="/citas" element={<Citas />} />
+        <Route path="/calendario" element={<Calendario />} />
       </Route>
     )
 );
