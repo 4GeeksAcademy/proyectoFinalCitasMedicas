@@ -8,7 +8,7 @@ const Calendario = () => {
     <div className="calendario-container">
 
       {/* Sidebar */}
-      <div className="sidebar">
+      <div className="sidebar rounded-5 bg-dark">
         <Link to="/Landing-n1" className="d-flex align-items-center mb-3 text-white text-decoration-none">
           <div className="ps-5">
             <img
@@ -58,7 +58,7 @@ const Calendario = () => {
       </div>
 
       {/* Calendario */}
-      <div className="calendario-content">
+      <div className="calendario-content bg-dark rounded-5">
         <div className="calendar">
           {/* Encabezado */}
           <div className="calendar-header">

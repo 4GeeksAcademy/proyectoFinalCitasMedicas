@@ -10,9 +10,10 @@
 .sidebar {
   flex-shrink: 0;           /* no se reduce */
   width: 280px;              /* ancho fijo */
-  background-color: #1a1a1a; /* negro oscuro */
   padding: 2rem 1rem;
   border-radius: 0.75rem;
+  margin: 10px; 
+
 }
 
 /* Links del sidebar */
@@ -59,16 +60,15 @@
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
 }
-
 /* Cada día */
 .day {
   border: 1px solid #444;
   min-height: 100px;
   padding: 5px;
-  background-color: #222;
-  border-radius: 6px;
+  background-color: #fff; /* fondo blanco */
+  border-radius: 12px;
   position: relative;
-  color: white;
+  color: black; /* texto negro */
 }
 
 /* Número del día */
@@ -77,6 +77,7 @@
   font-size: 14px;
   display: block;
   margin-bottom: 4px;
+  color: black; /* número del día en negro */
 }
 
 /* Eventos dentro de un día */
@@ -85,6 +86,7 @@
   margin-top: 3px;
   border-radius: 4px;
   font-size: 12px;
-  background-color: #555;
-  color: white;
+  background-color: #e0e0e0; /* fondo gris claro para destacar eventos */
+  color: black; /* texto del evento en negro */
 }
+
