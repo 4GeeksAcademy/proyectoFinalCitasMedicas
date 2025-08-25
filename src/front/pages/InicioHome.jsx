@@ -19,7 +19,7 @@ export const InicioHome = () => {
                 minHeight: '100vh'
             }}
         >
-            <div className="container-fluid vh-100 p-0 pe-3">
+            <div className="container-fluid vh-100 ps-1 ms-1 pe-3">
                 <div className="row h-50 g-3 ">
                     {/* Navbar - Sidebar */}
                     <div className="col-12 col-md-3 col-lg-2 ps-0 ms-0">

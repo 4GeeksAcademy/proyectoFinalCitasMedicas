@@ -2,60 +2,14 @@ import React from "react";
 import { useState } from "react"
 import "./Calendario.css";
 import { Link } from "react-router-dom";
+import { Navbar2 } from "../components/Navbar2";
 
 const Calendario = () => {
   return (
-    <div className="calendario-container">
+    <div className="calendario-container pt-3">
 
       {/* Sidebar */}
-      <div className="sidebar">
-        <Link to="/Landing-n1" className="d-flex align-items-center mb-3 text-white text-decoration-none">
-          <div className="ps-5">
-            <img
-              className="mb-1 mx-auto"
-              src="/src/front/assets/img/logo-white.png"
-              alt="logomedAgend"
-              style={{ width: '120px', height: 'auto' }}
-            />
-          </div>
-        </Link>
-        <hr />
-        <ul className="nav nav-pills flex-column mb-auto">
-          <li className="nav-item">
-            <Link to="" className="nav-link text-white">
-              <i className="fa-solid fa-house me-2"></i>Inicio
-            </Link>
-          </li>
-          <li>
-            <Link to="/pacientes" className="nav-link text-white">
-              <i className="fa-solid fa-hospital-user me-2"></i>Pacientes
-            </Link>
-          </li>
-          <li>
-            <Link to="/citas" className="nav-link text-white">
-              <i className="fa-regular fa-clock me-2"></i>Citas
-            </Link>
-          </li>
-          <li>
-            <Link to="" className="nav-link text-white">
-              <i className="fa-regular fa-calendar-check me-2"></i>Calendario
-            </Link>
-          </li>
-        </ul>
-        <span className="fs-5 mt-3 ms-3">Opciones</span>
-        <ul className="nav nav-pills flex-column mb-auto">
-          <li>
-            <Link to="/agregar-cita" className="nav-link text-white">
-              <i className="fa-solid fa-user-check me-2"></i>Agregar cita
-            </Link>
-          </li>
-          <li>
-            <Link to="/agregar-paciente" className="nav-link text-white">
-              <i className="fa-solid fa-user-plus me-2"></i>Nuevo paciente
-            </Link>
-          </li>
-        </ul>
-      </div>
+      < Navbar2 />
 
       {/* Calendario */}
       <div className="calendario-content">
@@ -64,7 +18,7 @@ const Calendario = () => {
           <div className="calendar-header">
             <h5>Calendario</h5>
             <div>
-              <select className="form-select d-inline w-auto me-2">
+              <select className="form-select d-inline w-auto me-2 rounded-5">
                 <option>Enero</option>
                 <option>Febrero</option>
                 <option>Marzo</option>
@@ -78,7 +32,7 @@ const Calendario = () => {
                 <option>Noviembre</option>
                 <option>Diciembre</option>
               </select>
-              <select className="form-select d-inline w-auto">
+              <select className="form-select d-inline w-auto rounded-5">
                 <option>2025</option>
                 <option>2026</option>
               </select>
