@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, Boolean, ForeignKey
+from sqlalchemy import String, Boolean, ForeignKey, Date, Time 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from datetime import date, time
 
 db = SQLAlchemy()
 
@@ -26,7 +27,7 @@ class Paciente(db.Model):
     direccion: Mapped[str] = mapped_column(String(50), nullable=False)
     ciudad: Mapped[str] = mapped_column(String(40), nullable=False)
     estado: Mapped[str] = mapped_column(String(40), nullable=False)
-    nota: Mapped[str] = mapped_column(String(400), nullable=False)
+    nota: Mapped[str] = mapped_column(String(400), nullable=True)
 
     def serialize(self):
         return {
@@ -42,13 +43,13 @@ class Paciente(db.Model):
     
 class Cita(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    paciente_id: Mapped[int] = mapped_column(db.ForeignKey('paciente.id'), nullable=False)
-    fecha: Mapped[str] = mapped_column(String(20), nullable=False)
-    hora: Mapped[str] = mapped_column(String(20), nullable=False)
+    paciente_id: Mapped[int] = mapped_column(ForeignKey('paciente.id'), nullable=False)
+    fecha: Mapped[date] = mapped_column(Date, nullable=False)
+    hora: Mapped[time] = mapped_column(Time, nullable=False)
     modalidad: Mapped[str] = mapped_column(String(40), nullable=False)
     precio: Mapped[str] = mapped_column(String(20), nullable=False)
     estado_pago: Mapped[str] = mapped_column(String(20), nullable=False)
-    nota: Mapped[str] = mapped_column(String(400), nullable=False)
+    nota: Mapped[str] = mapped_column(String(400), nullable=True)
 
     paciente: Mapped["Paciente"] = relationship("Paciente", backref="citas")
 
