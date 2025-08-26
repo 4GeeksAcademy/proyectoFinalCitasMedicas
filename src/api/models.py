@@ -57,6 +57,7 @@ class Cita(db.Model):
         return {
             "id": self.id,
             "paciente_id": self.paciente_id,
+            "paciente_nombre": self.paciente.nombre,
             "fecha": self.fecha,
             "hora": self.hora,
             "modalidad": self.modalidad,
