@@ -5,8 +5,8 @@ import { RouterProvider } from "react-router-dom";  // Import RouterProvider to 
 import { router } from "./routes";  // Import the router configuration
 import { StoreProvider } from './hooks/useGlobalReducer';  // Import the StoreProvider for global state management
 import { BackendURL } from './components/BackendURL';
-import PaginaRegistrate from './pages/PaginaRegistrate';
-import Calendario from './pages/Calendario';
+
+
 
 
 const Main = () => {
