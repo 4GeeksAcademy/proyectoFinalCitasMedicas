@@ -2,9 +2,10 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Paciente, Cita
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
+
 
 api = Blueprint('api', __name__)
 
@@ -21,4 +22,14 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
+@api.route('/paciente/', methods=['POST'])
+def crear_paciente():
+    datos_paceinte = request.get_json()
+
+@api.route('/paciente', methods=['GET'])
+def obtener_paciente():
+    pacientes = Paciente.query.all()
+    pacientes_to_dict = [paciente.serialize() for paciente in pacientes]
+    return jsonify(pacientes_to_dict), 200
+ 
 

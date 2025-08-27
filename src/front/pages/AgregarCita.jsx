@@ -71,7 +71,8 @@ export const AgregarCita = () => {
                                             className="form-select rounded-5" 
                                             id="floatingSelect" 
                                             aria-label="Floating label select example"
-                                            // value={citaData.paciente}
+                                            value={citaData.paciente}
+                                            onChange={(e) => handleInputChange('paciente', e.target.value)}
                                             
                                             >   
                                             <option value="">Paciente</option>
