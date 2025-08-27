@@ -23,6 +23,7 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
+#obtener todos los pacietes
 @api.route('/paciente', methods=['GET'])
 def obtener_paciente():
     pacientes = Paciente.query.all()
@@ -30,6 +31,7 @@ def obtener_paciente():
         paciente.serialize() for paciente in pacientes
     ]), 200
 
+#obtener todas las citas
 @api.route('/cita', methods=['GET'])
 def obtener_citas():
     citas = Cita.query.all()
@@ -38,13 +40,46 @@ def obtener_citas():
     ]), 200
  
 
-
+#obtener paciente por id
 @api.route('/paciente/<int:paciente_id>', methods=['GET'])
 def obtener_single_paciente(paciente_id):
     buscar_paciente = Paciente.query.get(paciente_id)
 
     if not buscar_paciente:
-        return jsonify({"msg": f"Paciente no encontrado con id {paciente_id} no está en la base de datos" }), 404
+        return jsonify({"msg": f"Paciente con id {paciente_id} no encontrado en la base de datos" }), 404
     
     return jsonify(buscar_paciente.serialize()), 200
 
+
+# revisar como obtener todas las citas de un paciente.
+@api.route('/cita/<int:paciente_id>', methods=['GET'])
+def obtener_single_cita(paciente_id):
+    buscar_cita = Cita.query.get(paciente_id)
+
+    if not buscar_cita:
+        return jsonify({"msg": f"Cita con id {id} no encontrado en la base de datos" }), 404
+    
+    return jsonify(buscar_cita.serialize()), 200
+
+#crear paciente
+@api.route('/paciente', methods=['POST'])
+def crear_paciente():
+    body = request.get_json()
+
+    if not body:
+        return jsonify({"error": "No se enviaron datos"}), 400 
+        
+    nuevo_paciente = Paciente(
+                nombre=body['nombre'],
+                telefono=body['telefono'],
+                email=body['email'],
+                direccion=body['direccion'],
+                ciudad=body['ciudad'],
+                estado=body['estado'],
+                nota=body.get('nota', '')  # Campo opcional
+    )
+
+    db.session.add(nuevo_paciente)
+    db.session.commit()
+
+    return jsonify(nuevo_paciente.serialize()), 201
