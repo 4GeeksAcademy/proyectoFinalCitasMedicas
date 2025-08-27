@@ -22,14 +22,29 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-@api.route('/paciente/', methods=['POST'])
-def crear_paciente():
-    datos_paceinte = request.get_json()
 
 @api.route('/paciente', methods=['GET'])
 def obtener_paciente():
     pacientes = Paciente.query.all()
-    pacientes_to_dict = [paciente.serialize() for paciente in pacientes]
-    return jsonify(pacientes_to_dict), 200
+    return jsonify([
+        paciente.serialize() for paciente in pacientes
+    ]), 200
+
+@api.route('/cita', methods=['GET'])
+def obtener_citas():
+    citas = Cita.query.all()
+    return jsonify([
+        cita.serialize() for cita in citas
+    ]), 200
  
+
+
+@api.route('/paciente/<int:paciente_id>', methods=['GET'])
+def obtener_single_paciente(paciente_id):
+    buscar_paciente = Paciente.query.get(paciente_id)
+
+    if not buscar_paciente:
+        return jsonify({"msg": f"Paciente no encontrado con id {paciente_id} no está en la base de datos" }), 404
+    
+    return jsonify(buscar_paciente.serialize()), 200
 
