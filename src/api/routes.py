@@ -33,8 +33,6 @@ def obtener_paciente():
     ]), 200
 
 # obtener todas las citas
-
-
 @api.route('/cita', methods=['GET'])
 def obtener_citas():
     citas = Cita.query.all()
@@ -66,7 +64,6 @@ def obtener_single_cita(paciente_id):
 
 # crear paciente
 
-
 @api.route('/paciente', methods=['POST'])
 def crear_paciente():
     body = request.get_json()
@@ -90,7 +87,6 @@ def crear_paciente():
     return jsonify(nuevo_paciente.serialize()), 201
 
 # crear cita
-
 
 def parse_fecha(fecha_str):
     return datetime.strptime(fecha_str, "%Y-%m-%d").date()
@@ -122,9 +118,7 @@ def crear_cita():
 
     return jsonify(nueva_cita.serialize()), 201
 
-    # PUT Paciente
-
-
+# PUT Paciente
 @api.route('/paciente/<int:paciente_id>', methods=['PUT'])
 def actualizar_paciente(paciente_id):
     paciente = Paciente.query.get(paciente_id)
@@ -153,3 +147,31 @@ def actualizar_paciente(paciente_id):
 
 
     return jsonify(paciente.serialize()), 200
+
+#PUT cita
+
+@api.route('/cita/<id>', methods=['PUT'])
+def actualizar_cita(id):
+    cita = Cita.query.get(id)
+
+    if not cita:
+        return jsonify({"error": "Cita no encontrada"}), 404
+    
+    body = request.get_json()
+
+    if 'fecha' in body:
+        cita.fecha = parse_fecha(body['fecha'])
+    if 'hora' in body:
+        cita.hora = parse_hora(body['hora'])
+    if 'modalidad' in body:
+        cita.modalidad = body['modalidad']
+    if 'precio' in body:
+        cita.precio = body['precio']
+    if 'estado_pago' in body:
+        cita.estado_pago = body['estado_pago']
+    if 'nota' in body:
+        cita.nota = body['nota']
+
+    db.session.commit() # Actualizar cambios
+
+    return jsonify(cita.serialize()), 200
