@@ -6,6 +6,7 @@ from api.models import db, User, Paciente, Cita
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import datetime
+from sqlalchemy.exc import IntegrityError 
 
 
 api = Blueprint('api', __name__)
@@ -175,3 +176,25 @@ def actualizar_cita(id):
     db.session.commit() # Actualizar cambios
 
     return jsonify(cita.serialize()), 200
+
+# Delete Paciente
+
+@api.route('/paciente/<int:paciente_id>', methods=['DELETE'])
+def eliminar_paciente(paciente_id):
+    eliminar = Paciente.query.get(paciente_id)
+
+    if not eliminar: 
+        return jsonify({"Error": "Paciente no encontrado"}), 404
+    
+    
+    try:
+        db.session.delete(eliminar)
+        db.session.commit()
+
+        return jsonify({"Mensaje": "Paciente eliminado"}), 200
+    except IntegrityError:
+        db.session.rollback() #deshace la transacción
+        return jsonify({
+            "Error": "No se puede eliminar el paciente",
+            "Mensaje": "El paciente tiene citas asociadas. Debe eliminar primero las citas"
+        }), 400
