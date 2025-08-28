@@ -198,3 +198,15 @@ def eliminar_paciente(paciente_id):
             "Error": "No se puede eliminar el paciente",
             "Mensaje": "El paciente tiene citas asociadas. Debe eliminar primero las citas"
         }), 400
+    
+@api.route('/cita/<int:id>', methods=['DELETE'])
+def eliminar_cita(id):
+    eliminar = Cita.query.get(id)
+
+    if not eliminar:
+        return jsonify({"error": "Cita no encontrada"}), 404
+
+    db.session.delete(eliminar)
+    db.session.commit()
+
+    return jsonify({"Mensaje": "Cita eliminada"}), 200
