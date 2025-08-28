@@ -72,6 +72,19 @@ def crear_paciente():
     if not body:
         return jsonify({"error": "No se enviaron datos"}), 400
 
+    if not body.get('nombre'):
+        return jsonify({"error": "El nombre es requerido"}), 400
+    if not body.get('telefono'):
+        return jsonify({"error": "El telefono es requerido"}), 400
+    if not body.get('email'):
+        return jsonify({"error": "El email es requerido"}), 400
+    if not body.get('direccion'):
+        return jsonify({"error": "La direccion es requerida"}), 400
+    if not body.get('ciudad'):
+        return jsonify({"error": "La ciudad es requerida"}), 400
+    if not body.get('estado'):
+        return jsonify({"error": "El estado es requerido"}), 400
+
     nuevo_paciente = Paciente(
                 nombre=body['nombre'],
                 telefono=body['telefono'],

@@ -24,11 +24,35 @@ export const AgregarPaciente = () => {
         }));
     };
 
-    console.log('Paciente Data:', pacienteData);
+    // console.log('Paciente Data:', pacienteData);
 
     const crearPaciente = () => {
         if(!pacienteData.nombre || !pacienteData.telefono || !pacienteData.email || !pacienteData.direccion || !pacienteData.ciudad || !pacienteData.estado) {
             alert('Por favor, completa los campos obligatorios.')
+        }
+    }
+
+    const urlCrearPaciente = '/paciente'
+
+    async function crearPaciente(pacienteData){
+        try{
+            const response = await fetch(urlCrearPaciente, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(pacienteData)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`)
+            }
+
+            
+
+        } catch (error) {
+            console.error('Error fetching data: ', error);
+            throw error;
         }
     }
 
