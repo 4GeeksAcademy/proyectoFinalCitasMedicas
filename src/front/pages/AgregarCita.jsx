@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Navbar2 } from "../components/Navbar2"
 import { Link } from "react-router-dom";
 
@@ -6,14 +6,16 @@ import { Link } from "react-router-dom";
 export const AgregarCita = () => {
 
     const [citaData, setCitaData] = useState ({
-        paciente: '',
+        paciente_id: '',
         fecha: '',
         hora: '',
         modalidad: '',
         precio: '',
-        estadoPago: '',
+        estado_pago: '',
         nota: ''
     });
+
+    const [paciente, setPaciente] = useState([])
 
     const handleInputChange = (campo, valor) => {
         setCitaData(prevData => ({
@@ -23,11 +25,11 @@ export const AgregarCita = () => {
     }
 
     
-
+// button para crear cita
     const crearCitaButton = () => {
-        if(!citaData.paciente || !citaData.fecha || 
+        if(!citaData.paciente_id || !citaData.fecha || 
             !citaData.hora || !citaData.modalidad || 
-            !citaData.precio || !citaData.estadoPago) {
+            !citaData.precio || !citaData.estado_pago) {
             alert('Por favor, completa todos los campos.')
         }
         try{
@@ -42,7 +44,7 @@ export const AgregarCita = () => {
 
     }
 
-    
+// fetch para crear cita
     async function crearCita(citaData) {
         try {
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita`, {
@@ -65,6 +67,29 @@ export const AgregarCita = () => {
             throw error;
         }
     }
+
+// Fetchs para obtener pacientes
+    async function obtenerPacientes(){
+        try{
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`);
+            
+            if (!response.ok){
+                throw new Error(`HTTP Error! status: ${response.status}`)
+            }
+            const data = await response.json();
+            setPaciente(data);
+            return data;
+
+
+        } catch(error){
+            console.error(`Error fetching data: `, error);
+            throw error;
+        }
+    }
+
+    useEffect(() => {
+        obtenerPacientes();
+    }, [])
 
     return (
         <div
@@ -107,14 +132,17 @@ export const AgregarCita = () => {
                                             className="form-select rounded-5" 
                                             id="floatingSelect" 
                                             aria-label="Floating label select example"
-                                            value={citaData.paciente}
-                                            onChange={(e) => handleInputChange('paciente', e.target.value)}
-                                            
-                                            >   
-                                            <option value="">Paciente</option>
-                                            <option value="1">Samuel</option>
-                                            <option value="2">Sebastian</option>
-                                            <option value="3">Leonardo</option>
+                                            value={citaData.paciente_id}
+                                            onChange={(e) => handleInputChange('paciente_id', e.target.value)}
+                                            > 
+                                            <option value="">Selecione un paciente</option>
+                                              {/* map para renderizar pacientes */}
+                                              {paciente.map((paciente) => (
+                                                  <option key={paciente.id} value={paciente.id}>
+                                                    {paciente.nombre}
+                                                  </option>
+
+                                              ))}
                                         </select>
                                         <label htmlFor="floatingSelect">Selecione un paciente</label>
                                     </div>
@@ -164,7 +192,7 @@ export const AgregarCita = () => {
                                             onChange={(e) => handleInputChange('modalidad', e.target.value)}
                                         >   
                                             <option value="">¿Presencial o virtual?</option>
-                                            <option value="Precensial">Presencial</option>
+                                            <option value="Presencial">Presencial</option>
                                             <option value="Virtual">Virtual</option>
                                         </select>
                                         <label htmlFor="floatingSelect">Modalidad</label>
@@ -191,8 +219,8 @@ export const AgregarCita = () => {
                                         className="form-select rounded-5" 
                                         id="floatingSelect" 
                                         aria-label="Floating label select example"
-                                        value={citaData.estadoPago}
-                                        onChange={(e) => handleInputChange('estadoPago', e.target.value)}
+                                        value={citaData.estado_pago}
+                                        onChange={(e) => handleInputChange('estado_pago', e.target.value)}
                                         >   
                                             <option value="">¿Ya fue cancelado?</option>
                                             <option value="Cancelado">Cancelado</option>

@@ -107,7 +107,7 @@ def parse_fecha(fecha_str):
 
 
 def parse_hora(hora_str):
-    return datetime.strptime(hora_str, "%H:%M:%S").time()
+    return datetime.strptime(hora_str, "%H:%M").time()
 
 
 @api.route('/cita', methods=['POST'])
