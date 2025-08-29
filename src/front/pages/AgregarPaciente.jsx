@@ -4,9 +4,6 @@ import { useState } from "react"
 
 export const AgregarPaciente = () => {
 
-    const [estadoPaciente, SetEstadoPaciente] = useState('')
-    console.log(estadoPaciente)
-
     const [pacienteData, setPacienteData] = useState({
         nombre: '',
         telefono: '',
@@ -26,17 +23,40 @@ export const AgregarPaciente = () => {
 
     // console.log('Paciente Data:', pacienteData);
 
-    const crearPaciente = () => {
-        if(!pacienteData.nombre || !pacienteData.telefono || !pacienteData.email || !pacienteData.direccion || !pacienteData.ciudad || !pacienteData.estado) {
-            alert('Por favor, completa los campos obligatorios.')
-        }
+    const crearPacienteButton = () => {
+
+        if(!pacienteData.nombre || !pacienteData.telefono || 
+            !pacienteData.email || !pacienteData.direccion || 
+            !pacienteData.ciudad || !pacienteData.estado) {
+                alert('Por favor, completa los campos obligatorios.')
+            }    
+    try{
+        const resultado = crearPaciente(pacienteData)
+        console.log('Paciente creado:', resultado)
+        alert('Paciente creado con éxito')
+
+        setPacienteData({
+            nombre: '',
+            telefono: '',
+            email: '',
+            direccion: '',
+            ciudad: '',
+            estado: '',
+            nota: ''
+        })
+   
+    } catch(error){
+        alert(`Error: ${error.message}`)
     }
 
-    const urlCrearPaciente = '/paciente'
+
+    }
+    
+
 
     async function crearPaciente(pacienteData){
         try{
-            const response = await fetch(urlCrearPaciente, {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -48,6 +68,8 @@ export const AgregarPaciente = () => {
                 throw new Error(`HTTP error! status: ${response.status}`)
             }
 
+            const nuevoPaciente = await response.json()
+            return nuevoPaciente;
             
 
         } catch (error) {
@@ -180,15 +202,13 @@ export const AgregarPaciente = () => {
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-end w-100">
-                                    <Link to="">
-                                        <button 
-                                            type="button" 
-                                            className=" btn btn-outline-light btn-lg px-4 rounded-5 mt-3 me-3"
-                                            onClick={crearPaciente}
-                                        >
-                                            Crear
-                                        </button>
-                                    </Link>
+                                    <button 
+                                        type="button" 
+                                        className=" btn btn-outline-light btn-lg px-4 rounded-5 mt-3 me-3"
+                                        onClick={crearPacienteButton}
+                                    >
+                                        Crear
+                                    </button>
                                 </div>
                             </div>
                         </div>

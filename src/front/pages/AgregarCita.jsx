@@ -22,11 +22,47 @@ export const AgregarCita = () => {
         }))
     }
 
-    console.log('Cita Data:', citaData);
+    
 
-    const crearCita = () => {
-        if(!citaData.paciente || !citaData.fecha || !citaData.hora || !citaData.modalidad || !citaData.precio || !citaData.estadoPago) {
+    const crearCitaButton = () => {
+        if(!citaData.paciente || !citaData.fecha || 
+            !citaData.hora || !citaData.modalidad || 
+            !citaData.precio || !citaData.estadoPago) {
             alert('Por favor, completa todos los campos.')
+        }
+        try{
+            const resultado = crearCita(citaData);
+            console.log('Cita creada', resultado)
+            alert('Cita creada con exito')
+
+        } catch(error) {
+            console.error()
+            alert(`Error: ${error.message}`)
+        }
+
+    }
+
+    
+    async function crearCita(citaData) {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(citaData)
+            });
+
+            if (!response.ok){
+                throw new Error(`HTTP error! status: ${response.status}`)
+            }
+
+            const nuevaCita = await response.json();
+            return nuevaCita;
+
+        } catch(error) {
+            console.error(`Error fetching data: `, error);
+            throw error;
         }
     }
 
@@ -187,7 +223,7 @@ export const AgregarCita = () => {
                                     <button 
                                     type="button" 
                                     className=" btn btn-outline-light btn-lg rounded-5 px-4 mt-3 me-3"
-                                    onClick={crearCita}
+                                    onClick={crearCitaButton}
                                     >
                                         Crear
                                     </button>
