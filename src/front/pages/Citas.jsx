@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Navbar2 } from "../components/Navbar2"
 import { Link } from "react-router-dom";
 
@@ -11,6 +11,33 @@ export const Citas = () => {
         month: 'long',
         day: 'numeric',
     });
+
+    const [citas, setCitas] = useState([])
+
+    // fetch get citas
+    async function obtenerCitas() {
+        try{
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita`)
+
+            if (!response.ok){
+                throw new Error(`HTTP Error! status: ${response.status}`)
+            }
+
+            const data = await response.json();
+            setCitas(data);
+            return(data);
+
+            
+
+        } catch(error) {
+            console.error(`Error fetching data: `, error);
+            throw error;
+        }
+    }
+
+    useEffect(() => {
+        obtenerCitas();
+    }, [])
 
     return (
         <div
@@ -124,47 +151,14 @@ export const Citas = () => {
                             <div className="d-flex flex-column mx-auto justify-content-center" style={{ maxWidth:"750px", maxHeight: "500px", overflowY: "auto", border: "3px solid #ccc" }}>
                                 <div className="col-12 mt-1 px-3 " >
                                     <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                        <small className="text-muted d-block ">Camilo Betancurth</small>
-                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
+                                        {citas.map((cita) => (
+                                        <div key={cita.id}>    
+                                            <small  value={cita.id} className="text-muted d-block ">{cita.paciente_nombre}</small>
+                                            <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
+                                        </div>
+                                        ))}
                                     </div>
-                                </div>
-                                
-                                <div className="col-12 mt-1 px-3" >
-                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                        <small className="text-muted d-block ">Camilo Betancurth</small>
-                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
-                                    </div>
-                                </div>
-                                <div className="col-12 mt-1 px-3" >
-                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                        <small className="text-muted d-block ">Camilo Betancurth</small>
-                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
-                                    </div>
-                                </div>
-                                <div className="col-12 mt-1 px-3" >
-                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                        <small className="text-muted d-block ">Camilo Betancurth</small>
-                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
-                                    </div>
-                                </div>
-                                <div className="col-12 mt-1 px-3" >
-                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                        <small className="text-muted d-block ">Camilo Betancurth</small>
-                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
-                                    </div>
-                                </div>
-                                <div className="col-12 mt-1 px-3" >
-                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                        <small className="text-muted d-block ">Camilo Betancurth</small>
-                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
-                                    </div>
-                                </div>                            
-                                <div className="col-12 mt-1 px-3" >
-                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                        <small className="text-muted d-block ">Camilo Betancurth</small>
-                                        <p className="border border-dark rounded-5 d-inline-flex px-2 mb-0">Activo</p>
-                                    </div>
-                                </div>                         
+                                </div>                                                      
                             </div>
                         </div>
                     </div>
