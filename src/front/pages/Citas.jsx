@@ -54,7 +54,18 @@ export const Citas = () => {
         }
     }
 
-   
+    // contar estados de pacientes
+    const contarTotal = pacientes.length;
+    
+    const contarActivos = pacientes.filter(paciente => 
+        paciente.estado === 'Activo' || paciente.estado === 'activo').length;
+
+    const contarDeAlta = pacientes.filter(paciente =>
+        paciente.estado === 'De alta' || paciente.estado === 'de alta').length;
+
+    const contarInactivos =pacientes.filter(paciente =>
+        paciente.estado === 'Inactivo' || paciente.estado === 'inactivo').length;
+    
 
     useEffect(() => {
         obtenerCitas();
@@ -99,19 +110,19 @@ export const Citas = () => {
 
                                 <div className="bg-white rounded-5 w-25 mx-2 pt-3">
                                     <h4 className="text-dark ms-3">Total</h4>
-                                    <p className="text-dark ms-3"></p>
+                                    <p className="text-dark ms-3"><strong>{contarTotal}</strong></p>
                                 </div>
                                 <div className="bg-white rounded-5 w-25 mx-2 pt-3">
                                     <h4 className="text-dark ms-3">Activos</h4>
-                                    <p className="text-dark ms-3">13</p>
+                                    <p className="text-dark ms-3"><strong>{contarActivos}</strong></p>
                                 </div>
                                 <div className="bg-white rounded-5 w-25 mx-2 pt-3">
                                     <h4 className="text-dark ms-3">De alta</h4>
-                                    <p className="text-dark ms-3">13</p>
+                                    <p className="text-dark ms-3"><strong>{contarDeAlta}</strong></p>
                                 </div>
                                 <div className="bg-white rounded-5 w-25 mx-2 pt-3">
                                     <h4 className="text-dark ms-3">Inactivos</h4>
-                                    <p className="text-dark ms-3">13</p>
+                                    <p className="text-dark ms-3"><strong>{contarInactivos}</strong></p>
                                 </div>
                             </div>
                             
@@ -153,23 +164,6 @@ export const Citas = () => {
                                         <label htmlFor="floatingSelect">por nombre</label>
                                     </div>
                                 </div>
-                                <div className="bg-white rounded-5 p-3 text-dark">
-                                    <div className="form-floating">
-                                        <select
-                                            className="form-select rounded-5"
-                                            id="floatingSelect"
-                                            aria-label="Floating label select example"
-                                        // value={estadoPaciente}
-                                        // onChange={(e)=> SetEstadoPaciente(e.target.value)}
-                                        >
-                                            <option value=""></option>
-                                            <option value="1">Activo</option>
-                                            <option value="2">De alta</option>
-                                            <option value="3">Inactivo</option>
-                                        </select>
-                                        <label htmlFor="floatingSelect">ascendente</label>
-                                    </div>
-                                </div>
                             </div>
 
                             {/* lista pacientes */}
@@ -206,13 +200,15 @@ export const Citas = () => {
                                                                 </div>
                                                                 <div className="modal-body">
                                                                     <p><strong>Paciente:</strong> {cita.paciente_nombre}</p>
-                                                                    <p><strong>Fecha:</strong> {cita.fecha} - {cita.hora}</p>
+                                                                    <p><strong>Fecha:</strong> {cita.fecha} / {cita.hora}</p>
                                                                     <p><strong>Nota:</strong></p>
                                                                     <p className="bg-dark p-3 rounded-5 text-white">
                                                                         {cita.nota || 'Sin notas adicionales'}
                                                                     </p>
                                                                 </div>
                                                                 <div className="modal-footer rounded-5">
+                                                                    
+                                                                    <button type="button" className="btn btn-dark rounded-5" data-bs-dismiss="modal">Editar</button>
                                                                     <button type="button" className="btn btn-outline-dark rounded-5" data-bs-dismiss="modal">Close</button>
                                                                 </div>
                                                             </div>
