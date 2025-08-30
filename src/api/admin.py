@@ -9,7 +9,7 @@ class CitaModelView(ModelView):
     form_columns = ['paciente', 'fecha', 'hora', 'modalidad', 'precio', 'estado_pago', 'nota']
     
     # Campos que se mostrarán en la lista
-    column_list = ['id', 'paciente', 'fecha', 'hora', 'modalidad', 'estado_pago']
+    column_list = ['id', 'paciente', 'fecha', 'hora', 'modalidad', 'estado_pago', 'nota']
     
     # ✅ Configurar el dropdown para seleccionar paciente
     form_args = {
