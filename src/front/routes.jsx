@@ -20,6 +20,7 @@ import { InicioHome } from "./pages/InicioHome";
 import { AgregarCita } from "./pages/AgregarCita";
 import { AgregarPaciente } from "./pages/AgregarPaciente";
 import { Citas } from "./pages/Citas";
+import { EditarCita } from "./pages/EditarCita";
 
 
 export const router = createBrowserRouter(
@@ -48,6 +49,7 @@ export const router = createBrowserRouter(
         <Route path="/agregar-paciente" element={<AgregarPaciente />} />
         <Route path="/citas" element={<Citas />} />
         <Route path="/calendario" element={<Calendario />} />
+        <Route path="/editar-cita" element={<EditarCita />} />
       </Route>
     )
 );

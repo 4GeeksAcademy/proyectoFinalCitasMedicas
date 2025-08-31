@@ -136,15 +136,12 @@ export const Citas = () => {
                                             className="form-select rounded-5"
                                             id="floatingSelect"
                                             aria-label="Floating label select example"
-                                        // value={estadoPaciente}
-                                        // onChange={(e)=> SetEstadoPaciente(e.target.value)}
                                         >
                                             <option value=""></option>
-                                            <option value="1">Activo</option>
-                                            <option value="2">De alta</option>
-                                            <option value="3">Inactivo</option>
+                                            <option value="1">Próximas</option>
+                                            <option value="2">Últimas</option>
                                         </select>
-                                        <label htmlFor="floatingSelect">Estado</label>
+                                        <label htmlFor="floatingSelect">Fecha</label>
                                     </div>
                                 </div>
                                 <div className="bg-white rounded-5 p-3 text-dark">
@@ -153,13 +150,10 @@ export const Citas = () => {
                                             className="form-select rounded-5"
                                             id="floatingSelect"
                                             aria-label="Floating label select example"
-                                        // value={estadoPaciente}
-                                        // onChange={(e)=> SetEstadoPaciente(e.target.value)}
                                         >
                                             <option value=""></option>
-                                            <option value="1">Activo</option>
-                                            <option value="2">De alta</option>
-                                            <option value="3">Inactivo</option>
+                                            <option value="1">Ascendente</option>
+                                            <option value="2">Descendente</option>
                                         </select>
                                         <label htmlFor="floatingSelect">por nombre</label>
                                     </div>
@@ -167,7 +161,7 @@ export const Citas = () => {
                             </div>
 
                             {/* lista pacientes */}
-                            <div className="d-flex flex-column mx-auto justify-content-start" style={{ maxWidth: "750px", maxHeight: "500px", overflowY: "auto", border: "3px solid #ccc" }}>
+                            <div className="d-flex flex-column mx-auto justify-content-start" style={{ maxWidth: "750px", maxHeight: "500px", overflowY: "auto"}}>
                                 <div className="col-12 mt-1 px-3 " >
                                     <div className="bg-white rounded-5 p-3 text-dark h-100">
                                         {citas.map((cita) => (
@@ -185,30 +179,34 @@ export const Citas = () => {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    {/* <!-- Button trigger modal --> */}
+                                                    {/*Button modal*/}
                                                     <button type="button" className="btn btn-outline-dark border-black rounded-5" data-bs-toggle="modal" data-bs-target={`#modalNota-${cita.id}`}>
                                                         Nota
                                                     </button>
 
                                                     {/* <!-- Modal --> */}
                                                     <div className="modal fade" id={`modalNota-${cita.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={`modalLabel-${cita.id}`} aria-hidden="true">
-                                                        <div className="modal-dialog">
+                                                        <div className="modal-dialog modal-dialog-centered">
                                                             <div className="modal-content rounded-5">
                                                                 <div className="modal-header rounded-5">
-                                                                    <h1 className="modal-title fs-5" id={`modalLabel-${cita.id}`}>Motivo de consulta - {cita.paciente_nombre} </h1>
+                                                                    <h1 className="modal-title fs-5" id={`modalLabel-${cita.id}`}>{cita.paciente_nombre} </h1>
                                                                     <button type="button" className="btn-close rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div className="modal-body">
-                                                                    <p><strong>Paciente:</strong> {cita.paciente_nombre}</p>
-                                                                    <p><strong>Fecha:</strong> {cita.fecha} / {cita.hora}</p>
+                                                                    <p><strong>Motivo de consulta:</strong></p>
                                                                     <p><strong>Nota:</strong></p>
                                                                     <p className="bg-dark p-3 rounded-5 text-white">
                                                                         {cita.nota || 'Sin notas adicionales'}
                                                                     </p>
+                                                                    <div className="d-flex justify-content-evenly">
+                                                                        <p><i className="fa-regular fa-calendar-days me-2"></i><strong>Fecha:</strong> {cita.fecha}</p>
+                                                                        <p><i className="fa-regular fa-clock me-2"></i><strong>Hora:</strong> {cita.hora}</p>
+                                                                    </div>
                                                                 </div>
                                                                 <div className="modal-footer rounded-5">
-                                                                    
-                                                                    <button type="button" className="btn btn-dark rounded-5" data-bs-dismiss="modal">Editar</button>
+                                                                    <Link to={"/editar-cita"}>
+                                                                        <button type="button" className="btn btn-dark rounded-5" data-bs-dismiss="modal">Editar</button>
+                                                                    </Link>
                                                                     <button type="button" className="btn btn-outline-dark rounded-5" data-bs-dismiss="modal">Close</button>
                                                                 </div>
                                                             </div>
