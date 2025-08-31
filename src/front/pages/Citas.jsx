@@ -56,16 +56,16 @@ export const Citas = () => {
 
     // contar estados de pacientes
     const contarTotal = pacientes.length;
-    
-    const contarActivos = pacientes.filter(paciente => 
+
+    const contarActivos = pacientes.filter(paciente =>
         paciente.estado === 'Activo' || paciente.estado === 'activo').length;
 
     const contarDeAlta = pacientes.filter(paciente =>
         paciente.estado === 'De alta' || paciente.estado === 'de alta').length;
 
-    const contarInactivos =pacientes.filter(paciente =>
+    const contarInactivos = pacientes.filter(paciente =>
         paciente.estado === 'Inactivo' || paciente.estado === 'inactivo').length;
-    
+
 
     useEffect(() => {
         obtenerCitas();
@@ -105,7 +105,7 @@ export const Citas = () => {
                             <p className="text-light">{fechaFormateada}</p>
 
                             {/* Estados de pacientes */}
-                            
+
                             <div className="d-flex justify-content-between text-start">
 
                                 <div className="bg-white rounded-5 w-25 mx-2 pt-3">
@@ -125,7 +125,7 @@ export const Citas = () => {
                                     <p className="text-dark ms-3"><strong>{contarInactivos}</strong></p>
                                 </div>
                             </div>
-                            
+
 
                             {/* Filtros */}
                             <div className="d-flex justify-content-around my-3 h-50">
@@ -161,7 +161,7 @@ export const Citas = () => {
                             </div>
 
                             {/* lista pacientes */}
-                            <div className="d-flex flex-column mx-auto justify-content-start" style={{ maxWidth: "750px", maxHeight: "500px", overflowY: "auto"}}>
+                            <div className="d-flex flex-column mx-auto justify-content-start" style={{ maxWidth: "750px", maxHeight: "500px", overflowY: "auto" }}>
                                 <div className="col-12 mt-1 px-3 " >
                                     <div className="bg-white rounded-5 p-3 text-dark h-100">
                                         {citas.map((cita) => (
