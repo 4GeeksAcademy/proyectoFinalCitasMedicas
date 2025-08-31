@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Navbar2 } from "../components/Navbar2"
 import { Link } from "react-router-dom";
+import { func } from "prop-types";
 
 export const Citas = () => {
 
@@ -14,6 +15,7 @@ export const Citas = () => {
 
     const [citas, setCitas] = useState([])
     const [pacientes, setPacientes] = useState([])
+    const [busqueda, setBusqueda] = useState("")
 
     // fetch get citas
     async function obtenerCitas() {
@@ -66,6 +68,9 @@ export const Citas = () => {
     const contarInactivos = pacientes.filter(paciente =>
         paciente.estado === 'Inactivo' || paciente.estado === 'inactivo').length;
 
+    
+        const citasFiltradas = citas.filter(cita => 
+            cita.paciente_nombre.includes(busqueda))
 
     useEffect(() => {
         obtenerCitas();
@@ -90,8 +95,21 @@ export const Citas = () => {
                             <div className=" d-flex  justify-content-between">
                                 <h1 className="ms-2">Citas</h1>
                                 <div className="d-flex">
-                                    <div className="form-inline pe-2">
-                                        <input className="form-control mr-sm-2 rounded-5" type="search" placeholder="Search" aria-label="Search" />
+                                    <div className="form-inline pe-2 d-flex">
+                                        <input 
+                                                className="form-control mr-sm-2 rounded-start-pill" 
+                                                type="search" 
+                                                placeholder="Search" 
+                                                aria-label="Search"
+                                            />
+                                        <button 
+                                            className="btn btn-outline-light border rounded-end-circle" 
+                                            type="submit"
+                                            value={busqueda}
+                                            onChange={(e) => {citasFiltradas}}
+                                        >
+                                            <i className="fa-solid fa-magnifying-glass"></i>
+                                        </button>
                                     </div>
                                     <div>
                                         <Link to="/agregar-paciente">

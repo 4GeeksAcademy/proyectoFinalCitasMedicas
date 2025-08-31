@@ -112,7 +112,7 @@ export const EditarCita = () => {
                             {/* Header */}
                             <div className="d-flex justify-content-between">
                                 <div className="col-6" >
-                                    <h2 className="mb-1">Agregar cita</h2>
+                                    <h2 className="mb-1">Editar cita</h2>
                                     <p className="text-light"></p>                                
                                 </div>
                                 <div>
