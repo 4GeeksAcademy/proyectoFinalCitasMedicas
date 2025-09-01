@@ -16,6 +16,7 @@ export const Citas = () => {
     const [citas, setCitas] = useState([])
     const [pacientes, setPacientes] = useState([])
     const [busqueda, setBusqueda] = useState("")
+    const [ordenamiento, setOrdenamiento] = useState("")
 
     // fetch get citas
     async function obtenerCitas() {
@@ -83,9 +84,26 @@ export const Citas = () => {
         }
     }
 
+    // FILTROS
+
     // buscar citas
     const citasFiltradas = citas.filter(cita =>
         cita.paciente_nombre.toLowerCase().includes(busqueda.toLowerCase()))
+
+// Ordenar por nombre
+
+const citasOrdenadas = [...citasFiltradas].sort((a, b) => {
+    if (ordenamiento === "1") { 
+        if (a.paciente_nombre < b.paciente_nombre) return -1;
+        if (a.paciente_nombre > b.paciente_nombre) return 1;
+        return 0;
+    } else if (ordenamiento === "2") {
+        if (a.paciente_nombre > b.paciente_nombre) return -1;
+        if (a.paciente_nombre < b.paciente_nombre) return 1;
+        return 0;
+    }
+    return 0;
+});
 
     // contar estados de pacientes
     const contarTotal = pacientes.length;
@@ -117,7 +135,6 @@ export const Citas = () => {
             }}
         >
             <div className="d-flex">
-                {/* Navbar - Sidebar */}
                 <Navbar2 />
                 <div className="col-12 col-md-6 col-lg-8 ps-5">
                     <div className="bg-dark rounded-5 h-100 p-3 p-md-4 ">
@@ -179,7 +196,7 @@ export const Citas = () => {
                                             className="form-select rounded-5"
                                             id="floatingSelect"
                                             aria-label="Floating label select example"
-                                        >
+                                            >
                                             <option value="">Todas las fechas</option>
                                             <option value="1">Próximas</option>
                                             <option value="2">Últimas</option>
@@ -193,6 +210,8 @@ export const Citas = () => {
                                             className="form-select rounded-5"
                                             id="floatingSelect"
                                             aria-label="Floating label select example"
+                                            value={ordenamiento}
+                                            onChange={(e) => setOrdenamiento(e.target.value)}
                                         >
                                             <option value="">Sin ordenar</option>
                                             <option value="1">Ascendente (A-Z)</option>
@@ -223,7 +242,7 @@ export const Citas = () => {
                                                 <p className="text-muted">Agrega tu primera cita para comenzar</p>
                                             </div>
                                         )}
-                                        {citasFiltradas.map((cita) => (
+                                        {citasOrdenadas.map((cita) => (
 
                                             <div key={cita.id} className="mt-2  border-bottom d-flex justify-content-between">
                                                 <div>
