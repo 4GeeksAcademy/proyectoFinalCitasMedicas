@@ -55,6 +55,33 @@ export const Citas = () => {
             throw error;
         }
     }
+    // fetch eliminar cita
+    async function eliminarCita(){
+        try{
+            const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar esta cita?')
+            if(!confirmacion){
+                return
+            }
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita/${citaId}`,{
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP Error! sataus: ${response.status}`);
+            }
+            const data = await response.json();
+
+        }catch(error){
+            console.error(`Error eliminando: `, error);
+        }
+    }
+    
+    // buscar citas
+    const citasFiltradas = citas.filter(cita => 
+           cita.paciente_nombre.toLowerCase().includes(busqueda.toLocaleLowerCase()))
+    console.log(citasFiltradas)
 
     // contar estados de pacientes
     const contarTotal = pacientes.length;
@@ -68,10 +95,9 @@ export const Citas = () => {
     const contarInactivos = pacientes.filter(paciente =>
         paciente.estado === 'Inactivo' || paciente.estado === 'inactivo').length;
 
-    
-        const citasFiltradas = citas.filter(cita => 
-            cita.paciente_nombre.includes(busqueda))
 
+   
+    
     useEffect(() => {
         obtenerCitas();
         obtenerPacientes();
@@ -97,19 +123,14 @@ export const Citas = () => {
                                 <div className="d-flex">
                                     <div className="form-inline pe-2 d-flex">
                                         <input 
-                                                className="form-control mr-sm-2 rounded-start-pill" 
+                                                className="form-control mr-sm-2 rounded-5" 
                                                 type="search" 
                                                 placeholder="Search" 
                                                 aria-label="Search"
+                                                value={busqueda}
+                                                onChange={(e) => {setBusqueda(e.target.value)}}
+                                                style={{height: '38px'}}
                                             />
-                                        <button 
-                                            className="btn btn-outline-light border rounded-end-circle" 
-                                            type="submit"
-                                            value={busqueda}
-                                            onChange={(e) => {citasFiltradas}}
-                                        >
-                                            <i className="fa-solid fa-magnifying-glass"></i>
-                                        </button>
                                     </div>
                                     <div>
                                         <Link to="/agregar-paciente">
@@ -182,7 +203,7 @@ export const Citas = () => {
                             <div className="d-flex flex-column mx-auto justify-content-start" style={{ maxWidth: "750px", maxHeight: "500px", overflowY: "auto" }}>
                                 <div className="col-12 mt-1 px-3 " >
                                     <div className="bg-white rounded-5 p-3 text-dark h-100">
-                                        {citas.map((cita) => (
+                                        {citasFiltradas.map((cita) => (
 
                                             <div key={cita.id} className="mt-2  border-bottom d-flex justify-content-between">
                                                 <div>
@@ -225,7 +246,13 @@ export const Citas = () => {
                                                                     <Link to={"/editar-cita"}>
                                                                         <button type="button" className="btn btn-dark rounded-5" data-bs-dismiss="modal">Editar</button>
                                                                     </Link>
-                                                                    <button type="button" className="btn btn-outline-dark rounded-5" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" 
+                                                                            className="btn btn-outline-danger rounded-5" 
+                                                                            data-bs-dismiss="modal"
+                                                                            onClick={() => eliminarCita(cita.id)}
+                                                                    >
+                                                                        <i className="fa-solid fa-trash me-2"></i>Eliminar
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
