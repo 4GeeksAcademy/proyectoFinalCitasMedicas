@@ -55,15 +55,16 @@ export const Citas = () => {
             throw error;
         }
     }
+
+
     // fetch eliminar cita
-    async function eliminarCita(citaId){
-        //  console.log('ID a eliminar:', citaId); // ✅ Para debug
-        try{
+    async function eliminarCita(citaId) {
+        try {
             const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar esta cita?')
-            if(!confirmacion){
+            if (!confirmacion) {
                 return
             }
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita/${citaId}`,{
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita/${citaId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,15 +78,14 @@ export const Citas = () => {
             setCitas(citasActuales => citasActuales.filter(cita => cita.id !== citaId));
             alert('Cita eliminada con éxito')
 
-        }catch(error){
+        } catch (error) {
             console.error(`Error eliminando: `, error);
         }
     }
-    
+
     // buscar citas
-    const citasFiltradas = citas.filter(cita => 
-           cita.paciente_nombre.toLowerCase().includes(busqueda.toLowerCase()))
-    console.log(citasFiltradas)
+    const citasFiltradas = citas.filter(cita =>
+        cita.paciente_nombre.toLowerCase().includes(busqueda.toLowerCase()))
 
     // contar estados de pacientes
     const contarTotal = pacientes.length;
@@ -94,14 +94,14 @@ export const Citas = () => {
         paciente.estado === 'Activo' || paciente.estado === 'activo').length;
 
     const contarDeAlta = pacientes.filter(paciente =>
-        paciente.estado === 'De alta' || paciente.estado === 'de alta').length;
+        paciente.estado === 'De_alta' || paciente.estado === 'de_alta').length;
 
     const contarInactivos = pacientes.filter(paciente =>
         paciente.estado === 'Inactivo' || paciente.estado === 'inactivo').length;
 
 
-   
-    
+
+
     useEffect(() => {
         obtenerCitas();
         obtenerPacientes();
@@ -126,15 +126,15 @@ export const Citas = () => {
                                 <h1 className="ms-2">Citas</h1>
                                 <div className="d-flex">
                                     <div className="form-inline pe-2 d-flex">
-                                        <input 
-                                                className="form-control mr-sm-2 rounded-5" 
-                                                type="search" 
-                                                placeholder="Search" 
-                                                aria-label="Search"
-                                                value={busqueda}
-                                                onChange={(e) => {setBusqueda(e.target.value)}}
-                                                style={{height: '38px'}}
-                                            />
+                                        <input
+                                            className="form-control mr-sm-2 rounded-5"
+                                            type="search"
+                                            placeholder="Search"
+                                            aria-label="Search"
+                                            value={busqueda}
+                                            onChange={(e) => { setBusqueda(e.target.value) }}
+                                            style={{ height: '38px' }}
+                                        />
                                     </div>
                                     <div>
                                         <Link to="/agregar-paciente">
@@ -195,8 +195,8 @@ export const Citas = () => {
                                             aria-label="Floating label select example"
                                         >
                                             <option value=""></option>
-                                            <option value="1">Ascendente</option>
-                                            <option value="2">Descendente</option>
+                                            <option value="1">Ascendente (A-Z)</option>
+                                            <option value="2">Descendente (Z-A)</option>
                                         </select>
                                         <label htmlFor="floatingSelect">por nombre</label>
                                     </div>
@@ -205,18 +205,27 @@ export const Citas = () => {
 
                             {/* lista pacientes */}
                             <div className="d-flex flex-column mx-auto justify-content-start" style={{ maxWidth: "750px", maxHeight: "500px", overflowY: "auto" }}>
-                                <div className="col-12 mt-1 px-3 " >
+                                <div className="col-12 px-3 " >
                                     <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                        {citasFiltradas.length === 0 && busqueda && (
+                                            <div className="text-center py-4">
+                                                <p className="text-muted mb-2">
+                                                    <i className="fa-solid fa-magnifying-glass me-2"></i>
+                                                    No se encontraron citas para "{busqueda}"
+                                                </p>
+                                                <small className="text-muted">Intenta con otro término de búsqueda</small>
+                                            </div>
+                                        )}
                                         {citasFiltradas.map((cita) => (
 
                                             <div key={cita.id} className="mt-2  border-bottom d-flex justify-content-between">
                                                 <div>
-                                                    <p value={cita.id} className="">{cita.paciente_nombre}</p>
-                                                    <div className="d-flex  text-muted d-block ">
+                                                    <p value={cita.id} className="mb-2 ms-2"><strong>{cita.paciente_nombre}</strong></p>
+                                                    <div className="d-flex  text-muted d-block ms-2">
                                                         <small><i className="fa-regular fa-calendar-days me-2"></i>{cita.fecha}</small>
                                                         <small> <i className="fa-regular fa-clock ms-2"></i> {cita.hora}</small>
                                                     </div>
-                                                    <div className="d-flex text-muted d-block ">
+                                                    <div className="d-flex text-muted d-block ms-2">
                                                         <small><i className="fa-solid fa-location-dot me-2"></i>{cita.modalidad}</small>
                                                         <small><i className="fa-solid fa-sack-dollar mx-2"></i>${cita.precio}</small>
                                                     </div>
@@ -250,10 +259,10 @@ export const Citas = () => {
                                                                     <Link to={"/editar-cita"}>
                                                                         <button type="button" className="btn btn-dark rounded-5" data-bs-dismiss="modal">Editar</button>
                                                                     </Link>
-                                                                    <button type="button" 
-                                                                            className="btn btn-outline-danger rounded-5" 
-                                                                            data-bs-dismiss="modal"
-                                                                            onClick={() => eliminarCita(cita.id)}
+                                                                    <button type="button"
+                                                                        className="btn btn-outline-danger rounded-5"
+                                                                        data-bs-dismiss="modal"
+                                                                        onClick={() => eliminarCita(cita.id)}
                                                                     >
                                                                         <i className="fa-solid fa-trash me-2"></i>Eliminar
                                                                     </button>
