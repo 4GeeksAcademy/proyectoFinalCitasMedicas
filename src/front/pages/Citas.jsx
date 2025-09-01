@@ -180,7 +180,7 @@ export const Citas = () => {
                                             id="floatingSelect"
                                             aria-label="Floating label select example"
                                         >
-                                            <option value=""></option>
+                                            <option value="">Todas las fechas</option>
                                             <option value="1">Próximas</option>
                                             <option value="2">Últimas</option>
                                         </select>
@@ -194,7 +194,7 @@ export const Citas = () => {
                                             id="floatingSelect"
                                             aria-label="Floating label select example"
                                         >
-                                            <option value=""></option>
+                                            <option value="">Sin ordenar</option>
                                             <option value="1">Ascendente (A-Z)</option>
                                             <option value="2">Descendente (Z-A)</option>
                                         </select>
