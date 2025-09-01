@@ -24,6 +24,18 @@ export const AgregarCita = () => {
         }))
     }
 
+    const limpiarFormulario = () => {
+        setCitaData({
+             paciente_id: '',
+        fecha: '',
+        hora: '',
+        modalidad: '',
+        precio: '',
+        estado_pago: '',
+        nota: ''
+        });
+    }
+
     
 // button para crear cita
     const crearCitaButton = () => {
@@ -36,6 +48,8 @@ export const AgregarCita = () => {
             const resultado = crearCita(citaData);
             console.log('Cita creada', resultado)
             alert('Cita creada con exito')
+            limpiarFormulario();
+            
 
         } catch(error) {
             console.error()

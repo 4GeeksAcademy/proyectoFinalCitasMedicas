@@ -216,6 +216,13 @@ export const Citas = () => {
                                                 <small className="text-muted">Intenta con otro término de búsqueda</small>
                                             </div>
                                         )}
+                                        {citasFiltradas.length === 0 && !busqueda && citas.length === 0 && (
+                                            <div className="text-center py-5">
+                                                <i className="fa-regular fa-calendar-xmark fs-1 text-muted mb-3"></i>
+                                                <h5 className="text-muted">No hay citas registradas</h5>
+                                                <p className="text-muted">Agrega tu primera cita para comenzar</p>
+                                            </div>
+                                        )}
                                         {citasFiltradas.map((cita) => (
 
                                             <div key={cita.id} className="mt-2  border-bottom d-flex justify-content-between">
