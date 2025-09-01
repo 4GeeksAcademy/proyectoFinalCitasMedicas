@@ -56,7 +56,8 @@ export const Citas = () => {
         }
     }
     // fetch eliminar cita
-    async function eliminarCita(){
+    async function eliminarCita(citaId){
+        //  console.log('ID a eliminar:', citaId); // ✅ Para debug
         try{
             const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar esta cita?')
             if(!confirmacion){
@@ -73,6 +74,9 @@ export const Citas = () => {
             }
             const data = await response.json();
 
+            setCitas(citasActuales => citasActuales.filter(cita => cita.id !== citaId));
+            alert('Cita eliminada con éxito')
+
         }catch(error){
             console.error(`Error eliminando: `, error);
         }
@@ -80,7 +84,7 @@ export const Citas = () => {
     
     // buscar citas
     const citasFiltradas = citas.filter(cita => 
-           cita.paciente_nombre.toLowerCase().includes(busqueda.toLocaleLowerCase()))
+           cita.paciente_nombre.toLowerCase().includes(busqueda.toLowerCase()))
     console.log(citasFiltradas)
 
     // contar estados de pacientes
