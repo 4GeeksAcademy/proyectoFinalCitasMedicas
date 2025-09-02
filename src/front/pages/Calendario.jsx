@@ -3,8 +3,11 @@ import { useState } from "react"
 import "./Calendario.css";
 import { Link } from "react-router-dom";
 import { Navbar2 } from "../components/Navbar2";
+import ModalDeCitas from "./ModalDeCitas";
+
 
 const Calendario = () => {
+
   return (
     <div className="calendario-container pt-3">
 
@@ -99,20 +102,29 @@ const Calendario = () => {
 
           {/* Grid de días */}
           <div className="calendar-grid">
-            <div className="day"><span className="day-number">1</span></div>
+            <div className="day" ><span className="day-number">1</span></div>
             <div className="day">
+              <button
+        type="button"
+        className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDay2"
+      >
               <span className="day-number">2</span>
               <div className="event">Andrés Beltrán 1:00pm</div>
               <div className="event">Camilo Betancurth 3:00pm</div>
+              </button>
             </div>
-            <div className="day"><span className="day-number">3</span></div>
-            <div className="day"><span className="day-number">4</span></div>
+            <div className="day" ><span className="day-number">3</span></div>
+            <div className="day" ><span className="day-number">4</span></div>
             <div className="day">
+              
               <span className="day-number">5</span>
               <div className="event">Diana Ortiz 10:00am</div>
             </div>
-            <div className="day"><span className="day-number">6</span></div>
-            <div className="day"><span className="day-number">7</span></div>
+            
+            <div className="day" ><span className="day-number">6</span></div>
+            <div className="day" ><span className="day-number">7</span></div>
 
             {/* Semana 2 */}
             <div className="day"><span className="day-number">8</span></div>
@@ -212,13 +224,22 @@ const Calendario = () => {
               <span className="day-number">4</span>
               <div className="event">Diana Ortiz 10:00am</div>
             </div>
+            
+            </div>
+             <ModalDeCitas />
 
+            
             {/* Puedes seguir agregando más días como los anteriores */}
+          
           </div>
-        </div>
-      </div>
+          
 
+    
     </div>
+        </div>
+      
+
+    
   );
 };
 
