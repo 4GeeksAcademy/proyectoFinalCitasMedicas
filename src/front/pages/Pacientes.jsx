@@ -133,9 +133,9 @@ export const Pacientes = () => {
         }
     };
 
-    const citasDelPaciente = citas.filter(cita => 
+    
+const citasDelPaciente = citas.filter(cita => 
         cita.paciente_id === pacientes.id || cita.id_paciente === pacientes.id);
-
 
 
     useEffect(() => {
@@ -332,15 +332,19 @@ export const Pacientes = () => {
                                                                                 </ul>
                                                                             </div>
                                                                         </div>
+
+                                        
+
                                                                         <div className="tab-pane fade" id="profile" role="tabpanel">
                                                                             <h3><strong>Contenido de Pacientes</strong></h3>
+                                                                            
                                                                             <div className="row g-1 mb-4 mt-2">
                                                                                 <div className="col-12 col-lg-4">
                                                                                     <div className="dropdown w-100">
                                                                                         <button className="btn btn-dark dropdown-toggle w-100 py-3 rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                                                             <span><strong>Todas las citas</strong></span>
                                                                                         </button>
-
+                                                                                
                                                                                         <ul className="dropdown-menu w-100">
                                                                                             <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar por fecha</a></li>
                                                                                             <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar por actividad</a></li>
@@ -348,7 +352,7 @@ export const Pacientes = () => {
                                                                                     </div>
                                                                                 </div>
 
-                                                                                {citas.map((cita, index) =>(
+                                                                                {citasDelPaciente.map((cita, index) =>(
                                                                                     
                                                                                 <div key={cita.id} className="p-3 bg-dark text-white rounded-5 text-start mt-2 h-100">
 
@@ -366,7 +370,7 @@ export const Pacientes = () => {
 
                                                                 
                                                                 <div className="modal-footer rounded-5 d-flex align-items-end">
-                                                                    <Link to={"/editar-cita"}>
+                                                                    <Link to={`/editar-paciente/${paciente.id}`}>
                                                                         <button type="button" className="btn btn-dark rounded-5" data-bs-dismiss="modal">Editar</button>
                                                                     </Link>
                                                                     <button type="button"
@@ -381,8 +385,8 @@ export const Pacientes = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        ))}
+                                           </div>
+                                        ))} 
                                     </div>
                                 </div>
                             </div>
