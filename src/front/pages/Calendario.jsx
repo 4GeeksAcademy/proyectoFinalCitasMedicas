@@ -3,7 +3,6 @@ import { useState } from "react"
 import "./Calendario.css";
 import { Link } from "react-router-dom";
 import { Navbar2 } from "../components/Navbar2";
-import ModalDeCitas from "./ModalDeCitas";
 
 
 const Calendario = () => {

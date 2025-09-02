@@ -12,11 +12,10 @@ import { Demo } from "./pages/Demo";
 import { LandingN1 } from "./pages/LandingN1";
 import PaginaRegistrate from './pages/PaginaRegistrate';
 import Calendario from "./pages/Calendario";
-import ModalDeCitas from "./pages/ModalDeCitas";
 
 
 import SingIn from "./pages/singIn"
-import Pacientes from "./pages/Pacientes"
+import {Pacientes} from "./pages/Pacientes"
 import { InicioHome } from "./pages/InicioHome";
 import { AgregarCita } from "./pages/AgregarCita";
 import { AgregarPaciente } from "./pages/AgregarPaciente";
@@ -42,7 +41,6 @@ export const router = createBrowserRouter(
         <Route path="/pacientes" element={<Pacientes />} />
         <Route path="/register" element={<PaginaRegistrate />} />
         <Route path="/calendario" element={<Calendario />} />
-        <Route path="/modal-de-citas" element={<ModalDeCitas />} />
         <Route path="/landing-n1" element={<LandingN1 />} />
         <Route path="/sing-in" element={<SingIn />} />
         <Route path="/inicio-home" element={<InicioHome />} />

@@ -1,262 +1,307 @@
-import React from "react";
-import { Navbar2 } from "../components/Navbar2";
+import { useEffect, useState } from "react"
+import { Navbar2 } from "../components/Navbar2"
+import { Link } from "react-router-dom";
+import { func } from "prop-types";
 
-const Pacientes = () => {
+export const Pacientes = () => {
+
+    const fecha = new Date()
+    const fechaFormateada = fecha.toLocaleDateString('es-ES', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+
+    const [citas, setCitas] = useState([])
+    const [pacientes, setPacientes] = useState([])
+    const [busqueda, setBusqueda] = useState("")
+    const [ordenamiento, setOrdenamiento] = useState("")
+
+    // fetch get citas
+    async function obtenerCitas() {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita`)
+
+            if (!response.ok) {
+                throw new Error(`HTTP Error! status: ${response.status}`)
+            }
+
+            const data = await response.json();
+            setCitas(data);
+            return (data);
+
+
+
+        } catch (error) {
+            console.error(`Error fetching data: `, error);
+            throw error;
+        }
+    }
+    // fetch get pacientes
+    async function obtenerPacientes() {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP Error! status: ${response.status}`)
+            }
+            const data = await response.json();
+            setPacientes(data);
+            return data;
+
+
+        } catch (error) {
+            console.error(`Error fetching data: `, error);
+            throw error;
+        }
+    }
+
+
+    // fetch eliminar cita
+    async function eliminarPaciente(pacienteId) {
+        try {
+            const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este paciente?')
+            if (!confirmacion) {
+                return
+            }
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente/${pacienteId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP Error! sataus: ${response.status}`);
+            }
+            const data = await response.json();
+
+            setPacientes(pacientesActuales => pacientesActuales.filter(paciente => paciente.id !== pacienteId));
+            alert('Paciente eliminado con éxito')
+
+        } catch (error) {
+            console.error(`Error eliminando: `, error);
+        }
+    }
+
+    // FILTROS
+
+    // buscar pacientes
+    const pacientesFiltrados = pacientes.filter(paciente =>
+        paciente.nombre.toLowerCase().includes(busqueda.toLowerCase()))
+
+// Ordenar por nombre
+
+const pacientesOrdenados = [...pacientesFiltrados].sort((a, b) => {
+    if (ordenamiento === "1") { 
+        if (a.nombre < b.nombre) return -1;
+        if (a.nombre > b.nombre) return 1;
+        return 0;
+    } else if (ordenamiento === "2") {
+        if (a.nombre > b.nombre) return -1;
+        if (a.nombre < b.nombre) return 1;
+        return 0;
+    }
+    return 0;
+});
+
+    // contar estados de pacientes
+    const contarTotal = pacientes.length;
+
+    const contarActivos = pacientes.filter(paciente =>
+        paciente.estado === 'Activo' || paciente.estado === 'activo').length;
+
+    const contarDeAlta = pacientes.filter(paciente =>
+        paciente.estado === 'De_alta' || paciente.estado === 'de_alta').length;
+
+    const contarInactivos = pacientes.filter(paciente =>
+        paciente.estado === 'Inactivo' || paciente.estado === 'inactivo').length;
+
+
+
+
+    useEffect(() => {
+        obtenerCitas();
+        obtenerPacientes();
+    }, [])
+
     return (
-        <div className="pt-3"
+        <div
             style={{
                 backgroundColor: 'black',
                 margin: 0,
-                padding: 0,
-                minHeight: '100vh',
-                display: "flex",
+                paddingTop: '15px',
+                minHeight: '100vh'
             }}
         >
-            {/* Sidebar */}
-            <Navbar2 />
-            <div className="container-fluid p-0">
-                <div className="row g-3 p-3">
-                    <div className="col-12 col-xl-6">
-                        <div className="rounded-5 text-black h-100 p-4" style={{ backgroundColor: "#eaeaeaff", minHeight: "600px" }}>
-                            <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
-                                <h2><strong>Pacientes</strong></h2>
-                                <div className="d-flex flex-column flex-sm-row gap-2 mt-3 mt-md-0">
-                                    <button type="button" className="btn btn-dark rounded-5 px-4 py-2">
-                                        Buscar
-                                    </button>
-                                    <button type="button" className="btn btn-dark rounded-5 px-4 py-2">
-                                        Agregar Paciente
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="row g-3 mb-4">
-                                <div className="col-6 col-lg-3">
-                                    <div className="p-3 bg-dark text-white rounded-5 text-center h-100">
-                                        <div style={{ fontSize: "16px" }}>Totales:</div>
-                                        <div className="fs-4 fw-bold mt-2">8</div>
+            <div className="d-flex">
+                <Navbar2 />
+                <div className="col-12 col-md-6 col-lg-8 ps-5">
+                    <div className="bg-dark rounded-5 h-100 p-3 p-md-4 ">
+                        <div className="row g-0 text-white h-25 ">
+                            <div className=" d-flex  justify-content-between">
+                                <h1 className="ms-2">Pacientes</h1>
+                                <div className="d-flex">
+                                    <div className="form-inline pe-2 d-flex">
+                                        <input
+                                            className="form-control mr-sm-2 rounded-5"
+                                            type="search"
+                                            placeholder="Search"
+                                            aria-label="Search"
+                                            value={busqueda}
+                                            onChange={(e) => { setBusqueda(e.target.value) }}
+                                            style={{ height: '38px' }}
+                                        />
                                     </div>
-                                </div>
-                                <div className="col-6 col-lg-3">
-                                    <div className="p-3 bg-dark text-white rounded-5 text-center h-100">
-                                        <div style={{ fontSize: "16px" }}>Activos</div>
-                                        <div className="fs-4 fw-bold mt-2">5</div>
-                                    </div>
-                                </div>
-                                <div className="col-6 col-lg-3">
-                                    <div className="p-3 bg-dark text-white rounded-5 text-center h-100">
-                                        <div style={{ fontSize: "16px" }}>De alta</div>
-                                        <div className="fs-4 fw-bold mt-2">0</div>
-                                    </div>
-                                </div>
-                                <div className="col-6 col-lg-3">
-                                    <div className="p-3 bg-dark text-white rounded-5 text-center h-100">
-                                        <div style={{ fontSize: "16px" }}>Inactivos</div>
-                                        <div className="fs-4 fw-bold mt-2">3</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row g-3 mb-4 mt-5">
-                                <div className="col-12 col-lg-4">
-                                    <div className="dropdown w-100">
-                                        <button className="btn btn-dark dropdown-toggle w-100 py-3 rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span><strong>Estado</strong></span>
-                                        </button>
-                                        <ul className="dropdown-menu w-100">
-                                            <li><a className="dropdown-item bg-dark text-white" href="#">Todos</a></li>
-                                            <li><a className="dropdown-item bg-dark text-white" href="#">Activos</a></li>
-                                            <li><a className="dropdown-item bg-dark text-white" href="#">Inactivos</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="col-12 col-lg-4">
-                                    <div className="dropdown w-100">
-                                        <button className="btn btn-dark dropdown-toggle w-100 py-3 rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span><strong>Ordenar por nombre</strong></span>
-                                        </button>
-                                        <ul className="dropdown-menu w-100">
-                                            <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar A-Z</a></li>
-                                            <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar Z-A</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="col-12 col-lg-4">
-                                    <div className="dropdown w-100">
-                                        <button className="btn btn-dark dropdown-toggle w-100 py-3 rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span><strong>Ordenar activos/inactivos</strong></span>
-                                        </button>
-                                        <ul className="dropdown-menu w-100">
-                                            <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar Activos</a></li>
-                                            <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar Inactivos</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="bg-white rounded-3 p-3 mt-5 mx-auto" style={{ maxWidth: "750px", maxHeight: "500px", overflowY: "auto", border: "3px solid #ccc" }}>
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                        <span style={{ fontSize: "20px", height: "60px" }}>Andrés</span>
-                                        <button type="button" className="btn btn-success rounded-5 btn-sm align-self-start">
-                                            Activo
-                                        </button>
-                                    </li>
-                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                        <span style={{ fontSize: "20px", height: "60px" }}>Corinto</span>
-                                        <button type="button" className="btn btn-danger rounded-5 btn-sm align-self-start">
-                                            Inactivo
-                                        </button>
-                                    </li>
-                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                        <span style={{ fontSize: "20px", height: "60px" }}>Maria</span>
-                                        <button type="button" className="btn btn-success rounded-5 btn-sm align-self-start">
-                                            Activo
-                                        </button>
-                                    </li>
-                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                        <span style={{ fontSize: "20px", height: "60px" }}>Cornelio</span>
-                                        <button type="button" className="btn btn-danger rounded-5 btn-sm align-self-start">
-                                            Inactivo
-                                        </button>
-                                    </li>
-                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                        <span style={{ fontSize: "20px", height: "60px" }}>Toluco</span>
-                                        <button type="button" className="btn btn-success rounded-5 btn-sm align-self-start">
-                                            Activo
-                                        </button>
-                                    </li>
-                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                        <span style={{ fontSize: "20px", height: "60px" }}>Ignacia</span>
-                                        <button type="button" className="btn btn-danger rounded-5 btn-sm align-self-start">
-                                            Inactivo
-                                        </button>
-                                    </li>
-                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                        <span style={{ fontSize: "20px", height: "60px" }}>Rodriga</span>
-                                        <button type="button" className="btn btn-success rounded-5 btn-sm align-self-start">
-                                            Activo
-                                        </button>
-                                    </li>
-                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                        <span style={{ fontSize: "20px", height: "60px" }}>Felipa</span>
-                                        <button type="button" className="btn btn-success rounded-5 btn-sm align-self-start">
-                                            Activo
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-12 col-xl-6">
-                        <div className="rounded-5 h-100 p-4" style={{ backgroundColor: "#eaeaeaff", minHeight: "600px" }}>
-                            <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
-                                <h2 className="text-black"><strong>Perfil del paciente</strong></h2>
-                                <div className="d-flex flex-column flex-sm-row gap-2 mt-3 mt-md-0">
-                                    <button type="button" className="btn btn-dark rounded-5 px-4 py-2">
-                                        Editar Datos
-                                    </button>
-                                    <button type="button" className="btn btn-dark rounded-5 px-4 py-2">
-                                        Agregar Cita
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="col-6 col-lg-10">
-                                <div className="p-3 bg-dark text-white rounded-5 text-center h-100">
-                                    <div style={{ fontSize: "28px", textAlign: "start" }}> <strong> Andrés Beltrán</strong></div>
-                                    <div style={{ fontSize: "16px", textAlign: "start" }}>Masculino</div>
-                                    <div style={{ fontSize: "16px", textAlign: "start" }}>Dia-Mes-Año</div>
-                                </div>
-                                <div>
-                                    <ul className="nav nav-tabs mt-5" id="myTab" role="tablist">
-                                        <li className="nav-item" role="presentation">
-                                            <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" style={{ color: "black" }}>
-                                                Datos
+                                    <div>
+                                        <Link to="/agregar-paciente">
+                                            <button type="button" className="btn btn-outline-light rounded-5">
+                                                <i className="fa-solid fa-user-plus me-2"></i>Agregar paciente
                                             </button>
-                                        </li>
-                                        <li className="nav-item" role="presentation">
-                                            <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" style={{ color: "black" }}>
-                                                Citas
-                                            </button>
-                                        </li>
-                                    </ul>
-                                    <div className="tab-content mt-5" id="myTabContent">
-                                        <div className="tab-pane fade show active" id="home" role="tabpanel">
-                                            <h4>Datos del paciente</h4>
-                                            <div className="p-3 mt-2">
-                                                <ul className="list-group list-group-flush">
-                                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                                        <span style={{ fontSize: "20px", height: "40px" }}>Estado del paciente: </span>
-                                                        <button type="button" className="btn btn-success rounded-5 btn-sm align-self-start">
-                                                            Activo
-                                                        </button>
-                                                    </li>
-                                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                                        <span style={{ fontSize: "20px", height: "40px" }}>Precio por cita: </span>
-                                                        <span>$150.00</span>
-                                                    </li>
-                                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                                        <span style={{ fontSize: "20px", height: "30px" }}>Contacto: </span>
-                                                        <span>Móvl: 55-5555-5555</span>
-                                                        <span>Correo Electrónico: Example@mail.com</span>
-                                                    </li>
-                                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                                        <span style={{ fontSize: "20px", height: "30px" }}>Dirección: </span>
-                                                        <span>Av de los chistosos #45. Col, los payasos. CP: 10000</span>
-                                                    </li>
-                                                </ul>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            <p className="text-light">{fechaFormateada}</p>
+
+                            {/* Estados de pacientes */}
+
+                            <div className="d-flex justify-content-between text-start">
+
+                                <div className="bg-white rounded-5 w-25 mx-2 pt-3">
+                                    <h4 className="text-dark ms-3">Total</h4>
+                                    <p className="text-dark ms-3"><strong>{contarTotal}</strong></p>
+                                </div>
+                                <div className="bg-white rounded-5 w-25 mx-2 pt-3">
+                                    <h4 className="text-dark ms-3">Activos</h4>
+                                    <p className="text-dark ms-3"><strong>{contarActivos}</strong></p>
+                                </div>
+                                <div className="bg-white rounded-5 w-25 mx-2 pt-3">
+                                    <h4 className="text-dark ms-3">De alta</h4>
+                                    <p className="text-dark ms-3"><strong>{contarDeAlta}</strong></p>
+                                </div>
+                                <div className="bg-white rounded-5 w-25 mx-2 pt-3">
+                                    <h4 className="text-dark ms-3">Inactivos</h4>
+                                    <p className="text-dark ms-3"><strong>{contarInactivos}</strong></p>
+                                </div>
+                            </div>
+
+
+                            {/* Filtros */}
+                            <div className="d-flex justify-content-around my-3 h-50">
+
+                                <div className="bg-white rounded-5 p-3 text-dark">
+                                    <div className="form-floating ">
+                                        <select
+                                            className="form-select rounded-5"
+                                            id="floatingSelect"
+                                            aria-label="Floating label select example"
+                                            >
+                                            <option value="">Todas las fechas</option>
+                                            <option value="1">Próximas</option>
+                                            <option value="2">Últimas</option>
+                                        </select>
+                                        <label htmlFor="floatingSelect">Fecha</label>
+                                    </div>
+                                </div>
+                                <div className="bg-white rounded-5 p-3 text-dark">
+                                    <div className="form-floating ">
+                                        <select
+                                            className="form-select rounded-5"
+                                            id="floatingSelect"
+                                            aria-label="Floating label select example"
+                                            value={ordenamiento}
+                                            onChange={(e) => setOrdenamiento(e.target.value)}
+                                        >
+                                            <option value="">Sin ordenar</option>
+                                            <option value="1">Ascendente (A-Z)</option>
+                                            <option value="2">Descendente (Z-A)</option>
+                                        </select>
+                                        <label htmlFor="floatingSelect">por nombre</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* lista pacientes */}
+                            <div className="d-flex flex-column mx-auto justify-content-start" style={{ maxWidth: "750px", maxHeight: "500px", overflowY: "auto" }}>
+                                <div className="col-12 px-3 " >
+                                    <div className="bg-white rounded-5 p-3 text-dark h-100">
+                                        {pacientesFiltrados.length === 0 && busqueda && (
+                                            <div className="text-center py-4">
+                                                <p className="text-muted mb-2">
+                                                    <i className="fa-solid fa-magnifying-glass me-2"></i>
+                                                    No se encontraron pacientes para "{busqueda}"
+                                                </p>
+                                                <small className="text-muted">Intenta con otro término de búsqueda</small>
                                             </div>
-                                        </div>
-                                        <div className="tab-pane fade" id="profile" role="tabpanel">
-                                            <h3>Contenido de Pacientes</h3>
-                                            <div className="row g-1 mb-4 mt-2">
-                                                <div className="col-12 col-lg-4">
-                                                    <div className="dropdown w-100">
-                                                        <button className="btn btn-dark dropdown-toggle w-100 py-3 rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ height: "50px", }}>
-                                                            <span><strong>Mes</strong></span>
-                                                        </button>
-                                                        <ul className="dropdown-menu w-100">
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Enero</a></li>
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Febrero</a></li>
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Marzo</a></li>
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Abril</a></li>
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Mayo</a></li>
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Junio</a></li>
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Julio</a></li>
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Agosto</a></li>
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Septiembre</a></li>
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Octubre</a></li>
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Noviembre</a></li>
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Diciembre</a></li>
-                                                        </ul>
+                                        )}
+                                        {pacientesFiltrados.length === 0 && !busqueda && citas.length === 0 && (
+                                            <div className="text-center py-5">
+                                                <i className="fa-regular fa-calendar-xmark fs-1 text-muted mb-3"></i>
+                                                <h5 className="text-muted">No hay pacientes registrados</h5>
+                                                <p className="text-muted">Agrega tu primer paciente para comenzar</p>
+                                            </div>
+                                        )}
+                                        {pacientesOrdenados.map((paciente) => (
+
+                                            <div key={paciente.id} className="mt-2  border-bottom d-flex justify-content-between">
+                                                <div>
+                                                    <p value={paciente.id} className="mb-2 ms-2"><strong>{paciente.nombre}</strong></p>
+                                                    <div className="d-flex  text-muted d-block ms-2">
+                                                        <small>{paciente.estado}</small>
                                                     </div>
                                                 </div>
-                                                <div className="col-12 col-lg-4">
-                                                    <div className="dropdown w-100">
-                                                        <button className="btn btn-dark dropdown-toggle w-100 py-3 rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ height: "50px", }}>
-                                                            <span><strong>Todas las citas</strong></span>
-                                                        </button>
-                                                        <ul className="dropdown-menu w-100">
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar por fecha</a></li>
-                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar por actividad</a></li>
-                                                        </ul>
+                                                <div>
+                                                    {/*Button modal*/}
+                                                    <button type="button" className="btn btn-outline-dark border-black rounded-5" data-bs-toggle="modal" data-bs-target={`#modalNota-${paciente.id}`}>
+                                                        Nota
+                                                    </button>
+
+                                                    {/* <!-- Modal --> */}
+                                                    <div className="modal fade" id={`modalNota-${paciente.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={`modalLabel-${paciente.id}`} aria-hidden="true">
+                                                        <div className="modal-dialog modal-dialog-centered modal-lg h-100 position-fixed end-0 top-0 m-0" 
+                                                        >
+                                                            <div className="modal-content rounded-5" style={{ height: '100%', borderRadius: '0' }}>
+                                                                <div className="modal-header rounded-5">
+                                                                    <h1 className="modal-title fs-5" id={`modalLabel-${paciente.id}`}>{paciente.nombre} </h1>
+                                                                    <button type="button" className="btn-close rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div className="modal-body">
+                                                                    <p><strong>Motivo de consulta:</strong></p>
+                                                                    <p><strong>Nota:</strong></p>
+                                                                    <p className="bg-dark p-3 rounded-5 text-white">
+                                                                        {paciente.nota || 'Sin notas adicionales'}
+                                                                    </p>
+                                                                    <div className="d-flex justify-content-evenly">
+                                                                        <p><i className="fa-regular fa-calendar-days me-2"></i><strong>Teléfono:</strong> {paciente.telefono}</p>
+                                                                        <p><i className="fa-regular fa-clock me-2"></i><strong>Email:</strong> {paciente.email}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="modal-footer rounded-5">
+                                                                    <Link to={"/editar-cita"}>
+                                                                        <button type="button" className="btn btn-dark rounded-5" data-bs-dismiss="modal">Editar</button>
+                                                                    </Link>
+                                                                    <button type="button"
+                                                                        className="btn btn-outline-danger rounded-5"
+                                                                        data-bs-dismiss="modal"
+                                                                        onClick={() => eliminarPaciente(paciente.id)}
+                                                                    >
+                                                                        <i className="fa-solid fa-trash me-2"></i>Eliminar
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div className="p-3 bg-dark text-white rounded-5 text-center mt-5 h-100">
-                                                    <div style={{ fontSize: "16px", textAlign: "start" }}>Dia-Mes-Año</div>
-                                                    <div style={{ fontSize: "28px", textAlign: "start" }}> <strong> Andrés Beltrán</strong></div>
-                                                    <div></div>
-                                                </div>
                                             </div>
-                                        </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                      <div>
-                   </div>
                 </div>
             </div>
         </div>
     )
 }
-
-export default Pacientes;
