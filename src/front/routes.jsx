@@ -21,6 +21,7 @@ import { InicioHome } from "./pages/InicioHome";
 import { AgregarCita } from "./pages/AgregarCita";
 import { AgregarPaciente } from "./pages/AgregarPaciente";
 import { Citas } from "./pages/Citas";
+import { EditarCita } from "./pages/EditarCita";
 
 
 export const router = createBrowserRouter(
@@ -40,14 +41,15 @@ export const router = createBrowserRouter(
         <Route path="/demo" element={<Demo />} />
         <Route path="/pacientes" element={<Pacientes />} />
         <Route path="/register" element={<PaginaRegistrate />} />
-        <Route path="calendario" element={<Calendario />} />
-        <Route path="modal-de-citas" element={<ModalDeCitas />} />
+        <Route path="/calendario" element={<Calendario />} />
+        <Route path="/modal-de-citas" element={<ModalDeCitas />} />
         <Route path="/landing-n1" element={<LandingN1 />} />
         <Route path="/sing-in" element={<SingIn />} />
         <Route path="/inicio-home" element={<InicioHome />} />
         <Route path="/agregar-cita" element={<AgregarCita />} />
         <Route path="/agregar-paciente" element={<AgregarPaciente />} />
         <Route path="/citas" element={<Citas />} />
+        <Route path="/editar-cita" element={<EditarCita />} />
       </Route>
     )
 );

@@ -55,7 +55,7 @@ export const InicioHome = () => {
                                         </div>
                                     </div>
                                 </div>
-
+                                {/* Gráfica */}
                                 <div className="col-12 d-flex flex-column" style={{ height: '70%' }}>
                                     <div className="bg-white rounded-5 p-4 text-dark h-100 d-flex flex-column">
                                         <h6 className="mb-3 fw-bold">Citas de la semana</h6>
@@ -74,7 +74,7 @@ export const InicioHome = () => {
                                                         <small className="text-black fw-bold mb-1">{item.value}</small>
                                                         <div
                                                             className="bg-dark rounded-5 w-100 mb-2"
-                                                            style={{ height: `${(item.value / 10) * 100}%`, minHeight: '8px' }}
+                                                            style={{ height: `${(item.value / 10) * 80}%`, minHeight: '8px' }}
                                                         ></div>
                                                         <small className="text-muted fw-bold">{item.label}</small>
                                                     </div>

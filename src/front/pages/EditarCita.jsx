@@ -3,7 +3,7 @@ import { Navbar2 } from "../components/Navbar2"
 import { Link } from "react-router-dom";
 
 
-export const AgregarCita = () => {
+export const EditarCita = () => {
 
     const [citaData, setCitaData] = useState ({
         paciente_id: '',
@@ -24,18 +24,6 @@ export const AgregarCita = () => {
         }))
     }
 
-    const limpiarFormulario = () => {
-        setCitaData({
-             paciente_id: '',
-        fecha: '',
-        hora: '',
-        modalidad: '',
-        precio: '',
-        estado_pago: '',
-        nota: ''
-        });
-    }
-
     
 // button para crear cita
     const crearCitaButton = () => {
@@ -48,8 +36,6 @@ export const AgregarCita = () => {
             const resultado = crearCita(citaData);
             console.log('Cita creada', resultado)
             alert('Cita creada con exito')
-            limpiarFormulario();
-            
 
         } catch(error) {
             console.error()
@@ -126,7 +112,7 @@ export const AgregarCita = () => {
                             {/* Header */}
                             <div className="d-flex justify-content-between">
                                 <div className="col-6" >
-                                    <h2 className="mb-1">Agregar cita</h2>
+                                    <h2 className="mb-1">Editar cita</h2>
                                     <p className="text-light"></p>                                
                                 </div>
                                 <div>
@@ -267,7 +253,7 @@ export const AgregarCita = () => {
                                     className=" btn btn-outline-light btn-lg rounded-5 px-4 mt-3 me-3"
                                     onClick={crearCitaButton}
                                     >
-                                        Crear
+                                        Editar
                                     </button>
                                 </Link> 
                             </div>
