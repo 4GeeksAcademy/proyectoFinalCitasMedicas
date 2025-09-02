@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Navbar2 } from "../components/Navbar2"
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 
 export const AgregarCita = () => {
@@ -16,6 +16,7 @@ export const AgregarCita = () => {
     });
 
     const [paciente, setPaciente] = useState([])
+    const navigate = useNavigate();
 
     const handleInputChange = (campo, valor) => {
         setCitaData(prevData => ({
@@ -74,6 +75,7 @@ export const AgregarCita = () => {
             }
 
             const nuevaCita = await response.json();
+            navigate('/citas')
             return nuevaCita;
 
         } catch(error) {

@@ -1,5 +1,5 @@
 import { Navbar2 } from "../components/Navbar2"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 export const AgregarPaciente = () => {
@@ -13,6 +13,7 @@ export const AgregarPaciente = () => {
         estado: '',
         nota: ''
     });
+    const navigate = useNavigate();
 
     const handleInputChange = (campo, valor) => {
         setPacienteData(prevData => ({
@@ -69,6 +70,7 @@ export const AgregarPaciente = () => {
             }
 
             const nuevoPaciente = await response.json()
+            navigate('/pacientes')
             return nuevoPaciente;
             
 
