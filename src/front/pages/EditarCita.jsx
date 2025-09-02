@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Navbar2 } from "../components/Navbar2"
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate} from "react-router-dom";
 
 
 export const EditarCita = () => {
@@ -14,41 +14,64 @@ export const EditarCita = () => {
         estado_pago: '',
         nota: ''
     });
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     const [paciente, setPaciente] = useState([])
 
-    const handleInputChange = (campo, valor) => {
-        setCitaData(prevData => ({
-            ...prevData,
-            [campo]: valor
-        }))
+
+//traer citas
+    async function cargarCitas(citaId) {
+        try {
+            
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita/${citaId}`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const cita = await response.json();
+            setCitaData({
+                paciente_id: cita.paciente_id || '',
+                fecha: cita.fecha || '',
+                hora: cita.hora || '',
+                modalidad: cita.modalidad || '',
+                precio: cita.precio || '',
+                estado_pago: cita.estado_pago || '',
+                nota: cita.nota || ''
+            });
+            
+        } catch (error) {
+            console.error('Error cargando paciente:', error);
+        }
     }
 
     
-// button para crear cita
-    const crearCitaButton = () => {
+    
+    // button para crear cita
+    const actualizarCitaButton = async () => {
         if(!citaData.paciente_id || !citaData.fecha || 
             !citaData.hora || !citaData.modalidad || 
             !citaData.precio || !citaData.estado_pago) {
-            alert('Por favor, completa todos los campos.')
+                alert('Por favor, completa todos los campos.')
+            }
+            try{
+                const resultado = await actualizarCita(citaData);
+                alert('Cita editada con exito')
+                navigate('/citas')
+                return resultado
+            } catch(error) {
+                console.error()
+                alert(`Error: ${error.message}`)
+            }
+            
         }
-        try{
-            const resultado = crearCita(citaData);
-            console.log('Cita creada', resultado)
-            alert('Cita creada con exito')
-
-        } catch(error) {
-            console.error()
-            alert(`Error: ${error.message}`)
-        }
-
-    }
-
-// fetch para crear cita
-    async function crearCita(citaData) {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita`, {
-                method: 'POST',
+        
+        // fetch para actulizar cita
+        async function actualizarCita(citaData) {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita/${id}`, {
+                    method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -58,17 +81,17 @@ export const EditarCita = () => {
             if (!response.ok){
                 throw new Error(`HTTP error! status: ${response.status}`)
             }
-
+            
             const nuevaCita = await response.json();
             return nuevaCita;
-
+            
         } catch(error) {
             console.error(`Error fetching data: `, error);
             throw error;
         }
     }
-
-// Fetchs para obtener pacientes
+    
+    // Fetchs para obtener pacientes
     async function obtenerPacientes(){
         try{
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`);
@@ -79,17 +102,27 @@ export const EditarCita = () => {
             const data = await response.json();
             setPaciente(data);
             return data;
-
-
+            
+            
         } catch(error){
             console.error(`Error fetching data: `, error);
             throw error;
         }
     }
+    
+    const handleInputChange = (campo, valor) => {
+        setCitaData(prevData => ({
+            ...prevData,
+            [campo]: valor
+        }))
+    }
 
     useEffect(() => {
         obtenerPacientes();
-    }, [])
+        if (id){
+            cargarCitas(id)
+        }
+    }, [id])
 
     return (
         <div
@@ -251,7 +284,7 @@ export const EditarCita = () => {
                                     <button 
                                     type="button" 
                                     className=" btn btn-outline-light btn-lg rounded-5 px-4 mt-3 me-3"
-                                    onClick={crearCitaButton}
+                                    onClick={actualizarCitaButton}
                                     >
                                         Editar
                                     </button>

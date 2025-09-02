@@ -18,6 +18,7 @@ export const EditarPaciente = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    //traer cita por id
       async function cargarPaciente(pacienteId) {
         try {
             
@@ -50,7 +51,6 @@ export const EditarPaciente = () => {
         }));
     };
 
-    // console.log('Paciente Data:', pacienteData);
 
     const editarPacienteButton = async () => {
 

@@ -48,7 +48,7 @@ export const router = createBrowserRouter(
         <Route path="/agregar-cita" element={<AgregarCita />} />
         <Route path="/agregar-paciente" element={<AgregarPaciente />} />
         <Route path="/citas" element={<Citas />} />
-        <Route path="/editar-cita" element={<EditarCita />} />
+        <Route path="/editar-cita/:id" element={<EditarCita />} />
         <Route path="/editar-paciente/:id" element={<EditarPaciente />} />
       </Route>
     )

@@ -282,7 +282,7 @@ const citasOrdenadas = [...citasFiltradas].sort((a, b) => {
                                                                     </div>
                                                                 </div>
                                                                 <div className="modal-footer rounded-5">
-                                                                    <Link to={"/editar-cita"}>
+                                                                    <Link to={`/editar-cita/${cita.id}`}>
                                                                         <button type="button" className="btn btn-dark rounded-5" data-bs-dismiss="modal">Editar</button>
                                                                     </Link>
                                                                     <button type="button"
