@@ -58,9 +58,10 @@ export const Pacientes = () => {
     }
 
 
-    // fetch eliminar cita
+    // fetch eliminar paciente
     async function eliminarPaciente(pacienteId) {
         try {
+            
             const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este paciente?')
             if (!confirmacion) {
                 return
@@ -72,7 +73,7 @@ export const Pacientes = () => {
                 }
             });
             if (!response.ok) {
-                throw new Error(`HTTP Error! sataus: ${response.status}`);
+                throw new Error(`HTTP Error! status: ${response.status}`);
             }
             const data = await response.json();
 
@@ -132,6 +133,8 @@ export const Pacientes = () => {
         }
     };
 
+    const citasDelPaciente = citas.filter(cita => 
+        cita.paciente_id === pacientes.id || cita.id_paciente === pacientes.id);
 
 
 
@@ -258,7 +261,7 @@ export const Pacientes = () => {
                                             </div>
                                         )}
                                         {pacientesOrdenados.map((paciente) => (
-
+                                                
                                             <div key={paciente.id} className="mt-2  border-bottom d-flex justify-content-between">
                                                 <div>
                                                     <p value={paciente.id} className="mb-2 ms-2"><strong>{paciente.nombre}</strong></p>
@@ -269,119 +272,100 @@ export const Pacientes = () => {
                                                 </div>
                                                 <div>
                                                     {/*Button modal*/}
-                                                    <button type="button" className="btn btn-outline-dark border-black rounded-5" data-bs-toggle="modal" data-bs-target={`#modalNota-${paciente.id}`}>
-                                                        Nota
+                                                    <button type="button" className="btn btn-outline-darkrounded-5" data-bs-toggle="modal" data-bs-target={`#modalNota-${paciente.id}`}>
+                                                        <i className="fa-solid fa-circle-info fa-2x"></i>
                                                     </button>
 
                                                     {/* <!-- Modal --> */}
                                                     <div className="modal fade" id={`modalNota-${paciente.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={`modalLabel-${paciente.id}`} aria-hidden="true">
                                                         <div className="modal-dialog modal-dialog-centered modal-lg h-100 position-fixed end-0 top-0 m-0"
-                                                        >
-                                                            <div className="modal-content rounded-5" style={{ height: '100%', borderRadius: '0' }}>
+                                                         style={{ width: '600px', maxWidth: '600px' }}>
+                                                            <div className="modal-content rounded-5 d-flex flex-column" style={{ height: '100%', borderRadius: '0' }}>
                                                                 <div className="modal-header rounded-5">
-                                                                    <h1 className="modal-title fs-5" id={`modalLabel-${paciente.id}`}>{paciente.nombre} </h1>
+                                                                    <h1 className="modal-title fs-5" id={`modalLabel-${paciente.id}`}><strong>{paciente.nombre}</strong> </h1>
+
                                                                     <button type="button" className="btn-close rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
 
                                                                 {/* EMPIEZA ACA */}
-                                                            <div className="container">
-                                                                <ul className="nav nav-tabs mt-5" id="myTab" role="tablist">
-                                                                    <li className="nav-item" role="presentation">
-                                                                        <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" style={{ color: "black" }}>
-                                                                            Datos
-                                                                        </button>
-                                                                    </li>
-                                                                    <li className="nav-item" role="presentation">
-                                                                        <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" style={{ color: "black" }}>
-                                                                            Citas
-                                                                        </button>
-                                                                    </li>
-                                                                </ul>
-                                                                <div className="tab-content mt-5" id="myTabContent">
-                                                                    <div className="tab-pane fade show active" id="home" role="tabpanel">
-                                                                        <h4>Datos del paciente</h4>
-                                                                        <div className="p-3 mt-2">
-                                                                            <ul className="list-group list-group-flush">
-                                                                                <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                                                                    <span style={{ fontSize: "20px", height: "40px" }}>Estado del paciente: </span>
-                                                                                    <button type="button" className="btn btn-success rounded-5 btn-sm align-self-start">
-                                                                                        Activo
-                                                                                    </button>
-                                                                                </li>
-                                                                                <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                                                                    <span style={{ fontSize: "20px", height: "40px" }}>Precio por cita: </span>
-                                                                                    <span>$150.00</span>
-                                                                                </li>
-                                                                                <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                                                                    <span style={{ fontSize: "20px", height: "30px" }}>Contacto: </span>
-                                                                                    <span>Móvl: 55-5555-5555</span>
-                                                                                    <span>Correo Electrónico: Example@mail.com</span>
-                                                                                </li>
-                                                                                <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
-                                                                                    <span style={{ fontSize: "20px", height: "30px" }}>Dirección: </span>
-                                                                                    <span>Av de los chistosos #45. Col, los payasos. CP: 10000</span>
-                                                                                </li>
-                                                                            </ul>
+                                                                <div className="container flex-grow-1 overflow-auto">
+                                                                    <ul className="nav nav-tabs mt-5" id="myTab" role="tablist">
+                                                                        <li className="nav-item" role="presentation">
+                                                                            <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" style={{ color: "black" }}>
+                                                                                <strong>Datos</strong>
+                                                                            </button>
+                                                                        </li>
+                                                                        <li className="nav-item" role="presentation">
+                                                                            <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" style={{ color: "black" }}>
+                                                                                <strong>Citas</strong>
+                                                                            </button>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div className="tab-content mt-5" id="myTabContent">
+                                                                        <div className="tab-pane fade show active" id="home" role="tabpanel">
+                                                                            <h4><strong>Datos del paciente</strong></h4>
+                                                                            <div className="p-3 mt-2">
+                                                                                <ul className="list-group list-group-flush">
+                                                                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
+                                                                                        <span >Estado del paciente: </span>
+                                                                                        <button type="button" className="btn btn-light rounded-5 btn-sm align-self-start">
+                                                                                            {getEstadoIcon(paciente.estado)}{paciente.estado}
+                                                                                        </button>
+                                                                                    </li>
+                                                                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
+                                                                                        <span >Email</span>
+                                                                                        <span><i className="fa-solid fa-envelope me-2"></i>{paciente.email}</span>
+                                                                                    </li>
+                                                                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
+                                                                                        <span >Contacto: </span>
+                                                                                        <span><i className="fa-solid fa-mobile-retro me-2"></i>{paciente.telefono}</span>
+                                                                                    </li>
+                                                                                    <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
+                                                                                        <span>Dirección: </span>
+                                                                                        <span><i className="fa-solid fa-location-dot me-2"></i>{paciente.direccion} <i className="fa-solid fa-tree-city mx-2"></i>{paciente.ciudad}</span>
+                                                                                    </li>
+                                                                                    <h4><strong>Motivo de consulta:</strong></h4>
+                                                                                    <p><strong>Nota:</strong></p>
+                                                                                    <p className="bg-dark p-3 rounded-5 text-white">
+                                                                                        {paciente.nota || 'Sin notas adicionales'}
+                                                                                    </p>                                                                                    
+                                                                                </ul>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div className="tab-pane fade" id="profile" role="tabpanel">
-                                                                        <h3>Contenido de Pacientes</h3>
-                                                                        <div className="row g-1 mb-4 mt-2">
-                                                                            <div className="col-12 col-lg-4">
-                                                                                <div className="dropdown w-100">
-                                                                                    <button className="btn btn-dark dropdown-toggle w-100 py-3 rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ height: "50px", }}>
-                                                                                        <span><strong>Mes</strong></span>
-                                                                                    </button>
-                                                                                    <ul className="dropdown-menu w-100">
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Enero</a></li>
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Febrero</a></li>
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Marzo</a></li>
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Abril</a></li>
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Mayo</a></li>
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Junio</a></li>
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Julio</a></li>
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Agosto</a></li>
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Septiembre</a></li>
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Octubre</a></li>
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Noviembre</a></li>
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Diciembre</a></li>
-                                                                                    </ul>
+                                                                        <div className="tab-pane fade" id="profile" role="tabpanel">
+                                                                            <h3><strong>Contenido de Pacientes</strong></h3>
+                                                                            <div className="row g-1 mb-4 mt-2">
+                                                                                <div className="col-12 col-lg-4">
+                                                                                    <div className="dropdown w-100">
+                                                                                        <button className="btn btn-dark dropdown-toggle w-100 py-3 rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                            <span><strong>Todas las citas</strong></span>
+                                                                                        </button>
+
+                                                                                        <ul className="dropdown-menu w-100">
+                                                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar por fecha</a></li>
+                                                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar por actividad</a></li>
+                                                                                        </ul>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div className="col-12 col-lg-4">
-                                                                                <div className="dropdown w-100">
-                                                                                    <button className="btn btn-dark dropdown-toggle w-100 py-3 rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ height: "50px", }}>
-                                                                                        <span><strong>Todas las citas</strong></span>
-                                                                                    </button>
-                                                                                    <ul className="dropdown-menu w-100">
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar por fecha</a></li>
-                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar por actividad</a></li>
-                                                                                    </ul>
+
+                                                                                {citas.map((cita, index) =>(
+                                                                                    
+                                                                                <div key={cita.id} className="p-3 bg-dark text-white rounded-5 text-start mt-2 h-100">
+
+                                                                                        <div>{new Date(cita.fecha).toLocaleDateString('es-Es')}</div>
+                                                                                    <div> <strong> {paciente.nombre}</strong></div>
+                                                                                    <div></div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div className="p-3 bg-dark text-white rounded-5 text-center mt-5 h-100">
-                                                                                <div style={{ fontSize: "16px", textAlign: "start" }}>Dia-Mes-Año</div>
-                                                                                <div style={{ fontSize: "28px", textAlign: "start" }}> <strong> Andrés Beltrán</strong></div>
-                                                                                <div></div>
+                                                                                ))}
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
                                                                 {/* TERMINA ACA */}
 
-                                                                <div className="modal-body">
-                                                                    <p><strong>Motivo de consulta:</strong></p>
-                                                                    <p><strong>Nota:</strong></p>
-                                                                    <p className="bg-dark p-3 rounded-5 text-white">
-                                                                        {paciente.nota || 'Sin notas adicionales'}
-                                                                    </p>
-                                                                    <div className="d-flex justify-content-evenly">
-                                                                        <p><i className="fa-regular fa-calendar-days me-2"></i><strong>Teléfono:</strong> {paciente.telefono}</p>
-                                                                        <p><i className="fa-regular fa-clock me-2"></i><strong>Email:</strong> {paciente.email}</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="modal-footer rounded-5">
+                                                                
+                                                                <div className="modal-footer rounded-5 d-flex align-items-end">
                                                                     <Link to={"/editar-cita"}>
                                                                         <button type="button" className="btn btn-dark rounded-5" data-bs-dismiss="modal">Editar</button>
                                                                     </Link>
