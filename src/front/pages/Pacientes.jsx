@@ -90,20 +90,20 @@ export const Pacientes = () => {
     const pacientesFiltrados = pacientes.filter(paciente =>
         paciente.nombre.toLowerCase().includes(busqueda.toLowerCase()))
 
-// Ordenar por nombre
+    // Ordenar por nombre
 
-const pacientesOrdenados = [...pacientesFiltrados].sort((a, b) => {
-    if (ordenamiento === "1") { 
-        if (a.nombre < b.nombre) return -1;
-        if (a.nombre > b.nombre) return 1;
+    const pacientesOrdenados = [...pacientesFiltrados].sort((a, b) => {
+        if (ordenamiento === "1") {
+            if (a.nombre < b.nombre) return -1;
+            if (a.nombre > b.nombre) return 1;
+            return 0;
+        } else if (ordenamiento === "2") {
+            if (a.nombre > b.nombre) return -1;
+            if (a.nombre < b.nombre) return 1;
+            return 0;
+        }
         return 0;
-    } else if (ordenamiento === "2") {
-        if (a.nombre > b.nombre) return -1;
-        if (a.nombre < b.nombre) return 1;
-        return 0;
-    }
-    return 0;
-});
+    });
 
     // contar estados de pacientes
     const contarTotal = pacientes.length;
@@ -116,6 +116,21 @@ const pacientesOrdenados = [...pacientesFiltrados].sort((a, b) => {
 
     const contarInactivos = pacientes.filter(paciente =>
         paciente.estado === 'Inactivo' || paciente.estado === 'inactivo').length;
+
+    // color estado del paciente
+    const getEstadoIcon = (estado) => {
+        switch (estado.toLowerCase()) {
+            case 'activo':
+                return <i className="fa-solid fa-circle-check text-black me-2"></i>;
+            case 'inactivo':
+                return <i className="fa-solid fa-circle-xmark text-black me-2"></i>;
+            case 'de_alta':
+            case 'de alta':
+                return <i className="fa-solid fa-circle-minus text-black me-2"></i>;
+            default:
+                return <i className="fa-solid fa-circle text-black me-2"></i>;
+        }
+    };
 
 
 
@@ -196,7 +211,7 @@ const pacientesOrdenados = [...pacientesFiltrados].sort((a, b) => {
                                             className="form-select rounded-5"
                                             id="floatingSelect"
                                             aria-label="Floating label select example"
-                                            >
+                                        >
                                             <option value="">Todas las fechas</option>
                                             <option value="1">Próximas</option>
                                             <option value="2">Últimas</option>
@@ -248,7 +263,8 @@ const pacientesOrdenados = [...pacientesFiltrados].sort((a, b) => {
                                                 <div>
                                                     <p value={paciente.id} className="mb-2 ms-2"><strong>{paciente.nombre}</strong></p>
                                                     <div className="d-flex  text-muted d-block ms-2">
-                                                        <small>{paciente.estado}</small>
+                                                        <small>{getEstadoIcon(paciente.estado)}{paciente.estado}</small>
+                                                        <small><i className="fa-solid fa-mobile-retro mx-2 mb-2"></i>{paciente.telefono}</small>
                                                     </div>
                                                 </div>
                                                 <div>
@@ -259,13 +275,101 @@ const pacientesOrdenados = [...pacientesFiltrados].sort((a, b) => {
 
                                                     {/* <!-- Modal --> */}
                                                     <div className="modal fade" id={`modalNota-${paciente.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={`modalLabel-${paciente.id}`} aria-hidden="true">
-                                                        <div className="modal-dialog modal-dialog-centered modal-lg h-100 position-fixed end-0 top-0 m-0" 
+                                                        <div className="modal-dialog modal-dialog-centered modal-lg h-100 position-fixed end-0 top-0 m-0"
                                                         >
                                                             <div className="modal-content rounded-5" style={{ height: '100%', borderRadius: '0' }}>
                                                                 <div className="modal-header rounded-5">
                                                                     <h1 className="modal-title fs-5" id={`modalLabel-${paciente.id}`}>{paciente.nombre} </h1>
                                                                     <button type="button" className="btn-close rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
+
+                                                                {/* EMPIEZA ACA */}
+                                                            <div className="container">
+                                                                <ul className="nav nav-tabs mt-5" id="myTab" role="tablist">
+                                                                    <li className="nav-item" role="presentation">
+                                                                        <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" style={{ color: "black" }}>
+                                                                            Datos
+                                                                        </button>
+                                                                    </li>
+                                                                    <li className="nav-item" role="presentation">
+                                                                        <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" style={{ color: "black" }}>
+                                                                            Citas
+                                                                        </button>
+                                                                    </li>
+                                                                </ul>
+                                                                <div className="tab-content mt-5" id="myTabContent">
+                                                                    <div className="tab-pane fade show active" id="home" role="tabpanel">
+                                                                        <h4>Datos del paciente</h4>
+                                                                        <div className="p-3 mt-2">
+                                                                            <ul className="list-group list-group-flush">
+                                                                                <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
+                                                                                    <span style={{ fontSize: "20px", height: "40px" }}>Estado del paciente: </span>
+                                                                                    <button type="button" className="btn btn-success rounded-5 btn-sm align-self-start">
+                                                                                        Activo
+                                                                                    </button>
+                                                                                </li>
+                                                                                <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
+                                                                                    <span style={{ fontSize: "20px", height: "40px" }}>Precio por cita: </span>
+                                                                                    <span>$150.00</span>
+                                                                                </li>
+                                                                                <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
+                                                                                    <span style={{ fontSize: "20px", height: "30px" }}>Contacto: </span>
+                                                                                    <span>Móvl: 55-5555-5555</span>
+                                                                                    <span>Correo Electrónico: Example@mail.com</span>
+                                                                                </li>
+                                                                                <li className="list-group-item bg-dark text-white rounded-5 mb-2 p-3 d-flex flex-column">
+                                                                                    <span style={{ fontSize: "20px", height: "30px" }}>Dirección: </span>
+                                                                                    <span>Av de los chistosos #45. Col, los payasos. CP: 10000</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="tab-pane fade" id="profile" role="tabpanel">
+                                                                        <h3>Contenido de Pacientes</h3>
+                                                                        <div className="row g-1 mb-4 mt-2">
+                                                                            <div className="col-12 col-lg-4">
+                                                                                <div className="dropdown w-100">
+                                                                                    <button className="btn btn-dark dropdown-toggle w-100 py-3 rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ height: "50px", }}>
+                                                                                        <span><strong>Mes</strong></span>
+                                                                                    </button>
+                                                                                    <ul className="dropdown-menu w-100">
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Enero</a></li>
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Febrero</a></li>
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Marzo</a></li>
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Abril</a></li>
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Mayo</a></li>
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Junio</a></li>
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Julio</a></li>
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Agosto</a></li>
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Septiembre</a></li>
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Octubre</a></li>
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Noviembre</a></li>
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Diciembre</a></li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="col-12 col-lg-4">
+                                                                                <div className="dropdown w-100">
+                                                                                    <button className="btn btn-dark dropdown-toggle w-100 py-3 rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ height: "50px", }}>
+                                                                                        <span><strong>Todas las citas</strong></span>
+                                                                                    </button>
+                                                                                    <ul className="dropdown-menu w-100">
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar por fecha</a></li>
+                                                                                        <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar por actividad</a></li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="p-3 bg-dark text-white rounded-5 text-center mt-5 h-100">
+                                                                                <div style={{ fontSize: "16px", textAlign: "start" }}>Dia-Mes-Año</div>
+                                                                                <div style={{ fontSize: "28px", textAlign: "start" }}> <strong> Andrés Beltrán</strong></div>
+                                                                                <div></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                                {/* TERMINA ACA */}
+
                                                                 <div className="modal-body">
                                                                     <p><strong>Motivo de consulta:</strong></p>
                                                                     <p><strong>Nota:</strong></p>

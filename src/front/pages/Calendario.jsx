@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react"
 import "./Calendario.css";
 import { Link } from "react-router-dom";
@@ -11,57 +10,10 @@ const Calendario = () => {
     <div className="calendario-container pt-3">
 
       {/* Sidebar */}
-      <div className="sidebar">
-        <Link to="/Landing-n1" className="d-flex align-items-center mb-3 text-white text-decoration-none">
-          <div className="ps-5">
-            <img
-              className="mb-1 mx-auto"
-              src="/src/front/assets/img/logo-white.png"
-              alt="logomedAgend"
-              style={{ width: '120px', height: 'auto' }}
-            />
-          </div>
-        </Link>
-        <hr />
-        <ul className="nav nav-pills flex-column mb-auto">
-          <li className="nav-item">
-            <Link to="" className="nav-link text-white">
-              <i className="fa-solid fa-house me-2"></i>Inicio
-            </Link>
-          </li>
-          <li>
-            <Link to="/pacientes" className="nav-link text-white">
-              <i className="fa-solid fa-hospital-user me-2"></i>Pacientes
-            </Link>
-          </li>
-          <li>
-            <Link to="/citas" className="nav-link text-white">
-              <i className="fa-regular fa-clock me-2"></i>Citas
-            </Link>
-          </li>
-          <li>
-            <Link to="" className="nav-link text-white">
-              <i className="fa-regular fa-calendar-check me-2"></i>Calendario
-            </Link>
-          </li>
-        </ul>
-        <span className="fs-5 mt-3 ms-3">Opciones</span>
-        <ul className="nav nav-pills flex-column mb-auto">
-          <li>
-            <Link to="/agregar-cita" className="nav-link text-white">
-              <i className="fa-solid fa-user-check me-2"></i>Agregar cita
-            </Link>
-          </li>
-          <li>
-            <Link to="/agregar-paciente" className="nav-link text-white">
-              <i className="fa-solid fa-user-plus me-2"></i>Nuevo paciente
-            </Link>
-          </li>
-        </ul>
-      </div>
+      < Navbar2 />
 
       {/* Calendario */}
-      <div className="calendario-content bg-dark rounded-5">
+      <div className="calendario-content bg-dark rounded-5 ms-2">
         <div className="calendar">
           {/* Encabezado */}
           <div className="calendar-header">
@@ -104,24 +56,24 @@ const Calendario = () => {
             <div className="day" ><span className="day-number">1</span></div>
             <div className="day">
               <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#modalDay2"
-      >
-              <span className="day-number">2</span>
-              <div className="event">Andrés Beltrán 1:00pm</div>
-              <div className="event">Camilo Betancurth 3:00pm</div>
+                type="button"
+                className="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#modalDay2"
+              >
+                <span className="day-number">2</span>
+                <div className="event">Andrés Beltrán 1:00pm</div>
+                <div className="event">Camilo Betancurth 3:00pm</div>
               </button>
             </div>
             <div className="day" ><span className="day-number">3</span></div>
             <div className="day" ><span className="day-number">4</span></div>
             <div className="day">
-              
+
               <span className="day-number">5</span>
               <div className="event">Diana Ortiz 10:00am</div>
             </div>
-            
+
             <div className="day" ><span className="day-number">6</span></div>
             <div className="day" ><span className="day-number">7</span></div>
 
@@ -223,22 +175,21 @@ const Calendario = () => {
               <span className="day-number">4</span>
               <div className="event">Diana Ortiz 10:00am</div>
             </div>
-            
-            </div>
-             <ModalDeCitas />
 
-            
-            {/* Puedes seguir agregando más días como los anteriores */}
-          
           </div>
-          
 
-    
-    </div>
+
+
+
         </div>
-      
 
-    
+
+
+      </div>
+    </div>
+
+
+
   );
 };
 
