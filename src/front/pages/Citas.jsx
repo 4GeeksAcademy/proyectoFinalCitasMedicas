@@ -17,6 +17,7 @@ export const Citas = () => {
     const [pacientes, setPacientes] = useState([])
     const [busqueda, setBusqueda] = useState("")
     const [ordenamiento, setOrdenamiento] = useState("")
+    const [ordenamientoFecha, setOrdenamientoFecha] = useState("")
 
     // fetch get citas
     async function obtenerCitas() {
@@ -93,16 +94,26 @@ export const Citas = () => {
 // Ordenar por nombre
 
 const citasOrdenadas = [...citasFiltradas].sort((a, b) => {
-    if (ordenamiento === "1") { 
-        if (a.paciente_nombre < b.paciente_nombre) return -1;
-        if (a.paciente_nombre > b.paciente_nombre) return 1;
-        return 0;
-    } else if (ordenamiento === "2") {
-        if (a.paciente_nombre > b.paciente_nombre) return -1;
-        if (a.paciente_nombre < b.paciente_nombre) return 1;
-        return 0;
+    let resultado= 0;
+    
+    if (ordenamientoFecha === "1") {
+        resultado = new Date(a.fecha) - new Date(b.fecha);
+    } else if (ordenamientoFecha === "2") {
+        resultado = new Date(b.fecha) - new Date(a.fecha);
     }
-    return 0;
+    
+    if (ordenamiento !== "" ) {    
+        if (ordenamiento === "1") { 
+            if (a.paciente_nombre < b.paciente_nombre) resultado = -1;
+            if (a.paciente_nombre > b.paciente_nombre) resultado = 1;
+            
+        } else if (ordenamiento === "2") {
+            if (a.paciente_nombre > b.paciente_nombre) resultado = -1;
+            if (a.paciente_nombre < b.paciente_nombre) resultado = 1;      
+        }
+    }
+    return resultado;
+    
 });
 
     // contar estados de pacientes
@@ -196,6 +207,8 @@ const citasOrdenadas = [...citasFiltradas].sort((a, b) => {
                                             className="form-select rounded-5"
                                             id="floatingSelect"
                                             aria-label="Floating label select example"
+                                            value={ordenamientoFecha}
+                                            onChange={(e) => setOrdenamientoFecha(e.target.value)}
                                             >
                                             <option value="">Todas las fechas</option>
                                             <option value="1">Próximas</option>

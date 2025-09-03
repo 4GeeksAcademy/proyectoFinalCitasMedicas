@@ -133,15 +133,12 @@ export const Pacientes = () => {
         }
     };
 
-    
-const citasDelPaciente = citas.filter(cita => 
-        cita.paciente_id === pacientes.id || cita.id_paciente === pacientes.id);
-
-
     useEffect(() => {
         obtenerCitas();
         obtenerPacientes();
     }, [])
+
+    
 
     return (
         <div
@@ -214,7 +211,7 @@ const citasDelPaciente = citas.filter(cita =>
                                             className="form-select rounded-5"
                                             id="floatingSelect"
                                             aria-label="Floating label select example"
-                                        >
+                                                                                    >
                                             <option value="">Todas las fechas</option>
                                             <option value="1">Próximas</option>
                                             <option value="2">Últimas</option>
@@ -352,15 +349,15 @@ const citasDelPaciente = citas.filter(cita =>
                                                                                     </div>
                                                                                 </div>
 
-                                                                                {citasDelPaciente.map((cita, index) =>(
+                                                                                
                                                                                     
-                                                                                <div key={cita.id} className="p-3 bg-dark text-white rounded-5 text-start mt-2 h-100">
+                                                                                <div className="p-3 bg-dark text-white rounded-5 text-start mt-2 h-100">
 
-                                                                                        <div>{new Date(cita.fecha).toLocaleDateString('es-Es')}</div>
-                                                                                    <div> <strong> {paciente.nombre}</strong></div>
+                                                                                        <div>{}</div>
+                                                                                    <div> <strong> {}</strong></div>
                                                                                     <div></div>
                                                                                 </div>
-                                                                                ))}
+                                                                               
 
                                                                             </div>
                                                                         </div>
