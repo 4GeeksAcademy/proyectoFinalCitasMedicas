@@ -7,6 +7,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import datetime
 from sqlalchemy.exc import IntegrityError 
+from flask_jwt_extended import create_access_token, jwt_required
 
 
 api = Blueprint('api', __name__)
@@ -23,6 +24,29 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+# Create a route to authenticate your users and return JWTs. The
+# create_access_token() function is used to actually generate the JWT.
+@api.route("/login", methods=["POST"])
+def login():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+
+# se pregunta si tiene email
+    if not email:
+        return jsonify({"msg": "Bad email or password in body."}), 401
+# buscamos el usuario por email    
+    user = User.query.filter_by(email=email).one_or_none()
+
+#pregunta si tiene usuario
+    if not user:
+        return jsonify({"msg": "Bad username or password"}), 401
+    # pregunta si está bien el password
+    if user.password != password:
+        return jsonify({"msg": "Bad username or password"}), 401
+#si todo coincide crea el token y puede acceder
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token), 200
 
 
 # obtener todos los pacietes
