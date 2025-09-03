@@ -73,10 +73,11 @@ export const Pacientes = () => {
                 }
             });
             if (!response.ok) {
-                throw new Error(`HTTP Error! status: ${response.status}`);
+                const errorData = await response.json()
+                alert(errorData.Mensaje || errorData ||  'Error al eliminar el paciente')
             }
+            
             const data = await response.json();
-
             setPacientes(pacientesActuales => pacientesActuales.filter(paciente => paciente.id !== pacienteId));
             alert('Paciente eliminado con éxito')
 
@@ -126,7 +127,6 @@ export const Pacientes = () => {
             case 'inactivo':
                 return <i className="fa-solid fa-circle-xmark text-black me-2"></i>;
             case 'de_alta':
-            case 'de alta':
                 return <i className="fa-solid fa-circle-minus text-black me-2"></i>;
             default:
                 return <i className="fa-solid fa-circle text-black me-2"></i>;
