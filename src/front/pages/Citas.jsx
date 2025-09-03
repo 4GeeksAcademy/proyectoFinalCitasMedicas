@@ -87,11 +87,11 @@ export const Citas = () => {
 
     // FILTROS
 
-    // buscar citas
+    // buscar por citas
     const citasFiltradas = citas.filter(cita =>
         cita.paciente_nombre.toLowerCase().includes(busqueda.toLowerCase()))
 
-// Ordenar por nombre
+// Ordenar por nombre y fecha
 
 const citasOrdenadas = [...citasFiltradas].sort((a, b) => {
     let resultado= 0;

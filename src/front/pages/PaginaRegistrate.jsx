@@ -16,7 +16,7 @@ const PaginaRegistrate = () => {
         <div className="container bg-light col-5 rounded-5 pt-5 pb-5 mt-5 mb-5">
           <div className="text-black text-center d-flex flex-column mb-4">
             <img className="mx-auto" src="/src/front/assets/img/logo-black.png" alt="logomedAgend" style={{ width: '50px', height: 'auto' }} />
-            <h1>Regístrate</h1>
+            <h1 className="mt-3">Regístrate</h1>
           </div>
           <form className="needs-validation">
             <div className="mb-3">
@@ -73,8 +73,8 @@ const PaginaRegistrate = () => {
             </div>
 
             <div className="d-grid mt-4">
-              <button className="btn btn-secondary rounded-4 " type="submit">
-                Registrarse
+              <button className="btn btn-outline-dark rounded-5" type="submit">
+                Regístrarse
               </button>
             </div>
           </form>
