@@ -1,6 +1,9 @@
 import { Navbar2 } from "../components/Navbar2"
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const InicioHome = () => {
+
+    const { store } = useGlobalReducer()
 
     const fecha = new Date()
     const fechaFormateada = fecha.toLocaleDateString('es-ES', {
@@ -32,7 +35,9 @@ export const InicioHome = () => {
                             <div className="row g-0 text-white h-100">
                                 {/* Header */}
                                 <div className="col-12" style={{ height: '10%' }}>
-                                    <h2 className="mb-1">Hola, usuario</h2>
+                                    <h2 className="mb-1">
+                                        {store.profile ? `Hola, ${store.profile.email}` : 'Hola, Invitado'}
+                                    </h2>
                                     <p className="text-light">{fechaFormateada}</p>
                                 </div>
 

@@ -2,8 +2,35 @@ body {
     font-family: 'Open Sans', sans-serif;  
     
 }
+.logout-btn {
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: start;
+    padding: 0.5rem 1rem;
+    color: white;
+    border-radius: 1rem; /* Mismo radio que el span */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none; /* Para los links */
+    display: block; /* Para que ocupe todo el ancho */
+}
 
 
+.logout-btn:hover {
+    background-color: white; /* Fondo blanco al hover */
+    color: black; /* Texto negro al hover */
+    /* border-radius ya está aplicado arriba */
+}
+
+/* También para los iconos dentro del botón logout */
+.logout-btn i {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.logout-btn:hover i {
+    color: black;
+}
 
 
 

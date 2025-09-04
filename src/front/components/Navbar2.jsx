@@ -1,6 +1,5 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import storeReducer from "../store";
 
 export const Navbar2 = () => {
 
@@ -26,15 +25,12 @@ export const Navbar2 = () => {
                 <div className="ps-5">
                     <img className="mb-1 mx-auto" src="/src/front/assets/img/logo-white.png" alt="logomedAgend" style={{ width: '120px', height: 'auto' }} />
                 </div>
-                <p>
-                    {store.profile && `Bienvenido ${store.profile.email}`}
-                </p>
             </Link>
             <hr />
-            <div className="btn-group-vertical" role="group" aria-label="Vertical button group">
-                <ul className="nav nav-pills flex-column mb-auto">
-                    <li className="nav-item">
-                        <Link to="/inicio-home" className="nav-link" aria-current="page">
+            <div className="btn-group-vertical " role="group" aria-label="Vertical button group">
+                <ul className="nav nav-pills flex-column mb-auto ">
+                    <li className="nav-item ">
+                        <Link to="/inicio-home" className="logout-btn " aria-current="page">
                             <svg className="bi me-2" width="16" height="16">
                                 <use xlinkHref="#home"></use>
                             </svg>
@@ -42,7 +38,7 @@ export const Navbar2 = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/pacientes" className="nav-link text-white">
+                        <Link to="/pacientes" className="logout-btn">
                             <svg className="bi me-2" width="16" height="16">
                                 <use xlinkHref="#speedometer2"></use>
                             </svg>
@@ -50,7 +46,7 @@ export const Navbar2 = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/citas" className="nav-link text-white">
+                        <Link to="/citas" className="logout-btn">
                             <svg className="bi me-2" width="16" height="16">
                                 <use xlinkHref="#table"></use>
                             </svg>
@@ -58,24 +54,26 @@ export const Navbar2 = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/calendario" className="nav-link text-white">
+                        <Link to="/calendario" className="logout-btn">
                             <svg className="bi me-2" width="16" height="16">
                                 <use xlinkHref="#people-circle"></use>
                             </svg>
                             <i className="fa-regular fa-calendar-check me-2"></i>Calendario
                         </Link>
                     </li>
-                    <span className="fs-5 mt-3 ms-3">Opciones</span>
-                    <li>
-                        <Link to="/agregar-cita" className="nav-link text-white">
-                            <svg className="bi me-2" width="16" height="16">
+                    <li className="my-3">
+                        <span className="fs-6 ms-3 ">Opciones</span>
+                    </li>
+                    <li >
+                        <Link to="/agregar-cita" className="logout-btn">
+                            <svg className="bi me-2 " width="16" height="16">
                                 <use xlinkHref="#people-circle"></use>
                             </svg>
                             <i className="fa-solid fa-user-check me-2"></i>Agregar cita
                         </Link>
                     </li>
                     <li>
-                        <Link to="/agregar-paciente" className="nav-link text-white">
+                        <Link to="/agregar-paciente" className="logout-btn">
                             <svg className="bi me-2" width="16" height="16">
                                 <use xlinkHref="#people-circle"></use>
                             </svg>
@@ -84,21 +82,14 @@ export const Navbar2 = () => {
                     </li>
                     <li>
                         {store.profile && (
-                            <div className="d-flex align-items-center">
-                                <Link to="/sing-in" className="nav-link text-white">
+                            
+                                <div className="logout-btn" style={{ cursor: 'pointer' }} onClick={handleLogout}>
                                     <svg className="bi me-2" width="16" height="16">
                                         <use xlinkHref="#people-circle"></use>
                                     </svg>
-                                    Profile
-                                </Link>
-                                <button
-                                    className="btn btn-outline-light btn-sm"
-                                    onClick={handleLogout}
-                                >
-                                    <i className="fa-solid fa-right-from-bracket me-2"></i>
-                                    Log out
-                                </button>
-                            </div>
+                                    <i className="fa-solid fa-right-from-bracket me-2"></i>Log out
+                                </div>
+                            
                         )}
                     </li>
                 </ul>
