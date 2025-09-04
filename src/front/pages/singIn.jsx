@@ -44,6 +44,10 @@ const SingIn = () => {
                 }
             })
 
+            localStorage.setItem('token', data.access_token);
+            localStorage.setItem('email', credenciales.email);
+
+
             alert('Tienes acceso')
             navigate(`/inicio-home`)
 

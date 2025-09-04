@@ -1,14 +1,34 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer";
+import storeReducer from "../store";
 
 export const Navbar2 = () => {
+
+    const { store, dispatch } = useGlobalReducer();
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        try {
+            localStorage.removeItem("token");
+            localStorage.removeItem("email");
+            dispatch({ type: "set_profile", payload: null });
+            navigate("/sing-in")
+        } catch (error) {
+            console.error("Error al cerrar sesión: ", error)
+        }
+    };
+
     return (
-        
+
         <div className="d-flex flex-column flex-shrink-0 text-white bg-dark rounded-5 pt-5" style={{ width: "280px", height: "95vh" }}>
             <Link to="/landing-n1" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                
+
                 <div className="ps-5">
                     <img className="mb-1 mx-auto" src="/src/front/assets/img/logo-white.png" alt="logomedAgend" style={{ width: '120px', height: 'auto' }} />
                 </div>
+                <p>
+                    {store.profile && `Bienvenido ${store.profile.email}`}
+                </p>
             </Link>
             <hr />
             <div className="btn-group-vertical" role="group" aria-label="Vertical button group">
@@ -61,6 +81,25 @@ export const Navbar2 = () => {
                             </svg>
                             <i className="fa-solid fa-user-plus me-2"></i>Nuevo paciente
                         </Link>
+                    </li>
+                    <li>
+                        {store.profile && (
+                            <div className="d-flex align-items-center">
+                                <Link to="/sing-in" className="nav-link text-white">
+                                    <svg className="bi me-2" width="16" height="16">
+                                        <use xlinkHref="#people-circle"></use>
+                                    </svg>
+                                    Profile
+                                </Link>
+                                <button
+                                    className="btn btn-outline-light btn-sm"
+                                    onClick={handleLogout}
+                                >
+                                    <i className="fa-solid fa-right-from-bracket me-2"></i>
+                                    Log out
+                                </button>
+                            </div>
+                        )}
                     </li>
                 </ul>
                 <hr />

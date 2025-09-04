@@ -1,7 +1,12 @@
 export const initialStore=()=>{
   return{
     message: null,
-    profile: null,
+    profile: (localStorage.getItem("token") ? 
+    {
+      email: localStorage.getItem("email"),
+      token: localStorage.getItem("token")
+    } : null
+  ),
     todos: [
       {
         id: 1,
