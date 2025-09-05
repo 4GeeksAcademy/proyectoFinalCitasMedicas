@@ -46,7 +46,11 @@ def login():
         return jsonify({"msg": "Bad username or password"}), 401
 #si todo coincide crea el token y puede acceder
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token), 200
+    return jsonify({
+        "access_token": access_token,
+        "name": user.name,
+        "email": user.email
+        }), 200
 
 #Crear Usuarios Register
 @api.route("/register", methods=["POST"])

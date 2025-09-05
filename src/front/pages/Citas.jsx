@@ -165,9 +165,9 @@ const citasOrdenadas = [...citasFiltradas].sort((a, b) => {
                                         />
                                     </div>
                                     <div>
-                                        <Link to="/agregar-paciente">
+                                        <Link to="/agregar-cita">
                                             <button type="button" className="btn btn-outline-light rounded-5">
-                                                <i className="fa-solid fa-user-plus me-2"></i>Agregar paciente
+                                                <i className="fa-solid fa-user-plus me-2"></i>Agregar Cita
                                             </button>
                                         </Link>
                                     </div>

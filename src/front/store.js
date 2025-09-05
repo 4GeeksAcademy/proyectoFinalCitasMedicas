@@ -4,6 +4,7 @@ export const initialStore=()=>{
     profile: (localStorage.getItem("token") ? 
     {
       email: localStorage.getItem("email"),
+      name: localStorage.getItem("name"),
       token: localStorage.getItem("token")
     } : null
   ),

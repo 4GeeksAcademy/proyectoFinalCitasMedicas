@@ -36,7 +36,7 @@ export const InicioHome = () => {
                                 {/* Header */}
                                 <div className="col-12" style={{ height: '10%' }}>
                                     <h2 className="mb-1">
-                                        {store.profile ? `Hola, ${store.profile.email}` : 'Hola, Invitado'}
+                                        {store.profile ? `Hola, ${store.profile.name}` : 'Hola, Invitado'}
                                     </h2>
                                     <p className="text-light">{fechaFormateada}</p>
                                 </div>

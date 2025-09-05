@@ -29,7 +29,7 @@ const SingIn = () => {
         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/login`, {
             method: 'POST',
             headers: {
-                "COntent-type": "application/json"
+                "Content-type": "application/json"
             },
             body: JSON.stringify(credenciales)
         })
@@ -41,11 +41,13 @@ const SingIn = () => {
                 payload: {
                     email: credenciales.email,
                     token: data.access_token,
+                    name: data.name,
                 }
             })
 
             localStorage.setItem('token', data.access_token);
             localStorage.setItem('email', credenciales.email);
+            localStorage.setItem('name', data.name)
 
 
             alert('Tienes acceso')
@@ -98,7 +100,7 @@ const SingIn = () => {
                                         <span className="col-4 p-1 ps-3 input-group-text bg-dark text-white rounded-start-pill"
                                             id="addon-wrapping">Password</span>
                                         <input type="password" className="form-control rounded-end-pill" placeholder="Password" aria-label="Username"
-                                            aria-describedby="addon-wrapping" name="password"
+                                            aria-describedby="addon-wrapping" name="password" autoComplete="current-password"
                                             onChange={handleInputs}
                                         />
                                     </div>

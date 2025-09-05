@@ -1,6 +1,6 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const PaginaRegistrate = () => {
 
@@ -26,9 +26,9 @@ const PaginaRegistrate = () => {
   const registrar = async (e) => {
     e.preventDefault();
 
-  console.log('Datos del usuario:', datosUsuarios); 
+    console.log('Datos del usuario:', datosUsuarios);
 
-    if (!datosUsuarios.name || !datosUsuarios.phone || !datosUsuarios.email || !datosUsuarios.password ) {
+    if (!datosUsuarios.name || !datosUsuarios.phone || !datosUsuarios.email || !datosUsuarios.password) {
       alert("Todos los campos son requeridos")
       return;
     }
@@ -60,7 +60,7 @@ const PaginaRegistrate = () => {
 
   }
 
-  
+
   return (
     <div
       style={{
@@ -133,6 +133,7 @@ const PaginaRegistrate = () => {
                 name="password"
                 placeholder="Contraseña"
                 minLength="8"
+                autoComplete="current-password"
                 value={datosUsuarios.password}
                 onChange={handleInputs}
                 required
@@ -143,7 +144,7 @@ const PaginaRegistrate = () => {
             </div>
 
             <div className="d-grid mt-4">
-              <button className="btn btn-outline-dark rounded-5" 
+              <button className="btn btn-outline-dark rounded-5"
                 type="submit"
                 onClick={registrar}
               >
@@ -151,6 +152,13 @@ const PaginaRegistrate = () => {
               </button>
             </div>
           </form>
+          <Link to="/sing-in"> </Link>
+        </div>
+        <div className="d-flex justify-content-center text-white col-12 mb-2 fs-5">
+          <p className="me-2 ">¿Ya tienes cuenta?</p>
+          <Link to="/sing-in" className="text-decoration-none text-black">
+            <p className="bg-white rounded-5 px-2">Inicia sesión</p>
+          </Link>
         </div>
       </div>
     </div>
