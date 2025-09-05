@@ -59,7 +59,7 @@ def register():
     if User.query.filter_by(email=body['email']).first():
         return jsonify({"error": "Email ya existe"}), 400
     
-    if User.query.filter_by(phone=['phone']).first():
+    if User.query.filter_by(phone=body['phone']).first():
         return jsonify({"error": "El teléfono ya existe"}), 400
 
     #crear usuario con todos los campos

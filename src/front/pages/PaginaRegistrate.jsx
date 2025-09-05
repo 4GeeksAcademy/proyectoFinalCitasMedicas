@@ -15,7 +15,7 @@ const PaginaRegistrate = () => {
   })
 
   const handleInputs = (e) => {
-    const key = e.target.value;
+    const key = e.target.name;
     setDatosUsuarios(
       {
         ...datosUsuarios,
@@ -26,7 +26,9 @@ const PaginaRegistrate = () => {
   const registrar = async (e) => {
     e.preventDefault();
 
-    if (!datosUsuarios.name || !datosUsuarios.phone || datosUsuarios.email || datosUsuarios.password ) {
+  console.log('Datos del usuario:', datosUsuarios); 
+
+    if (!datosUsuarios.name || !datosUsuarios.phone || !datosUsuarios.email || !datosUsuarios.password ) {
       alert("Todos los campos son requeridos")
       return;
     }
@@ -85,6 +87,8 @@ const PaginaRegistrate = () => {
                 id="name"
                 name="name"
                 placeholder="Usuario"
+                value={datosUsuarios.name}
+                onChange={handleInputs}
                 required
               />
               <div className="invalid-feedback">Ingresa tu nombre completo.</div>
@@ -98,6 +102,8 @@ const PaginaRegistrate = () => {
                 id="phone"
                 name="phone"
                 placeholder="555-5555-5555"
+                value={datosUsuarios.phone}
+                onChange={handleInputs}
                 required
               />
               <div className="invalid-feedback">Ingresa tu número de teléfono.</div>
@@ -111,6 +117,8 @@ const PaginaRegistrate = () => {
                 id="email"
                 name="email"
                 placeholder="example@mail.com"
+                value={datosUsuarios.email}
+                onChange={handleInputs}
                 required
               />
               <div className="invalid-feedback">Ingresa un correo válido.</div>
@@ -125,7 +133,8 @@ const PaginaRegistrate = () => {
                 name="password"
                 placeholder="Contraseña"
                 minLength="8"
-
+                value={datosUsuarios.password}
+                onChange={handleInputs}
                 required
               />
               <div className="invalid-feedback">
@@ -134,7 +143,10 @@ const PaginaRegistrate = () => {
             </div>
 
             <div className="d-grid mt-4">
-              <button className="btn btn-outline-dark rounded-5" type="submit">
+              <button className="btn btn-outline-dark rounded-5" 
+                type="submit"
+                onClick={registrar}
+              >
                 Regístrarse
               </button>
             </div>
