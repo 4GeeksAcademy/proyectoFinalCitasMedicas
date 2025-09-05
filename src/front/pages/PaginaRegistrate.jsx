@@ -1,6 +1,64 @@
-import React from "react";
+import React, { useState} from "react";
+import useGlobalReducer from "../hooks/useGlobalReducer";
+import { useNavigate } from "react-router-dom";
 
 const PaginaRegistrate = () => {
+
+  const navigate = useNavigate();
+  const { dispatch } = useGlobalReducer();
+
+  const [datosUsuarios, setDatosUsuarios] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    password: ""
+  })
+
+  const handleInputs = (e) => {
+    const key = e.target.value;
+    setDatosUsuarios(
+      {
+        ...datosUsuarios,
+        [key]: e.target.value
+      });
+  }
+
+  const registrar = async (e) => {
+    e.preventDefault();
+
+    if (!datosUsuarios.name || !datosUsuarios.phone || datosUsuarios.email || datosUsuarios.password ) {
+      alert("Todos los campos son requeridos")
+      return;
+    }
+
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/register`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(datosUsuarios)
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+
+      dispatch({
+        type: 'set_register',
+        payload: datosUsuarios
+      });
+
+      localStorage.setItem('nuevoUsuarioName', datosUsuarios.name);
+
+      alert('Registro exitoso. Ahora puedes iniciar sesión.')
+      navigate('/sing-in')
+    } else {
+      const error = await response.json();
+      alert(error.error || 'Error en el registro')
+    }
+
+  }
+
+  
   return (
     <div
       style={{

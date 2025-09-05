@@ -49,12 +49,18 @@ def login():
     return jsonify(access_token=access_token), 200
 
 #Crear Usuarios Register
-@api.router("/register", methods=["POST"])
+@api.route("/register", methods=["POST"])
 def register():
     body = request.get_json()
 
     if not body.get('name') or not body.get('phone'):
         return jsonify({"error": "Nombre y teléfono son requeridos"}), 400
+    
+    if User.query.filter_by(email=body['email']).first():
+        return jsonify({"error": "Email ya existe"}), 400
+    
+    if User.query.filter_by(phone=['phone']).first():
+        return jsonify({"error": "El teléfono ya existe"}), 400
 
     #crear usuario con todos los campos
     user = User(
@@ -63,7 +69,12 @@ def register():
         phone=body['phone'],
         password=body['password'],
         is_active=True
-    )   
+    )
+
+    db.session.add(user)
+    db.session.commit()
+
+    return jsonify(user.serialize()), 201  
 
 
 # obtener todos los pacietes

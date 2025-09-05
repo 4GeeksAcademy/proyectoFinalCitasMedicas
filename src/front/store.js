@@ -7,6 +7,8 @@ export const initialStore=()=>{
       token: localStorage.getItem("token")
     } : null
   ),
+    register: {},
+
     todos: [
       {
         id: 1,
@@ -40,11 +42,17 @@ export default function storeReducer(store, action = {}) {
       };
 
     case 'set_profile':
-      console.log(action.payload)
       return {
         ...store,
         profile: action.payload
-      }
+      };
+    
+      case 'set_register':
+        return {
+          ...store,
+          register: action.payload
+        }
+
 
     default:
       throw Error('Unknown action.');

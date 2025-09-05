@@ -18,13 +18,13 @@ const SingIn = () => {
         const key = e.target.name; // email - password
 
         setCredenciales({
-            ...credenciales, [key]: e.target.value
-        })
+            ...credenciales, 
+            [key]: e.target.value
+        });
     }
 
     const autorizar = async (e) => {
         e.preventDefault();
-        console.log(credenciales)
 
         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/login`, {
             method: 'POST',
