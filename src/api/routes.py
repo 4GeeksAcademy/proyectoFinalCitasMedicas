@@ -48,6 +48,23 @@ def login():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token), 200
 
+#Crear Usuarios Register
+@api.router("/register", methods=["POST"])
+def register():
+    body = request.get_json()
+
+    if not body.get('name') or not body.get('phone'):
+        return jsonify({"error": "Nombre y teléfono son requeridos"}), 400
+
+    #crear usuario con todos los campos
+    user = User(
+        name=body['name'],
+        email=body['email'],
+        phone=body['phone'],
+        password=body['password'],
+        is_active=True
+    )   
+
 
 # obtener todos los pacietes
 @api.route('/paciente', methods=['GET'])
