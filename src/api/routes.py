@@ -7,7 +7,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import datetime
 from sqlalchemy.exc import IntegrityError 
-from flask_jwt_extended import create_access_token, jwt_required
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 
 api = Blueprint('api', __name__)
@@ -81,27 +81,42 @@ def register():
     return jsonify(user.serialize()), 201  
 
 
-# obtener todos los pacietes
+# obtener todos los pacietes DEL USUARIO AUTENTICADO
 @api.route('/paciente', methods=['GET'])
+@jwt_required()
 def obtener_paciente():
-    pacientes = Paciente.query.all()
+
+    current_user_email= get_jwt_identity()
+    current_user= User.query.filter_by(email=current_user_email).first()
+
+    pacientes = Paciente.query.filter_by(user_id= current_user.id).all()
     return jsonify([
         paciente.serialize() for paciente in pacientes
     ]), 200
 
-# obtener todas las citas
+# obtener todas las citas DEL USUARIO AUTENTICADO
 @api.route('/cita', methods=['GET'])
+@jwt_required()
 def obtener_citas():
-    citas = Cita.query.all()
+
+    current_user_email= get_jwt_identity()
+    current_user= User.query.filter_by(email=current_user_email).first()
+
+    citas = Cita.query.filter_by(user_id=current_user.id).all()
     return jsonify([
         cita.serialize() for cita in citas
     ]), 200
 
 
-# obtener paciente por id
+# obtener paciente por id SI PERTENECE AL USUARIO
 @api.route('/paciente/<int:paciente_id>', methods=['GET'])
+@jwt_required()
 def obtener_single_paciente(paciente_id):
-    buscar_paciente = Paciente.query.get(paciente_id)
+
+    current_user_email= get_jwt_identity()
+    current_user= User.query.filter_by(email=current_user_email).first()
+
+    buscar_paciente = Paciente.query.filter_by(id=paciente_id, user_id=current_user.id).first()
 
     if not buscar_paciente:
         return jsonify({"msg": f"Paciente con id {paciente_id} no encontrado en la base de datos"}), 404
@@ -109,20 +124,35 @@ def obtener_single_paciente(paciente_id):
     return jsonify(buscar_paciente.serialize()), 200
 
 
-# revisar como obtener todas las citas de un paciente.
+# obtener citas de un paciente SI PERTENECE AL USUARIO
 @api.route('/cita/<int:paciente_id>', methods=['GET'])
+@jwt_required()
 def obtener_single_cita(paciente_id):
-    buscar_cita = Cita.query.get(paciente_id)
 
-    if not buscar_cita:
-        return jsonify({"msg": f"Cita con id {id} no encontrado en la base de datos"}), 404
+    current_user_email= get_jwt_identity()
+    current_user= User.query.filter_by(email=current_user_email).first()
 
-    return jsonify(buscar_cita.serialize()), 200
+    paciente = Paciente.query.filter_by(id=paciente_id, user_id=current_user.id).first()
+
+    if not paciente:
+        return jsonify({"msg": "Paciente no encontrado"}), 404
+    
+    citas = Cita.query.filter_by(paciente_id=paciente_id, user_id=current_user.id).all()
+
+    return jsonify([cita.serialize() for cita in citas]), 200
 
 # crear paciente
 
 @api.route('/paciente', methods=['POST'])
+@jwt_required()
 def crear_paciente():
+
+    current_user_email= get_jwt_identity()
+    current_user= User.query.filter_by(email=current_user_email).first()
+
+    if not current_user:
+        return jsonify({"error": "Usuario no encontrado"}), 404
+
     body = request.get_json()
 
     if not body:
@@ -140,7 +170,7 @@ def crear_paciente():
         return jsonify({"error": "La ciudad es requerida"}), 400
     if not body.get('estado'):
         return jsonify({"error": "El estado es requerido"}), 400
-
+    
     nuevo_paciente = Paciente(
                 nombre=body['nombre'],
                 telefono=body['telefono'],
@@ -148,7 +178,8 @@ def crear_paciente():
                 direccion=body['direccion'],
                 ciudad=body['ciudad'],
                 estado=body['estado'],
-                nota=body.get('nota', '')  # Campo opcional
+                nota=body.get('nota', ''),  # Campo opcional
+                user_id=current_user.id
     )
 
     db.session.add(nuevo_paciente)
@@ -156,8 +187,7 @@ def crear_paciente():
 
     return jsonify(nuevo_paciente.serialize()), 201
 
-# crear cita
-
+# crear cita ASOSCIADA AL PACIENTE AUTENTICADO
 def parse_fecha(fecha_str):
     return datetime.strptime(fecha_str, "%Y-%m-%d").date()
 
@@ -165,13 +195,21 @@ def parse_fecha(fecha_str):
 def parse_hora(hora_str):
     return datetime.strptime(hora_str, "%H:%M").time()
 
-
 @api.route('/cita', methods=['POST'])
+@jwt_required()
 def crear_cita():
+
+    current_user_email= get_jwt_identity()
+    current_user= User.query.filter_by(email=current_user_email).first()
+    
     body = request.get_json()
 
     if not body:
         return jsonify({"error": "no se enviaron datos"}), 400
+
+    paciente = Paciente.query.filter_by(id=body['paciente_id'], user_id=current_user.id).first()
+    if not paciente:
+        return jsonify({"error": "Paciente no encontrado o no autorizado"}), 404
 
     nueva_cita = Cita(
         paciente_id=body['paciente_id'],
@@ -180,7 +218,8 @@ def crear_cita():
         modalidad=body['modalidad'],
         precio=body['precio'],
         estado_pago=body['estado_pago'],
-        nota=body.get('nota', '')
+        nota=body.get('nota', ''),
+        user_id=current_user.id
     )
 
     db.session.add(nueva_cita)
@@ -190,8 +229,13 @@ def crear_cita():
 
 # PUT Paciente
 @api.route('/paciente/<int:paciente_id>', methods=['PUT'])
+@jwt_required()
 def actualizar_paciente(paciente_id):
-    paciente = Paciente.query.get(paciente_id)
+
+    current_user_email= get_jwt_identity()
+    current_user= User.query.filter_by(email=current_user_email).first()
+
+    paciente = Paciente.query.filter_by(id=paciente_id, user_id=current_user.id).first()
 
     if not paciente:
         return jsonify({"error": "Paciente no encontrado"}), 404
@@ -218,11 +262,16 @@ def actualizar_paciente(paciente_id):
 
     return jsonify(paciente.serialize()), 200
 
-#PUT cita
+#PUT cita SI PERTENECE AL USUARIO
 
 @api.route('/cita/<id>', methods=['PUT'])
+@jwt_required()
 def actualizar_cita(id):
-    cita = Cita.query.get(id)
+
+    current_user_email= get_jwt_identity()
+    current_user= User.query.filter_by(email=current_user_email).first()
+
+    cita = Cita.query.filter_by(id=id, user_id=current_user.id).first()
 
     if not cita:
         return jsonify({"error": "Cita no encontrada"}), 404
@@ -249,8 +298,13 @@ def actualizar_cita(id):
 # Delete Paciente
 
 @api.route('/paciente/<int:paciente_id>', methods=['DELETE'])
+@jwt_required()
 def eliminar_paciente(paciente_id):
-    eliminar = Paciente.query.get(paciente_id)
+
+    current_user_email= get_jwt_identity()
+    current_user= User.query.filter_by(email=current_user_email).first()
+
+    eliminar = Paciente.query.filter_by(id=paciente_id, user_id=current_user.id).first()
 
     if not eliminar: 
         return jsonify({"Error": "Paciente no encontrado"}), 404
@@ -269,8 +323,13 @@ def eliminar_paciente(paciente_id):
         }), 400
     
 @api.route('/cita/<int:id>', methods=['DELETE'])
+@jwt_required()
 def eliminar_cita(id):
-    eliminar = Cita.query.get(id)
+
+    current_user_email= get_jwt_identity()
+    current_user= User.query.filter_by(email=current_user_email).first()
+
+    eliminar = Cita.query.filter_by(id=id, user_id=current_user.id).first()
 
     if not eliminar:
         return jsonify({"error": "Cita no encontrada"}), 404

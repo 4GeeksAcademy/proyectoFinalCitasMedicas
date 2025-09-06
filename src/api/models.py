@@ -13,6 +13,10 @@ class User(db.Model):
     password: Mapped[str] = mapped_column(nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False)
 
+    #Relaciones uno-a-muchos
+    pacientes= relationship("Paciente", backref="user")
+    citas= relationship("Cita", backref="user")
+
 
     def serialize(self):
         return {
@@ -33,6 +37,8 @@ class Paciente(db.Model):
     estado: Mapped[str] = mapped_column(String(40), nullable=False)
     nota: Mapped[str] = mapped_column(String(400), nullable=True)
 
+    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'), nullable=False)
+
     def serialize(self):
         return {
             "id": self.id,
@@ -42,7 +48,8 @@ class Paciente(db.Model):
             "direccion": self.direccion,
             "ciudad": self.ciudad,
             "estado": self.estado,
-            "nota": self.nota
+            "nota": self.nota,
+            "user_id": self.user_id
         }
     
 class Cita(db.Model):
@@ -54,6 +61,8 @@ class Cita(db.Model):
     precio: Mapped[str] = mapped_column(String(20), nullable=False)
     estado_pago: Mapped[str] = mapped_column(String(20), nullable=False)
     nota: Mapped[str] = mapped_column(String(400), nullable=True)
+
+    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'), nullable=False)
 
     paciente: Mapped["Paciente"] = relationship("Paciente", backref="citas")
 
@@ -67,5 +76,6 @@ class Cita(db.Model):
             "modalidad": self.modalidad,
             "precio": self.precio,
             "estado_pago": self.estado_pago,
-            "nota": self.nota
+            "nota": self.nota,
+            "user_id": self.user_id
         }
