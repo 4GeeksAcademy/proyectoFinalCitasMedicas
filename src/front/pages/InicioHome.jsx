@@ -96,7 +96,7 @@ const crearFechaLocal = (fechaString, horaString = null) => {
     return new Date(year, month - 1, day);
 };
 
-// Función corregida para procesar los datos de las citas
+// Función para procesar los datos de las citas
 const procesarDatosCitas = (citas) => {
     const ahora = new Date();
     const lunesSemanaActual = obtenerLunesSemana(ahora);
@@ -107,7 +107,7 @@ const procesarDatosCitas = (citas) => {
     const citasDeHoy = citas.filter(cita => cita.fecha === fechaHoy);
     setCitasHoy(citasDeHoy.length);
 
-    // Encontrar próxima cita - CORREGIDO
+    // Encontrar próxima cita
     const citasFuturas = citas
         .filter(cita => {
             const fechaCita = crearFechaLocal(cita.fecha, cita.hora); // ✅ Usar función helper
@@ -147,7 +147,7 @@ const procesarDatosCitas = (citas) => {
     const totalSemanaActual = citasSemanaActual.reduce((total, dia) => total + dia.value, 0);
     
     const citasSemanaAnterior = citas.filter(cita => {
-        const fechaCita = crearFechaLocal(cita.fecha); // ✅ Usar función helper
+        const fechaCita = crearFechaLocal(cita.fecha); // Usar función helper
         const finSemanaAnterior = new Date(lunesSemanaActual);
         finSemanaAnterior.setDate(lunesSemanaActual.getDate() - 1);
         
@@ -161,11 +161,11 @@ const procesarDatosCitas = (citas) => {
     });
 };
 
-// Función corregida para formatear fecha y hora de la próxima cita
+// Función para formatear fecha y hora de la próxima cita
 const formatearProximaCita = (cita) => {
     if (!cita) return { fecha: '--', hora: '--', paciente: '--' };
     
-    const fecha = crearFechaLocal(cita.fecha); // ✅ Usar función helper
+    const fecha = crearFechaLocal(cita.fecha); // función helper
     
     const fechaFormateada = fecha.toLocaleDateString('es-ES', {
         day: 'numeric',
