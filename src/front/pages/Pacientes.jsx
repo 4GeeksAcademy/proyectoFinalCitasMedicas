@@ -20,12 +20,12 @@ export const Pacientes = () => {
     const [ordenamiento, setOrdenamiento] = useState("")
     const navigate = useNavigate();
 
-    
+
 
     // fetch get citas
     async function obtenerCitas() {
         try {
-            const token = localStorage.getItem('token'); 
+            const token = localStorage.getItem('token');
 
             if (!token) {
                 Navigate('/sing-in');
@@ -69,7 +69,7 @@ export const Pacientes = () => {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}` 
+                    "Authorization": `Bearer ${token}`
                 }
             });
 
@@ -111,9 +111,9 @@ export const Pacientes = () => {
             });
             if (!response.ok) {
                 const errorData = await response.json()
-                alert(errorData.Mensaje || errorData ||  'Error al eliminar el paciente')
+                alert(errorData.Mensaje || errorData || 'Error al eliminar el paciente')
             }
-            
+
             const data = await response.json();
             setPacientes(pacientesActuales => pacientesActuales.filter(paciente => paciente.id !== pacienteId));
             alert('Paciente eliminado con éxito')
@@ -171,18 +171,16 @@ export const Pacientes = () => {
     };
 
     useEffect(() => {
-
         const token = localStorage.getItem('token');
         if (!token) {
             navigate('/sing-in');
             return;
         }
-
         obtenerCitas();
         obtenerPacientes();
     }, [])
 
-    
+
 
     return (
         <div
@@ -210,6 +208,7 @@ export const Pacientes = () => {
                                             value={busqueda}
                                             onChange={(e) => { setBusqueda(e.target.value) }}
                                             style={{ height: '38px' }}
+
                                         />
                                     </div>
                                     <div>
@@ -248,21 +247,6 @@ export const Pacientes = () => {
 
                             {/* Filtros */}
                             <div className="d-flex justify-content-around my-3 h-50">
-
-                                <div className="bg-white rounded-5 p-3 text-dark">
-                                    <div className="form-floating ">
-                                        <select
-                                            className="form-select rounded-5"
-                                            id="floatingSelect"
-                                            aria-label="Floating label select example"
-                                                                                    >
-                                            <option value="">Todas las fechas</option>
-                                            <option value="1">Próximas</option>
-                                            <option value="2">Últimas</option>
-                                        </select>
-                                        <label htmlFor="floatingSelect">Fecha</label>
-                                    </div>
-                                </div>
                                 <div className="bg-white rounded-5 p-3 text-dark">
                                     <div className="form-floating ">
                                         <select
@@ -302,7 +286,7 @@ export const Pacientes = () => {
                                             </div>
                                         )}
                                         {pacientesOrdenados.map((paciente) => (
-                                                
+
                                             <div key={paciente.id} className="mt-2  border-bottom d-flex justify-content-between">
                                                 <div>
                                                     <p value={paciente.id} className="mb-2 ms-2"><strong>{paciente.nombre}</strong></p>
@@ -313,31 +297,69 @@ export const Pacientes = () => {
                                                 </div>
                                                 <div>
                                                     {/*Button modal*/}
-                                                    <button type="button" className="btn btn-outline-darkrounded-5" data-bs-toggle="modal" data-bs-target={`#modalNota-${paciente.id}`}>
+                                                    <button 
+                                                        type="button" 
+                                                        className="btn btn-outline-dark rounded-5 border-0" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target={`#modalNota-${paciente.id}`}
+                                                        
+                                                    >
                                                         <i className="fa-solid fa-circle-info fa-2x"></i>
                                                     </button>
 
                                                     {/* <!-- Modal --> */}
-                                                    <div className="modal fade" id={`modalNota-${paciente.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={`modalLabel-${paciente.id}`} aria-hidden="true">
+                                                    <div className="modal fade"
+                                                        id={`modalNota-${paciente.id}`}
+                                                        data-bs-backdrop="static"
+                                                        data-bs-keyboard="false"
+                                                        tabIndex="-1"
+                                                        aria-labelledby={`modalLabel-${paciente.id}`}
+                                                        
+                                                    >
                                                         <div className="modal-dialog modal-dialog-centered modal-lg h-100 position-fixed end-0 top-0 m-0"
-                                                         style={{ width: '600px', maxWidth: '600px' }}>
+                                                            style={{ width: '600px', maxWidth: '600px' }}>
                                                             <div className="modal-content rounded-5 d-flex flex-column" style={{ height: '100%', borderRadius: '0' }}>
                                                                 <div className="modal-header rounded-5">
                                                                     <h1 className="modal-title fs-5" id={`modalLabel-${paciente.id}`}><strong>{paciente.nombre}</strong> </h1>
 
-                                                                    <button type="button" className="btn-close rounded-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn-close rounded-5"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"
+                                                                        
+                                                                    >
+
+                                                                    </button>
                                                                 </div>
 
                                                                 {/* EMPIEZA ACA */}
                                                                 <div className="container flex-grow-1 overflow-auto">
                                                                     <ul className="nav nav-tabs mt-5" id="myTab" role="tablist">
                                                                         <li className="nav-item" role="presentation">
-                                                                            <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" style={{ color: "black" }}>
+                                                                            <button
+                                                                                className="nav-link active"
+                                                                                id="home-tab"
+                                                                                data-bs-toggle="tab"
+                                                                                data-bs-target="#home"
+                                                                                type="button"
+                                                                                role="tab"
+                                                                                style={{ color: "black" }}
+
+                                                                            >
                                                                                 <strong>Datos</strong>
                                                                             </button>
                                                                         </li>
                                                                         <li className="nav-item" role="presentation">
-                                                                            <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" style={{ color: "black" }}>
+                                                                            <button
+                                                                                className="nav-link"
+                                                                                id="profile-tab"
+                                                                                data-bs-toggle="tab"
+                                                                                data-bs-target="#profile"
+                                                                                type="button" role="tab"
+                                                                                style={{ color: "black" }}
+
+                                                                            >
                                                                                 <strong>Citas</strong>
                                                                             </button>
                                                                         </li>
@@ -365,51 +387,25 @@ export const Pacientes = () => {
                                                                                         <span>Dirección: </span>
                                                                                         <span><i className="fa-solid fa-location-dot me-2"></i>{paciente.direccion} <i className="fa-solid fa-tree-city mx-2"></i>{paciente.ciudad}</span>
                                                                                     </li>
-                                                                                    <h4><strong>Motivo de consulta:</strong></h4>
-                                                                                    <p><strong>Nota:</strong></p>
-                                                                                    <p className="bg-dark p-3 rounded-5 text-white">
-                                                                                        {paciente.nota || 'Sin notas adicionales'}
-                                                                                    </p>                                                                                    
                                                                                 </ul>
                                                                             </div>
                                                                         </div>
-
-                                        
-
                                                                         <div className="tab-pane fade" id="profile" role="tabpanel">
-                                                                            <h3><strong>Contenido de Pacientes</strong></h3>
-                                                                            
+                                                                            <h3 className="d-flex justify-content-center"><strong>Motivo de consulta</strong></h3>
                                                                             <div className="row g-1 mb-4 mt-2">
-                                                                                <div className="col-12 col-lg-4">
-                                                                                    <div className="dropdown w-100">
-                                                                                        <button className="btn btn-dark dropdown-toggle w-100 py-3 rounded-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                                            <span><strong>Todas las citas</strong></span>
-                                                                                        </button>
-                                                                                
-                                                                                        <ul className="dropdown-menu w-100">
-                                                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar por fecha</a></li>
-                                                                                            <li><a className="dropdown-item bg-dark text-white" href="#">Ordenar por actividad</a></li>
-                                                                                        </ul>
+                                                                                <div className="d-flex justify-content-center">
+                                                                                </div>
+                                                                                <div className="p-3 bg-dark text-white rounded-5 text-start mt-2 h-100">
+                                                                                    <p><strong>Nota</strong></p>
+                                                                                    <div> <strong><p >
+                                                                                        {paciente.nota || 'Sin notas adicionales'}</p></strong>
                                                                                     </div>
                                                                                 </div>
-
-                                                                                
-                                                                                    
-                                                                                <div className="p-3 bg-dark text-white rounded-5 text-start mt-2 h-100">
-
-                                                                                        <div>{}</div>
-                                                                                    <div> <strong> {}</strong></div>
-                                                                                    <div></div>
-                                                                                </div>
-                                                                               
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 {/* TERMINA ACA */}
-
-                                                                
                                                                 <div className="modal-footer rounded-5 d-flex align-items-end">
                                                                     <Link to={`/editar-paciente/${paciente.id}`}>
                                                                         <button type="button" className="btn btn-dark rounded-5" data-bs-dismiss="modal">Editar</button>
@@ -426,8 +422,8 @@ export const Pacientes = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                           </div>
-                                        ))} 
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>

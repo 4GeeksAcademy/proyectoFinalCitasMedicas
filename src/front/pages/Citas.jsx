@@ -301,7 +301,7 @@ export const Citas = () => {
                                                     </button>
 
                                                     {/* <!-- Modal --> */}
-                                                    <div className="modal fade" id={`modalNota-${cita.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={`modalLabel-${cita.id}`} aria-hidden="true">
+                                                    <div className="modal fade" id={`modalNota-${cita.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby={`modalLabel-${cita.id}`} >
                                                         <div className="modal-dialog modal-dialog-centered">
                                                             <div className="modal-content rounded-5">
                                                                 <div className="modal-header rounded-5">

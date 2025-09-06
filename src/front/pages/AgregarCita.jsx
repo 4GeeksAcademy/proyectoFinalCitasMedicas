@@ -113,9 +113,12 @@ export const AgregarCita = () => {
     }
 
     useEffect(() => {
-
+        const token = localStorage.getItem('token');
+        if(!token) {
+            navigate('/sing-in')
+        }
         obtenerPacientes();
-    }, [])
+    }, [navigate])
 
     return (
         <div

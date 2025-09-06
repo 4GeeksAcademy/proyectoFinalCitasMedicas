@@ -1,6 +1,6 @@
 import { Navbar2 } from "../components/Navbar2"
 import { Link, useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export const AgregarPaciente = () => {
 
@@ -14,8 +14,6 @@ export const AgregarPaciente = () => {
         nota: ''
     });
     const navigate = useNavigate();
-
-    const token = localStorage.getItem('token');
 
     const handleInputChange = (campo, valor) => {
         setPacienteData(prevData => ({
@@ -84,6 +82,13 @@ export const AgregarPaciente = () => {
             throw error;
         }
     }
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if(!token){
+            navigate('/sing-in')
+        }
+    }, [navigate])
 
     return (
         <div

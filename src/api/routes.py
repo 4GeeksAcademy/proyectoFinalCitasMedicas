@@ -107,7 +107,7 @@ def obtener_citas():
         cita.serialize() for cita in citas
     ]), 200
 #NUEVO
-@api.route('/cita/<int:id>', methods=['GET'])  # ← Mismo path pero método GET
+@api.route('/cita/<int:id>', methods=['GET'])
 @jwt_required()
 def obtener_cita_individual(id):
     current_user_email = get_jwt_identity()

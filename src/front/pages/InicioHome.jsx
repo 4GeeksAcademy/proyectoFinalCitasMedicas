@@ -1,8 +1,11 @@
+import { useEffect } from "react";
 import { Navbar2 } from "../components/Navbar2"
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const InicioHome = () => {
 
+    const navigate = useNavigate()
     const { store } = useGlobalReducer()
 
     const fecha = new Date()
@@ -12,6 +15,13 @@ export const InicioHome = () => {
         month: 'long',
         day: 'numeric',
     });
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if(!token) {
+            navigate('/sing-in')
+        }
+    }, [navigate])
 
     return (
         <div
