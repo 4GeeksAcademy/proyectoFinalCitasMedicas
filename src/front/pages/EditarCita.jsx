@@ -20,17 +20,27 @@ export const EditarCita = () => {
     const [paciente, setPaciente] = useState([])
 
 
+
+
 //traer citas
     async function cargarCitas(citaId) {
         try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita/${citaId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
             
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita/${citaId}`);
-            
+             
+        console.log('📋 Status Text:', response.statusText);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            
             const cita = await response.json();
+            
             setCitaData({
                 paciente_id: cita.paciente_id || '',
                 fecha: cita.fecha || '',
@@ -70,10 +80,12 @@ export const EditarCita = () => {
         // fetch para actulizar cita
         async function actualizarCita(citaData) {
             try {
+                const token = localStorage.getItem('token');
                 const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita/${id}`, {
                     method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(citaData)
             });
@@ -94,7 +106,15 @@ export const EditarCita = () => {
     // Fetchs para obtener pacientes
     async function obtenerPacientes(){
         try{
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`);
+            const token = localStorage.getItem('token');
+
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
             
             if (!response.ok){
                 throw new Error(`HTTP Error! status: ${response.status}`)

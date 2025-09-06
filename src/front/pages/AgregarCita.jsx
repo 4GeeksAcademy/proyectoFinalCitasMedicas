@@ -62,10 +62,12 @@ export const AgregarCita = () => {
 // fetch para crear cita
     async function crearCita(citaData) {
         try {
+            const token = localStorage.getItem('token');
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(citaData)
             });
@@ -87,7 +89,14 @@ export const AgregarCita = () => {
 // Fetchs para obtener pacientes
     async function obtenerPacientes(){
         try{
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`);
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`, {
+                method: 'GET',
+                headers: {
+                    "Content-type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
             
             if (!response.ok){
                 throw new Error(`HTTP Error! status: ${response.status}`)
@@ -104,6 +113,7 @@ export const AgregarCita = () => {
     }
 
     useEffect(() => {
+
         obtenerPacientes();
     }, [])
 

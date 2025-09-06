@@ -15,6 +15,8 @@ export const AgregarPaciente = () => {
     });
     const navigate = useNavigate();
 
+    const token = localStorage.getItem('token');
+
     const handleInputChange = (campo, valor) => {
         setPacienteData(prevData => ({
             ...prevData,
@@ -25,6 +27,7 @@ export const AgregarPaciente = () => {
     // console.log('Paciente Data:', pacienteData);
 
     const crearPacienteButton = () => {
+        
 
         if(!pacienteData.nombre || !pacienteData.telefono || 
             !pacienteData.email || !pacienteData.direccion || 
@@ -57,10 +60,12 @@ export const AgregarPaciente = () => {
 
     async function crearPaciente(pacienteData){
         try{
+            const token = localStorage.getItem('token');
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(pacienteData)
             });

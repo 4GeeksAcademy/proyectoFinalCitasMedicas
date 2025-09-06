@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { Navbar2 } from "../components/Navbar2"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { func } from "prop-types";
+
 
 export const Pacientes = () => {
 
@@ -17,11 +18,27 @@ export const Pacientes = () => {
     const [pacientes, setPacientes] = useState([])
     const [busqueda, setBusqueda] = useState("")
     const [ordenamiento, setOrdenamiento] = useState("")
+    const navigate = useNavigate();
+
+    
 
     // fetch get citas
     async function obtenerCitas() {
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita`)
+            const token = localStorage.getItem('token'); 
+
+            if (!token) {
+                Navigate('/sing-in');
+                return;
+            }
+
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita`, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            })
 
             if (!response.ok) {
                 throw new Error(`HTTP Error! status: ${response.status}`)
@@ -41,7 +58,20 @@ export const Pacientes = () => {
     // fetch get pacientes
     async function obtenerPacientes() {
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`);
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                Navigate('/sing-in');
+                return;
+            }
+
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}` 
+                }
+            });
 
             if (!response.ok) {
                 throw new Error(`HTTP Error! status: ${response.status}`)
@@ -61,7 +91,13 @@ export const Pacientes = () => {
     // fetch eliminar paciente
     async function eliminarPaciente(pacienteId) {
         try {
-            
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                Navigate('/sing-in');
+                return;
+            }
+
             const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este paciente?')
             if (!confirmacion) {
                 return
@@ -70,6 +106,7 @@ export const Pacientes = () => {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`
                 }
             });
             if (!response.ok) {
@@ -134,6 +171,13 @@ export const Pacientes = () => {
     };
 
     useEffect(() => {
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/sing-in');
+            return;
+        }
+
         obtenerCitas();
         obtenerPacientes();
     }, [])

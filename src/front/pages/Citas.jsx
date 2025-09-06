@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Navbar2 } from "../components/Navbar2"
 import { Link } from "react-router-dom";
 import { func } from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 export const Citas = () => {
 
@@ -18,11 +19,20 @@ export const Citas = () => {
     const [busqueda, setBusqueda] = useState("")
     const [ordenamiento, setOrdenamiento] = useState("")
     const [ordenamientoFecha, setOrdenamientoFecha] = useState("")
+    const navigate = useNavigate()
 
     // fetch get citas
     async function obtenerCitas() {
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita`)
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita`, {
+                method: 'GET',
+                headers: {
+                    "Content-type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+
+            })
 
             if (!response.ok) {
                 throw new Error(`HTTP Error! status: ${response.status}`)
@@ -42,7 +52,14 @@ export const Citas = () => {
     // fetch get pacientes
     async function obtenerPacientes() {
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`);
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente`, {
+                method: 'GET',
+                headers: {
+                    "Content-type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            })
 
             if (!response.ok) {
                 throw new Error(`HTTP Error! status: ${response.status}`)
@@ -62,6 +79,7 @@ export const Citas = () => {
     // fetch eliminar cita
     async function eliminarCita(citaId) {
         try {
+            const token = localStorage.getItem('token');
             const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar esta cita?')
             if (!confirmacion) {
                 return
@@ -70,6 +88,7 @@ export const Citas = () => {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`
                 }
             });
             if (!response.ok) {
@@ -91,30 +110,30 @@ export const Citas = () => {
     const citasFiltradas = citas.filter(cita =>
         cita.paciente_nombre.toLowerCase().includes(busqueda.toLowerCase()))
 
-// Ordenar por nombre y fecha
+    // Ordenar por nombre y fecha
 
-const citasOrdenadas = [...citasFiltradas].sort((a, b) => {
-    let resultado= 0;
-    
-    if (ordenamientoFecha === "1") {
-        resultado = new Date(a.fecha) - new Date(b.fecha);
-    } else if (ordenamientoFecha === "2") {
-        resultado = new Date(b.fecha) - new Date(a.fecha);
-    }
-    
-    if (ordenamiento !== "" ) {    
-        if (ordenamiento === "1") { 
-            if (a.paciente_nombre < b.paciente_nombre) resultado = -1;
-            if (a.paciente_nombre > b.paciente_nombre) resultado = 1;
-            
-        } else if (ordenamiento === "2") {
-            if (a.paciente_nombre > b.paciente_nombre) resultado = -1;
-            if (a.paciente_nombre < b.paciente_nombre) resultado = 1;      
+    const citasOrdenadas = [...citasFiltradas].sort((a, b) => {
+        let resultado = 0;
+
+        if (ordenamientoFecha === "1") {
+            resultado = new Date(a.fecha) - new Date(b.fecha);
+        } else if (ordenamientoFecha === "2") {
+            resultado = new Date(b.fecha) - new Date(a.fecha);
         }
-    }
-    return resultado;
-    
-});
+
+        if (ordenamiento !== "") {
+            if (ordenamiento === "1") {
+                if (a.paciente_nombre < b.paciente_nombre) resultado = -1;
+                if (a.paciente_nombre > b.paciente_nombre) resultado = 1;
+
+            } else if (ordenamiento === "2") {
+                if (a.paciente_nombre > b.paciente_nombre) resultado = -1;
+                if (a.paciente_nombre < b.paciente_nombre) resultado = 1;
+            }
+        }
+        return resultado;
+
+    });
 
     // contar estados de pacientes
     const contarTotal = pacientes.length;
@@ -132,6 +151,12 @@ const citasOrdenadas = [...citasFiltradas].sort((a, b) => {
 
 
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/sing-in');
+            return;
+        }
+
         obtenerCitas();
         obtenerPacientes();
     }, [])
@@ -209,7 +234,7 @@ const citasOrdenadas = [...citasFiltradas].sort((a, b) => {
                                             aria-label="Floating label select example"
                                             value={ordenamientoFecha}
                                             onChange={(e) => setOrdenamientoFecha(e.target.value)}
-                                            >
+                                        >
                                             <option value="">Todas las fechas</option>
                                             <option value="1">Próximas</option>
                                             <option value="2">Últimas</option>

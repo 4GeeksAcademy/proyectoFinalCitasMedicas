@@ -106,7 +106,23 @@ def obtener_citas():
     return jsonify([
         cita.serialize() for cita in citas
     ]), 200
+#NUEVO
+@api.route('/cita/<int:id>', methods=['GET'])  # ← Mismo path pero método GET
+@jwt_required()
+def obtener_cita_individual(id):
+    current_user_email = get_jwt_identity()
+    current_user = User.query.filter_by(email=current_user_email).first()
 
+    if not current_user:
+        return jsonify({"error": "Usuario no encontrado"}), 404
+
+    # Buscar la cita que pertenezca al usuario actual
+    cita = Cita.query.filter_by(id=id, user_id=current_user.id).first()
+
+    if not cita:
+        return jsonify({"error": "Cita no encontrada"}), 404
+
+    return jsonify(cita.serialize()), 200
 
 # obtener paciente por id SI PERTENECE AL USUARIO
 @api.route('/paciente/<int:paciente_id>', methods=['GET'])
@@ -264,7 +280,7 @@ def actualizar_paciente(paciente_id):
 
 #PUT cita SI PERTENECE AL USUARIO
 
-@api.route('/cita/<id>', methods=['PUT'])
+@api.route('/cita/<int:id>', methods=['PUT'])
 @jwt_required()
 def actualizar_cita(id):
 

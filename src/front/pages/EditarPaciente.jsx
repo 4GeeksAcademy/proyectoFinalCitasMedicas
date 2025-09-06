@@ -21,8 +21,15 @@ export const EditarPaciente = () => {
     //traer cita por id
       async function cargarPaciente(pacienteId) {
         try {
-            
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente/${pacienteId}`);
+            const token = localStorage.getItem('token');
+
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente/${pacienteId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -74,10 +81,12 @@ export const EditarPaciente = () => {
 
     async function actualizarPaciente(pacienteData){
         try{
+            const token = localStorage.getItem('token');
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente/${id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(pacienteData)
             });
