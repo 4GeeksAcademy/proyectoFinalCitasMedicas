@@ -35,7 +35,7 @@ export const EditarCita = () => {
             });
             
              
-        console.log('📋 Status Text:', response.statusText);
+        
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
