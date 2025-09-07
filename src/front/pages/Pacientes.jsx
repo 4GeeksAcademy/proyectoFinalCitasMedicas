@@ -20,6 +20,23 @@ export const Pacientes = () => {
     const [ordenamiento, setOrdenamiento] = useState("")
     const navigate = useNavigate();
 
+    // Modal event handlers to fix aria-hidden accessibility issue
+    const handleModalEvents = () => {
+        // Add event listeners for all modals
+        pacientes.forEach(paciente => {
+            const modalElement = document.getElementById(`modalNota-${paciente.id}`);
+            if (modalElement) {
+                // When modal is about to hide, remove focus from any focused element inside
+                modalElement.addEventListener('hide.bs.modal', () => {
+                    const focusedElement = modalElement.querySelector(':focus');
+                    if (focusedElement) {
+                        focusedElement.blur();
+                    }
+                });
+            }
+        });
+    };
+
 
 
     // fetch get citas
@@ -180,6 +197,16 @@ export const Pacientes = () => {
         obtenerPacientes();
     }, [])
 
+    // Add effect to handle modal events after pacientes are loaded
+    useEffect(() => {
+        if (pacientes.length > 0) {
+            // Small delay to ensure DOM is updated
+            setTimeout(() => {
+                handleModalEvents();
+            }, 100);
+        }
+    }, [pacientes])
+
 
 
     return (
@@ -314,7 +341,8 @@ export const Pacientes = () => {
                                                         data-bs-keyboard="false"
                                                         tabIndex="-1"
                                                         aria-labelledby={`modalLabel-${paciente.id}`}
-                                                        
+                                                        aria-describedby={`modalDesc-${paciente.id}`}
+                                                        role="dialog"
                                                     >
                                                         <div className="modal-dialog modal-dialog-centered modal-lg h-100 position-fixed end-0 top-0 m-0"
                                                             style={{ width: '600px', maxWidth: '600px' }}>
@@ -327,23 +355,28 @@ export const Pacientes = () => {
                                                                         className="btn-close rounded-5"
                                                                         data-bs-dismiss="modal"
                                                                         aria-label="Close"
-                                                                        
+                                                                        onClick={(e) => {
+                                                                            // Remove focus before modal closes to prevent aria-hidden accessibility issue
+                                                                            e.target.blur();
+                                                                        }}
                                                                     >
 
                                                                     </button>
                                                                 </div>
 
                                                                 {/* EMPIEZA ACA */}
-                                                                <div className="container flex-grow-1 overflow-auto">
-                                                                    <ul className="nav nav-tabs mt-5" id="myTab" role="tablist">
+                                                                <div className="container flex-grow-1 overflow-auto" id={`modalDesc-${paciente.id}`}>
+                                                                    <ul className="nav nav-tabs mt-5" id={`myTab-${paciente.id}`} role="tablist">
                                                                         <li className="nav-item" role="presentation">
                                                                             <button
                                                                                 className="nav-link active"
-                                                                                id="home-tab"
+                                                                                id={`home-tab-${paciente.id}`}
                                                                                 data-bs-toggle="tab"
-                                                                                data-bs-target="#home"
+                                                                                data-bs-target={`#home-${paciente.id}`}
                                                                                 type="button"
                                                                                 role="tab"
+                                                                                aria-controls={`home-${paciente.id}`}
+                                                                                aria-selected="true"
                                                                                 style={{ color: "black" }}
 
                                                                             >
@@ -353,10 +386,13 @@ export const Pacientes = () => {
                                                                         <li className="nav-item" role="presentation">
                                                                             <button
                                                                                 className="nav-link"
-                                                                                id="profile-tab"
+                                                                                id={`profile-tab-${paciente.id}`}
                                                                                 data-bs-toggle="tab"
-                                                                                data-bs-target="#profile"
-                                                                                type="button" role="tab"
+                                                                                data-bs-target={`#profile-${paciente.id}`}
+                                                                                type="button" 
+                                                                                role="tab"
+                                                                                aria-controls={`profile-${paciente.id}`}
+                                                                                aria-selected="false"
                                                                                 style={{ color: "black" }}
 
                                                                             >
@@ -364,8 +400,8 @@ export const Pacientes = () => {
                                                                             </button>
                                                                         </li>
                                                                     </ul>
-                                                                    <div className="tab-content mt-5" id="myTabContent">
-                                                                        <div className="tab-pane fade show active" id="home" role="tabpanel">
+                                                                    <div className="tab-content mt-5" id={`myTabContent-${paciente.id}`}>
+                                                                        <div className="tab-pane fade show active" id={`home-${paciente.id}`} role="tabpanel" aria-labelledby={`home-tab-${paciente.id}`}>
                                                                             <h4><strong>Datos del paciente</strong></h4>
                                                                             <div className="p-3 mt-2">
                                                                                 <ul className="list-group list-group-flush">
@@ -390,7 +426,7 @@ export const Pacientes = () => {
                                                                                 </ul>
                                                                             </div>
                                                                         </div>
-                                                                        <div className="tab-pane fade" id="profile" role="tabpanel">
+                                                                        <div className="tab-pane fade" id={`profile-${paciente.id}`} role="tabpanel" aria-labelledby={`profile-tab-${paciente.id}`}>
                                                                             <h3 className="d-flex justify-content-center"><strong>Motivo de consulta</strong></h3>
                                                                             <div className="row g-1 mb-4 mt-2">
                                                                                 <div className="d-flex justify-content-center">
@@ -408,12 +444,26 @@ export const Pacientes = () => {
                                                                 {/* TERMINA ACA */}
                                                                 <div className="modal-footer rounded-5 d-flex align-items-end">
                                                                     <Link to={`/editar-paciente/${paciente.id}`}>
-                                                                        <button type="button" className="btn btn-dark rounded-5" data-bs-dismiss="modal">Editar</button>
+                                                                        <button 
+                                                                            type="button" 
+                                                                            className="btn btn-dark rounded-5" 
+                                                                            data-bs-dismiss="modal"
+                                                                            onClick={(e) => {
+                                                                                // Remove focus before modal closes
+                                                                                e.target.blur();
+                                                                            }}
+                                                                        >
+                                                                            Editar
+                                                                        </button>
                                                                     </Link>
                                                                     <button type="button"
                                                                         className="btn btn-outline-danger rounded-5"
                                                                         data-bs-dismiss="modal"
-                                                                        onClick={() => eliminarPaciente(paciente.id)}
+                                                                        onClick={(e) => {
+                                                                            // Remove focus before modal closes and action
+                                                                            e.target.blur();
+                                                                            eliminarPaciente(paciente.id);
+                                                                        }}
                                                                     >
                                                                         <i className="fa-solid fa-trash me-2"></i>Eliminar
                                                                     </button>
