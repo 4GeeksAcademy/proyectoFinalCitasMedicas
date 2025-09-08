@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Navbar2 } from "../components/Navbar2"
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { toast } from 'react-hot-toast'
 
 
 export const AgregarCita = () => {
@@ -43,12 +44,14 @@ export const AgregarCita = () => {
         if(!citaData.paciente_id || !citaData.fecha || 
             !citaData.hora || !citaData.modalidad || 
             !citaData.precio || !citaData.estado_pago) {
-            alert('Por favor, completa todos los campos.')
+            toast.error('Por favor, completa todos los campos.')
+
+            return;
         }
         try{
             const resultado = crearCita(citaData);
             console.log('Cita creada', resultado)
-            alert('Cita creada con exito')
+            toast.success('Cita creada con exito')
             limpiarFormulario();
             
 

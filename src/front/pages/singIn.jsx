@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-hot-toast'
 
 
 
@@ -50,7 +51,7 @@ const SingIn = () => {
             localStorage.setItem('name', data.name)
 
 
-            alert('Tienes acceso')
+            toast.success('Tienes acceso')
             navigate(`/inicio-home`)
 
             return data;

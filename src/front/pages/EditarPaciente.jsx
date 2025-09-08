@@ -2,6 +2,7 @@ import { Navbar2 } from "../components/Navbar2"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState } from "react"
 import { useEffect } from "react"
+import toast, { Toaster } from "react-hot-toast"
 
 export const EditarPaciente = () => {
 
@@ -64,16 +65,16 @@ export const EditarPaciente = () => {
         if(!pacienteData.nombre || !pacienteData.telefono || 
             !pacienteData.email || !pacienteData.direccion || 
             !pacienteData.ciudad || !pacienteData.estado) {
-                alert('Por favor, completa los campos obligatorios.')
-                return;
+                toast.error('Por favor, completa los campos obligatorios.')
+            return;
             }    
         try{
             const resultado = await actualizarPaciente(pacienteData)
-            alert('Paciente actualizado con éxito')
+            toast.success('Paciente actualizado con éxito')
             navigate('/pacientes')
             
         } catch(error){
-            alert(`Error: ${error.message}`)
+            toast.error(`Error: ${error.message}`)
         }
     }
     
