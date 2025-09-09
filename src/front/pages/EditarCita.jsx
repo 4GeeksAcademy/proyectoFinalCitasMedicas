@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Navbar2 } from "../components/Navbar2"
 import { Link, useParams, useNavigate} from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 
 export const EditarCita = () => {
@@ -63,16 +64,18 @@ export const EditarCita = () => {
         if(!citaData.paciente_id || !citaData.fecha || 
             !citaData.hora || !citaData.modalidad || 
             !citaData.precio || !citaData.estado_pago) {
-                alert('Por favor, completa todos los campos.')
+            toast.error('Por favor, completa todos los campos.')
+
+            return;
             }
             try{
                 const resultado = await actualizarCita(citaData);
-                alert('Cita editada con exito')
+                toast.success('Cita editada con exito')
                 navigate('/citas')
                 return resultado
             } catch(error) {
                 console.error()
-                alert(`Error: ${error.message}`)
+                toast.error(`Error: ${error.message}`)
             }
             
         }

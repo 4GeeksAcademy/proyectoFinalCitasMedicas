@@ -3,6 +3,7 @@ import { Navbar2 } from "../components/Navbar2"
 import { Link } from "react-router-dom";
 import { func } from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 
 export const Citas = () => {
 
@@ -76,33 +77,81 @@ export const Citas = () => {
     }
 
 
-    // fetch eliminar cita
-    async function eliminarCita(citaId) {
-        try {
-            const token = localStorage.getItem('token');
-            const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar esta cita?')
-            if (!confirmacion) {
-                return
+        const confirmToast = (message, onConfirm) => {
+        const toastId = toast(
+            (t) => (
+                <div className="text-center">
+                    <p className="mb-3">{message}</p>
+                    <div className="d-flex gap-2 justify-content-center">
+                        <button
+                            className="btn btn-sm btn-outline-secondary rounded-5"
+                            onClick={() => toast.dismiss(toastId)}
+                        >
+                            No
+                        </button>
+                        <button
+                            className="btn btn-sm btn-danger rounded-5"
+                            onClick={() => {
+                                toast.dismiss(toastId);
+                                onConfirm();
+                            }}
+                        >
+                            Sí
+                        </button>
+                    </div>
+                </div>
+            ),
+            {
+                duration: Infinity,
+                className: 'rounded-5'
             }
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita/${citaId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-            if (!response.ok) {
-                throw new Error(`HTTP Error! sataus: ${response.status}`);
-            }
-            const data = await response.json();
+        );
+    };
 
-            setCitas(citasActuales => citasActuales.filter(cita => cita.id !== citaId));
-            alert('Cita eliminada con éxito')
-
-        } catch (error) {
-            console.error(`Error eliminando: `, error);
+   // fetch eliminar cita
+async function eliminarCita(citaId) {
+    try {
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+            navigate('/sing-in');
+            return;
         }
+
+        confirmToast(
+            '¿Estás seguro de que quieres eliminar esta cita?',
+            async () => {
+                try {
+                    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cita/${citaId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({}));
+                        throw new Error(errorData.message || `HTTP Error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    setCitas(citasActuales => citasActuales.filter(cita => cita.id !== citaId));
+                    toast.success('Cita eliminada con éxito');
+                    
+                } catch (error) {
+                    console.error('Error eliminando cita:', error);
+                    toast.error(error.message || 'Error al eliminar la cita');
+                }
+            }
+        );
+
+    } catch (error) {
+        console.error('Error en eliminarCita:', error);
+        toast.error('Error al procesar la solicitud');
     }
+}
 
     // FILTROS
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Navbar2 } from "../components/Navbar2"
 import { Link, useNavigate } from "react-router-dom";
 import { func } from "prop-types";
+import { Toaster, toast } from "react-hot-toast";
 
 
 export const Pacientes = () => {
@@ -104,41 +105,81 @@ export const Pacientes = () => {
         }
     }
 
+    const confirmToast = (message, onConfirm) => {
+        const toastId = toast(
+            (t) => (
+                <div className="text-center">
+                    <p className="mb-3">{message}</p>
+                    <div className="d-flex gap-2 justify-content-center">
+                        <button
+                            className="btn btn-sm btn-outline-secondary rounded-5"
+                            onClick={() => toast.dismiss(toastId)}
+                        >
+                            No
+                        </button>
+                        <button
+                            className="btn btn-sm btn-danger rounded-5"
+                            onClick={() => {
+                                toast.dismiss(toastId);
+                                onConfirm();
+                            }}
+                        >
+                            Sí
+                        </button>
+                    </div>
+                </div>
+            ),
+            {
+                duration: Infinity,
+                className: 'rounded-5'
+            }
+        );
+    };
 
     // fetch eliminar paciente
-    async function eliminarPaciente(pacienteId) {
-        try {
-            const token = localStorage.getItem('token');
+async function eliminarPaciente(pacienteId) {
+    try {
+        const token = localStorage.getItem('token');
 
-            if (!token) {
-                Navigate('/sing-in');
-                return;
-            }
-
-            const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este paciente?')
-            if (!confirmacion) {
-                return
-            }
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente/${pacienteId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-            if (!response.ok) {
-                const errorData = await response.json()
-                alert(errorData.Mensaje || errorData || 'Error al eliminar el paciente')
-            }
-
-            const data = await response.json();
-            setPacientes(pacientesActuales => pacientesActuales.filter(paciente => paciente.id !== pacienteId));
-            alert('Paciente eliminado con éxito')
-
-        } catch (error) {
-            console.error(`Error eliminando: `, error);
+        if (!token) {
+            navigate('/sing-in');
+            return;
         }
+
+        confirmToast(
+            '¿Estás seguro de que quieres eliminar este paciente?',
+            
+            async () => {
+                try {
+                    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/paciente/${pacienteId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        toast.error(errorData.Mensaje || errorData || 'Error al eliminar el paciente');
+                        return;
+                    }
+
+                    const data = await response.json();
+                    setPacientes(pacientesActuales => pacientesActuales.filter(paciente => paciente.id !== pacienteId));
+                    toast.success('Paciente eliminado con éxito');
+                    
+                } catch (error) {
+                    console.error('Error eliminando:', error);
+                    toast.error('Error al eliminar el paciente');
+                }
+            }
+        );
+
+    } catch (error) {
+        console.error(`Error eliminando: `, error);
     }
+}
 
     // FILTROS
 
@@ -324,12 +365,12 @@ export const Pacientes = () => {
                                                 </div>
                                                 <div>
                                                     {/*Button modal*/}
-                                                    <button 
-                                                        type="button" 
-                                                        className="btn btn-outline-dark rounded-5 border-0" 
-                                                        data-bs-toggle="modal" 
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-outline-dark rounded-5 border-0"
+                                                        data-bs-toggle="modal"
                                                         data-bs-target={`#modalNota-${paciente.id}`}
-                                                        
+
                                                     >
                                                         <i className="fa-solid fa-circle-info fa-2x"></i>
                                                     </button>
@@ -355,6 +396,7 @@ export const Pacientes = () => {
                                                                         className="btn-close rounded-5"
                                                                         data-bs-dismiss="modal"
                                                                         aria-label="Close"
+
                                                                         onClick={(e) => {
                                                                             // Remove focus before modal closes to prevent aria-hidden accessibility issue
                                                                             e.target.blur();

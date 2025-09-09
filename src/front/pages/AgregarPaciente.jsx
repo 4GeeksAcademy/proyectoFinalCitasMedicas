@@ -1,6 +1,7 @@
 import { Navbar2 } from "../components/Navbar2"
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
+import toast, { Toaster } from "react-hot-toast"
 
 export const AgregarPaciente = () => {
 
@@ -30,12 +31,14 @@ export const AgregarPaciente = () => {
         if(!pacienteData.nombre || !pacienteData.telefono || 
             !pacienteData.email || !pacienteData.direccion || 
             !pacienteData.ciudad || !pacienteData.estado) {
-                alert('Por favor, completa los campos obligatorios.')
+            toast.error('Por favor, completa los campos obligatorios.')
+
+            return;
             }    
     try{
         const resultado = crearPaciente(pacienteData)
         console.log('Paciente creado:', resultado)
-        alert('Paciente creado con éxito')
+        toast.success('Paciente creado con éxito')
 
         setPacienteData({
             nombre: '',
