@@ -61,6 +61,14 @@ export const Navbar2 = () => {
                             <i className="fa-regular fa-calendar-check me-2"></i>Calendario
                         </Link>
                     </li>
+                    <li>
+                        <Link to="/finanzas" className="logout-btn">
+                            <svg className="bi me-2" width="16" height="16">
+                                <use xlinkHref="#people-circle"></use>
+                            </svg>
+                            <i className="fas fa-sack-dollar me-2"></i>Finanzas
+                        </Link>
+                    </li>
                     <li className="my-3">
                         <span className="fs-6 ms-3 ">Opciones</span>
                     </li>

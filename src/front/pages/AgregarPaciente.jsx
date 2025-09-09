@@ -49,9 +49,10 @@ export const AgregarPaciente = () => {
             estado: '',
             nota: ''
         })
+        navigate('/pacientes')
    
     } catch(error){
-        alert(`Error: ${error.message}`)
+        toast.error(`Error: ${error.message}`)
     }
 
 

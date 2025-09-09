@@ -55,16 +55,9 @@ const Calendario = () => {
           <div className="calendar-grid">
             <div className="day" ><span className="day-number">1</span></div>
             <div className="day">
-              <button
-                type="button"
-                className="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#modalDay2"
-              >
                 <span className="day-number">2</span>
                 <div className="event">Andrés Beltrán 1:00pm</div>
                 <div className="event">Camilo Betancurth 3:00pm</div>
-              </button>
             </div>
             <div className="day" ><span className="day-number">3</span></div>
             <div className="day" ><span className="day-number">4</span></div>
