@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { useNavigate, Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const PaginaRegistrate = () => {
 
@@ -26,10 +27,8 @@ const PaginaRegistrate = () => {
   const registrar = async (e) => {
     e.preventDefault();
 
-    console.log('Datos del usuario:', datosUsuarios);
-
     if (!datosUsuarios.name || !datosUsuarios.phone || !datosUsuarios.email || !datosUsuarios.password) {
-      alert("Todos los campos son requeridos")
+      toast.error("Todos los campos son requeridos")
       return;
     }
 
@@ -51,7 +50,7 @@ const PaginaRegistrate = () => {
 
       localStorage.setItem('nuevoUsuarioName', datosUsuarios.name);
 
-      alert('Registro exitoso. Ahora puedes iniciar sesión.')
+      toast.success('Registro exitoso. Ahora puedes iniciar sesión.')
       navigate('/sing-in')
     } else {
       const error = await response.json();

@@ -27,6 +27,11 @@ const SingIn = () => {
     const autorizar = async (e) => {
         e.preventDefault();
 
+        if (!credenciales.email || !credenciales.password) {
+            toast.error('Por favor, complete todos los campos');
+            return;
+        }
+
         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/login`, {
             method: 'POST',
             headers: {
@@ -51,10 +56,14 @@ const SingIn = () => {
             localStorage.setItem('name', data.name)
 
 
-            toast.success('Tienes acceso')
+            toast.success('¡Bienvenido! Acceso concedido')
             navigate(`/inicio-home`)
 
             return data;
+        } else {
+            if(response.status === 401){
+                toast.error('Credenciales incorrectas: Verifique su usuario y contraseña')
+            }
         }
 
     }
