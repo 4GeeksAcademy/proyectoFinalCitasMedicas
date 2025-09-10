@@ -5,8 +5,8 @@ export const Finanzas = () => {
     const [tabActivo, setTabActivo] = useState('dia');
     const [citas, setCitas] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [busqueda, setBusqueda] = useState("")
 
-    // Cargar datos desde la API
     useEffect(() => {
         const cargarCitas = async () => {
             try {
@@ -31,11 +31,11 @@ export const Finanzas = () => {
         cargarCitas();
     }, []);
 
-  const citasHoy = obtenerCitasHoy(citas);
+const citasHoy = obtenerCitasHoy(citas);
 const citasSemana = obtenerCitasEstaSemana(citas);
 const citasMes = obtenerCitasEsteMes(citas);
 
-// Función simplificada que evita problemas de zona horaria
+
 function obtenerCitasHoy(citas) {
     const hoy = new Date().toLocaleDateString('en-CA'); // Formato YYYY-MM-DD
     return citas.filter(cita => cita.fecha === hoy);
@@ -66,6 +66,20 @@ function obtenerCitasEsteMes(citas) {
         return año === añoActual && mes === mesActual;
     });
 }
+    //Search
+    const citasFiltradas = () => {
+    let citasBase = [];
+    switch(tabActivo) {
+        case 'dia': citasBase = citasHoy; break;
+        case 'semana': citasBase = citasSemana; break;
+        case 'mes': citasBase = citasMes; break;
+        default: citasBase = [];
+    }
+    
+    return citasBase.filter(cita =>
+        cita.paciente_nombre.toLowerCase().includes(busqueda.toLowerCase())
+    );
+};
 
     // Calcular totales
     const totalHoy = citasHoy.reduce((total, cita) => total + parseInt(cita.precio), 0);
@@ -78,23 +92,20 @@ function obtenerCitasEsteMes(citas) {
             return <div className="text-white text-center">Cargando...</div>;
         }
 
-        let datosRenderizar = [];
+        let datosFiltrados = citasFiltradas();
         let titulo = '';
         let total = 0;
 
         switch(tabActivo) {
             case 'dia':
-                datosRenderizar = citasHoy;
                 titulo = 'Citas de Hoy';
                 total = totalHoy;
                 break;
             case 'semana':
-                datosRenderizar = citasSemana;
                 titulo = 'Citas de Esta Semana';
                 total = totalSemana;
                 break;
             case 'mes':
-                datosRenderizar = citasMes;
                 titulo = 'Citas de Este Mes';
                 total = totalMes;
                 break;
@@ -105,12 +116,22 @@ function obtenerCitasEsteMes(citas) {
                 <h4 className="text-white"><strong>{titulo}</strong></h4>
                 <div className="text-white mb-3">
                     <strong>Total: ${total.toLocaleString()}</strong> | 
-                    <span className="ms-2">{datosRenderizar.length} citas</span>
+                    <span className="ms-2">{datosFiltrados.length} citas</span>
+                    {busqueda && (
+                        <span className="ms-2 text-info">
+                            (Filtradas : {datosFiltrados.length} de {
+                                tabActivo === 'dia' ? citasHoy.length :
+                                tabActivo === 'semana' ? citasSemana.length :
+                                citasMes.length
+                            })
+
+                        </span>
+                    )}
                 </div>
                 
                 <div className="p-3 mt-2">
                     <ul className="list-group list-group-flush">
-                        {datosRenderizar.map(cita => (
+                        {datosFiltrados.map(cita => (
                             <li key={cita.id} className="list-group-item bg-white text-black rounded-5 mb-2 p-3">
                                 <div className="d-flex justify-content-between align-items-start">
                                     <div className="flex-grow-1">
@@ -138,7 +159,7 @@ function obtenerCitasEsteMes(citas) {
                             </li>
                         ))}
                         
-                        {datosRenderizar.length === 0 && (
+                        {datosFiltrados.length === 0 && (
                             <li className="list-group-item bg-dark text-white rounded-5 p-3 text-center">
                                 No hay citas para este período
                             </li>
@@ -192,36 +213,52 @@ function obtenerCitasEsteMes(citas) {
                     
                     <div className="container flex-grow-1 overflow-auto mt-4 ">
                         {/* Tabs */}
-                        <ul className="nav nav-tabs mt-5  d-flex" role="tablist">
-                            <li className="nav-item" role="presentation">
-                                <button
-                                    className={`nav-link btn rounded-5 ${tabActivo === 'dia' ? 'btn-light' : 'btn-outline-light'} ${tabActivo === 'dia' ? 'bg-white' : 'bg-dark'}`}
-                                    onClick={() => setTabActivo('dia')}
-                                    style={{ color: tabActivo === 'dia' ? "black" : "white" }}
-                                >
-                                    <strong>Día</strong>
-                                </button>
-                            </li>
-                            <li className="nav-item" role="presentation">
-                                <button
-                                    className={`nav-link btn rounded-5 ${tabActivo === 'semana' ? 'btn-light' : 'btn-outline-light'} ${tabActivo ==='semana' ? 'bg-white' : 'bg-dark'}`}
-                                    onClick={() => setTabActivo('semana')}
-                                    style={{ color: tabActivo === 'semana' ? "black" : "white" }}
-                                >
-                                    <strong>Semana</strong>
-                                </button>
-                            </li>
-                            <li className="nav-item" role="presentation">
-                                <button
-                                    className={`nav-link btn rounded-5 mb-1 ${tabActivo === 'mes' ? 'btn-light' : 'btn-outline-light'} ${tabActivo === 'mes' ? 'bg-white' : 'bg-dark'}`}
-                                    onClick={() => setTabActivo('mes')}
-                                    style={{ color: tabActivo === 'mes' ? "black" : "white" }}
-                                >
-                                    <strong>Mes</strong>
-                                </button>
-                            </li>
-                        </ul>
-                        
+                        <div className=''>
+
+                            <ul className="nav nav-tabs mt-5  d-flex" role="tablist">
+                                <li className="nav-item me-2" role="presentation">
+                                    <button
+                                        className={`nav-link btn rounded-5 ${tabActivo === 'dia' ? 'btn-light' : 'btn-outline-light'} ${tabActivo === 'dia' ? 'bg-white' : 'bg-dark'}`}
+                                        onClick={() => setTabActivo('dia')}
+                                        style={{ color: tabActivo === 'dia' ? "black" : "white" }}
+                                    >
+                                        <strong>Día</strong>
+                                    </button>
+                                </li>
+                                <li className="nav-item me-2" role="presentation">
+                                    <button
+                                        className={`nav-link btn rounded-5 ${tabActivo === 'semana' ? 'btn-light' : 'btn-outline-light'} ${tabActivo ==='semana' ? 'bg-white' : 'bg-dark'}`}
+                                        onClick={() => setTabActivo('semana')}
+                                        style={{ color: tabActivo === 'semana' ? "black" : "white" }}
+                                    >
+                                        <strong>Semana</strong>
+                                    </button>
+                                </li>
+                                <li className="nav-item" role="presentation">
+                                    <button
+                                        className={`nav-link btn rounded-5 mb-1 ${tabActivo === 'mes' ? 'btn-light' : 'btn-outline-light'} ${tabActivo === 'mes' ? 'bg-white' : 'bg-dark'}`}
+                                        onClick={() => setTabActivo('mes')}
+                                        style={{ color: tabActivo === 'mes' ? "black" : "white" }}
+                                    >
+                                        <strong>Mes</strong>
+                                    </button>
+                                </li>
+                            
+                                <li className=" nav-item ms-auto">
+                                <div className='d-flex'>
+                                                <input
+                                                    className="form-control mr-sm-2 rounded-5"
+                                                    type="search"
+                                                    placeholder="Search"
+                                                    aria-label="Search"
+                                                    value={busqueda}
+                                                    onChange={(e) => { setBusqueda(e.target.value) }}
+                                                    style={{ height: '38px' }}
+                                                />
+                                </div>
+                                </li>
+                            </ul>
+                        </div>
                         {/* Contenido */}
                         <div className="tab-content mt-5">
                             {renderContenido()}
