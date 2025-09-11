@@ -26,17 +26,30 @@ export const InicioHome = () => {
         day: 'numeric',
     });
 
+    const obtenerFechaLocal = () => {
     const hoy = new Date();
-    const fechaHoy = hoy.toISOString().split('T')[0]; // YYYY-MM-DD
+    const year = hoy.getFullYear();
+    const month = String(hoy.getMonth() + 1).padStart(2, '0');
+    const day = String(hoy.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
+
+// Usar la función
+    const fechaHoy = obtenerFechaLocal();
 
     // Función para obtener el lunes de la semana actual
-    const obtenerLunesSemana = (fecha) => {
-        const dia = new Date(fecha);
-        const diaSemana = dia.getDay();
-        const diasHastaLunes = diaSemana === 0 ? -6 : 1 - diaSemana;
-        dia.setDate(dia.getDate() + diasHastaLunes);
-        return dia;
-    };
+    const obtenerLunesSemana = () => {
+    const hoy = new Date();
+    const dia = hoy.getDay(); // 0 = domingo, 1 = lunes, etc.
+    
+    // Calcular cuántos días retroceder para llegar al lunes
+    const diasAtras = dia === 0 ? 6 : dia - 1;
+    
+    const lunes = new Date(hoy);
+    lunes.setDate(hoy.getDate() - diasAtras);
+    
+    return lunes;
+};
 
     // Función para obtener datos de citas y pacientes
     const obtenerCitas = async () => {
@@ -75,7 +88,7 @@ export const InicioHome = () => {
                     paciente: pacientesMap[cita.paciente_id] || null
                 }));
                 
-                procesarDatosCitas(citasConPacientes);
+                procesarDatosCitas(citasConPacientes, fechaHoy);
             }
         } catch (error) {
             console.error('Error al obtener citas:', error);
@@ -97,8 +110,9 @@ const crearFechaLocal = (fechaString, horaString = null) => {
 };
 
 // Función para procesar los datos de las citas
-const procesarDatosCitas = (citas) => {
+const procesarDatosCitas = (citas, fechaHoy ) => {
     const ahora = new Date();
+
     const lunesSemanaActual = obtenerLunesSemana(ahora);
     const lunesSemanaAnterior = new Date(lunesSemanaActual);
     lunesSemanaAnterior.setDate(lunesSemanaActual.getDate() - 7);
@@ -110,12 +124,12 @@ const procesarDatosCitas = (citas) => {
     // Encontrar próxima cita
     const citasFuturas = citas
         .filter(cita => {
-            const fechaCita = crearFechaLocal(cita.fecha, cita.hora); // ✅ Usar función helper
+            const fechaCita = crearFechaLocal(cita.fecha, cita.hora); // Usar función helper
             return fechaCita > ahora;
         })
         .sort((a, b) => {
-            const fechaA = crearFechaLocal(a.fecha, a.hora); // ✅ Usar función helper
-            const fechaB = crearFechaLocal(b.fecha, b.hora); // ✅ Usar función helper
+            const fechaA = crearFechaLocal(a.fecha, a.hora); // Usar función helper
+            const fechaB = crearFechaLocal(b.fecha, b.hora); // Usar función helper
             return fechaA - fechaB;
         });
 
@@ -130,17 +144,22 @@ const procesarDatosCitas = (citas) => {
     for (let i = 0; i < 7; i++) {
         const fecha = new Date(lunesSemanaActual);
         fecha.setDate(lunesSemanaActual.getDate() + i);
-        const fechaStr = fecha.toISOString().split('T')[0];
+        const fechaStr = `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}-${String(fecha.getDate()).padStart(2, '0')}`;
         
         const citasDelDia = citas.filter(cita => cita.fecha === fechaStr).length;
+
+        // Obtener el día real de la semana
+        const diaRealSemana = fecha.getDay(); // 0=domingo, 1=lunes, etc.
+        const indiceDia = diaRealSemana === 0 ? 6 : diaRealSemana - 1; // Convertir a índice 0-6 donde 0=lunes
         
         citasSemanaActual.push({
-            day: diasSemana[i],
+            day: diasSemana[indiceDia],
             value: citasDelDia,
-            label: diasSemana[i][0]
+            label: diasSemana[indiceDia][0],
+            fecha: fechaStr
         });
     }
-    
+
     setCitasSemana(citasSemanaActual);
 
     // Calcular estadísticas
