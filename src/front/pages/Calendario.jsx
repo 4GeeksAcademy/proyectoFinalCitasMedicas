@@ -174,8 +174,8 @@ const Calendario = () => {
                     <div className="row g-2 mb-3">
                         {diasSemana.map(dia => (
                             <div key={dia} className="col">
-                                <div className="bg-white rounded-5 text-center py-2">
-                                    <strong className="text-muted">{dia}</strong>
+                                <div className="bg-black rounded-5 text-center py-2 border">
+                                    <strong className="text-white">{dia}</strong>
                                 </div>
                             </div>
                         ))}

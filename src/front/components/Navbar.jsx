@@ -9,7 +9,7 @@ export const Navbar = () => {
 					<div className="d-flex">
 						<img className="my-3 mx-3" src="/src/front/assets/img/logo-black.png" alt="logomedAgend" style={{ width: '50px', height: 'auto' }} />
 						
-						<Link to="/landing-n1" className="text-decoration-none text-dark">
+						<Link to="/" className="text-decoration-none text-dark">
 							<h3 className="d-flex mt-3 pt-3 mx-3 ">MedAgend</h3>
 						</Link>
 					</div>

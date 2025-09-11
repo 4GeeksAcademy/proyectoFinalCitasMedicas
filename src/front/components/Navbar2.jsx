@@ -20,7 +20,7 @@ export const Navbar2 = () => {
     return (
 
         <div className="d-flex flex-column flex-shrink-0 text-white bg-dark rounded-5 pt-5" style={{ width: "280px", height: "95vh" }}>
-            <Link to="/landing-n1" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <Link to="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
 
                 <div className="ps-5">
                     <img className="mb-1 mx-auto" src="/src/front/assets/img/logo-white.png" alt="logomedAgend" style={{ width: '120px', height: 'auto' }} />

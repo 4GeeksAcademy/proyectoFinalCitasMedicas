@@ -474,7 +474,7 @@ async function eliminarPaciente(pacienteId) {
                                                                                 <div className="d-flex justify-content-center">
                                                                                 </div>
                                                                                 <div className="p-3 bg-dark text-white rounded-5 text-start mt-2 h-100">
-                                                                                    <p><strong>Nota</strong></p>
+                                                                                    <p><i className="fa-solid fa-note-sticky me-2"></i><strong>Nota</strong></p>
                                                                                     <div> <strong><p >
                                                                                         {paciente.nota || 'Sin notas adicionales'}</p></strong>
                                                                                     </div>

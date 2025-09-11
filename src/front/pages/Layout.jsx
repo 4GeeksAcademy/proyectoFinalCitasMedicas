@@ -9,7 +9,7 @@ export const Layout = () => {
 
     const location = useLocation();
 
-    const showNavbarFooterRoutes = ['/landing-n1', '/sing-in', '/register'];
+    const showNavbarFooterRoutes = ['/', '/sing-in', '/register'];
     const shouldShowNavbarFooter = showNavbarFooterRoutes.includes(location.pathname);
 
 
