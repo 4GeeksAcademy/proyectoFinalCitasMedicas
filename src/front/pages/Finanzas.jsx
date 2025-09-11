@@ -134,7 +134,7 @@ export const Finanzas = () => {
                     <div className="col-md-6 text-end pe-4">
                         <span className="me-2"><strong> Modalidad de citas: </strong></span>
                         <span className="badge bg-white text-black me-2 rounded-5">
-                            <i className="fa-solid fa-house-laptop"></i>Virtual: {modalidades.virtual}
+                            <i className="fa-solid fa-video me-2"></i>Virtual: {modalidades.virtual}
                         </span>
                         <span className="badge bg-white text-black rounded-5">
                             <i className="fa-solid fa-location-dot"></i> Presencial: {modalidades.presencial}
