@@ -1,5 +1,9 @@
-# ignore all files starting with .
-.*
+# ignore hidden files and folders (but not file extensions)
+.DS_Store
+.env
+.vscode/
+.idea/
+.cache/
 
 # track this file .gitignore (i.e. do NOT ignore it)
 !.gitignore
