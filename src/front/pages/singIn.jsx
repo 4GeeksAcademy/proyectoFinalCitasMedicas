@@ -85,7 +85,7 @@ const SingIn = () => {
                         <div className="container col-5 bg-white rounded-5 mt-5 pb-2 ">
                             <div className="text-black d-flex justify-content-center flex-column pt-4 pb-4">
                                 <div className="d-flex justify-content-center">
-                                    <img className="my-3 mx-3" src="/src/front/assets/img/logo-black.png" alt="logomedAgend" style={{ width: '50px', height: 'auto', }} />
+                                    <img className="my-3 mx-3" src="/img/logo-black.png" alt="logomedAgend" style={{ width: '50px', height: 'auto', }} />
                                 </div>
                                 <div className="text-center">
                                     <h1><strong>Bienvenido</strong></h1>

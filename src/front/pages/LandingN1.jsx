@@ -36,7 +36,7 @@ export const LandingN1 = () => {
             
             <div className="container pt-3 my-5 mt-0 text-center">
                  <div className="rounded-5 bg-dark py-5">   
-                    <img className="mb-1" src="/src/front/assets/img/logo-white.png" alt="logoClinicoo" style={{ width: '140px', height: 'auto' }} />
+                    <img className="mb-1" src="/img/logo-white.png" alt="logoClinicoo" style={{ width: '140px', height: 'auto' }} />
                     <div className="col-lg-6 mx-auto">
                         <p className="lead mb-4 text-white mt-5">
                             {displayedText}
@@ -62,7 +62,7 @@ export const LandingN1 = () => {
                     <div className="container-fluid row row-cols-1 row-cols-md-3 mb-3 d-flex flex-colunm justify-content-evenly my-5 ">
                         
                         <div className="card border border-white" style={{ width: '58rem' }}>
-                            <img src="/src/front/assets/img/vistasWeb.png" className="card-img-top" alt="..." />
+                            <img src="/img/vistasWeb.png" className="card-img-top" alt="..." />
                         </div>
                         
                     </div>

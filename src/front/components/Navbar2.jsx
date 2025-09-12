@@ -23,7 +23,7 @@ export const Navbar2 = () => {
             <Link to="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
 
                 <div className="ps-5">
-                    <img className="mb-1 mx-auto" src="/src/front/assets/img/logo-white.png" alt="logomedAgend" style={{ width: '120px', height: 'auto' }} />
+                    <img className="mb-1 mx-auto" src="/img/logo-white.png" alt="logomedAgend" style={{ width: '120px', height: 'auto' }} />
                 </div>
             </Link>
             <hr />
