@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar2 } from "../components/Navbar2";
+import { Link } from 'react-router-dom';
 
 const Calendario = () => {
     const [mesActual, setMesActual] = useState(new Date().getMonth());
@@ -214,8 +215,8 @@ const Calendario = () => {
                                             
                                             {/* Mostrar hasta 2 citas para evitar overflow */}
                                             {citasDelDia.slice(0, 2).map((cita, citaIndex) => (
-                                                <div key={citaIndex} className={`badge rounded-5 d-block text-truncate mb-1 ${cita.estado_pago === 'Cancelado' ? 'bg-success' : 'bg-warning'}`} style={{ fontSize: '9px' }}>
-                                                    {formatearHora(cita.hora)} {(cita.paciente?.nombre || cita.paciente_nombre).split(' ')[0]}
+                                                <div key={citaIndex} className={`badge rounded-5 d-block text-truncate  mb-1 ${cita.estado_pago === 'Cancelado' ? 'bg-dark' : 'bg-secondary'}`} style={{ fontSize: '9px' }}>
+                                                    <i className="fa-solid fa-clock text-white me-1"></i>{formatearHora(cita.hora)} - {(cita.paciente?.nombre)}
                                                 </div>
                                             ))}
                                             
@@ -272,7 +273,13 @@ const Calendario = () => {
                                             <i className="fa-regular fa-calendar-xmark fs-1 text-muted mb-3"></i>
                                             <h5 className="text-muted">No hay citas programadas</h5>
                                             <p className="text-muted">para este día</p>
+                                            <Link to="/agregar-cita">
+                                                <button type="button" className="btn btn-outline-dark rounded-5 mt-5">
+                                                    <i className="fa-solid fa-user-plus me-2"></i>Agregar Cita
+                                                </button>
+                                            </Link>
                                         </div>
+                                        
                                     ) : (
                                         <>
                                             <div className="row mb-3">
@@ -306,7 +313,7 @@ const Calendario = () => {
                                                                     <div className="col-8">
                                                                         <div className="d-flex align-items-center">
                                                                             <div className="me-3">
-                                                                                <i className="fa-solid fa-clock text-primary me-1"></i>
+                                                                                <i className="fa-solid fa-clock text-white me-1"></i>
                                                                                 <small className="fw-bold">{formatearHora(cita.hora)}</small>
                                                                             </div>
                                                                             <div>
@@ -326,7 +333,7 @@ const Calendario = () => {
                                                                         </div>
                                                                     </div>
                                                                     <div className="col-4 text-end">
-                                                                        <div className="badge bg-light text-dark rounded-5 mb-1">
+                                                                        <div className="badge bg-light text-dark rounded-5 mb-1 me-2">
                                                                             <i className="fa-solid fa-dollar-sign me-1"></i>
                                                                             {parseInt(cita.precio).toLocaleString()}
                                                                         </div>

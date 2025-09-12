@@ -108,7 +108,7 @@ export const Pacientes = () => {
     const confirmToast = (message, onConfirm) => {
         const toastId = toast(
             (t) => (
-                <div className="text-center">
+                <div className="text-center mt-2">
                     <p className="mb-3">{message}</p>
                     <div className="d-flex gap-2 justify-content-center">
                         <button
@@ -147,7 +147,7 @@ async function eliminarPaciente(pacienteId) {
         }
 
         confirmToast(
-            '¿Estás seguro de que quieres eliminar este paciente?',
+            '¿Estás seguro qué quieres eliminar este paciente?',
             
             async () => {
                 try {

@@ -55,19 +55,55 @@ export const LandingN1 = () => {
             </div>
                 <Spaces />
 
-                {/* Vistas web */}
+                {/* Vistas web carousel */}
             
-            <div>
-                <div className="container">
-                    <div className="container-fluid row row-cols-1 row-cols-md-3 mb-3 d-flex flex-colunm justify-content-evenly my-5 ">
+            
+            <div className="container">
+                <div className="container-fluid row row-cols-1 row-cols-md-3 mb-3 d-flex flex-colunm justify-content-evenly my-5">
+                    
+                    {/* Bootstrap Carousel */}
+                    <div id="imageCarousel" className="carousel slide" data-bs-ride="carousel" style={{ width: '58rem' }}>
                         
-                        <div className="card border border-white" style={{ width: '58rem' }}>
-                            <img src="/img/vistasWeb.png" className="card-img-top" alt="..." />
+                        {/* Indicators */}
+                        <div className="carousel-indicators">
+                            <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         </div>
                         
+                        {/* Slides */}
+                        <div className="carousel-inner">
+                            <div className="carousel-item active">
+                                <div className="card border border-white">
+                                    <img src="/img/vistasWeb.png" className="card-img-top" alt="Vista Web 1" />
+                                </div>
+                            </div>
+                            <div className="carousel-item">
+                                <div className="card border border-white">
+                                    <img src="/img/CalendarioScroll.png" className="card-img-top" alt="Vista Web 2" />
+                                </div>
+                            </div>
+                            <div className="carousel-item">
+                                <div className="card border border-white">
+                                    <img src="/img/reporteFinanciero.png" className="card-img-top" alt="Vista Web 3" />
+                                </div>
+                            </div>
+                        
+                        
+                        {/* Controls */}
+                        <button className="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button className="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span className="visually-hidden">Next</span>
+                        </button>
                     </div>
+                    
                 </div>
             </div>
+        </div>
 
             <Spaces />
 
@@ -203,9 +239,11 @@ export const LandingN1 = () => {
                                         <i className="fa-solid fa-user-check me-2"></i>Creación y edición de citas
                                     </li>
                                 </ul>
-                                <button type="button" className="w-100 btn btn-lg btn-outline-dark">
-                                    Empezar gratis
-                                </button>
+                                <Link to="sing-in">
+                                    <button type="button" className="w-100 btn btn-lg btn-outline-dark">
+                                        Empezar gratis
+                                    </button>
+                                </Link>   
                             </div>
                         </div>
                     </div>
