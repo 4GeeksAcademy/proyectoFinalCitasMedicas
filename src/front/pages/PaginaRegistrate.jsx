@@ -54,7 +54,7 @@ const PaginaRegistrate = () => {
       navigate('/sing-in')
     } else {
       const error = await response.json();
-      alert(error.error || 'Error en el registro')
+      toast.error(error.error || 'Error en el registro')
     }
 
   }
