@@ -142,7 +142,7 @@ export const Finanzas = () => {
                     </div>
                 </div>
 
-                <div className="p-3 mt-2">
+                <div className="flex-grow-1 overflow-auto" style={{ maxHeight: '50vh' }}>
                     <ul className="list-group list-group-flush">
                         {datosFiltrados.map(cita => (
                             <li key={cita.id} className="list-group-item bg-white text-black rounded-5 mb-2 p-3">

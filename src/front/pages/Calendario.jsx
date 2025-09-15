@@ -144,10 +144,10 @@ const Calendario = () => {
         <div className="bg-black" style={{ margin: 0, paddingTop: '15px', minHeight: '100vh' }}>
             <div className="d-flex">
                 <Navbar2 />
-                <div className="col bg-dark rounded-5 mx-3 p-4">
+                <div className="col bg-dark rounded-5 mx-3 p-4 d-flex flex-column" style={{ height: 'calc(100vh - 30px)' }}>
                     
                     {/* Header del calendario */}
-                    <div className="d-flex justify-content-between align-items-center mb-4">
+                    <div className="d-flex justify-content-between align-items-center mb-4 flex-shrink-0">
                         <h2 className="text-white mb-0">Calendario de Citas</h2>
                         <div className="d-flex gap-2">
                             <select 
@@ -172,7 +172,7 @@ const Calendario = () => {
                     </div>
 
                     {/* Días de la semana */}
-                    <div className="row g-2 mb-3">
+                    <div className="row g-2 mb-3 flex-shrink-0">
                         {diasSemana.map(dia => (
                             <div key={dia} className="col">
                                 <div className="bg-black rounded-5 text-center py-2 border">
@@ -184,48 +184,61 @@ const Calendario = () => {
 
                     {/* Grid del calendario */}
                     {loading ? (
-                        <div className="text-center text-white py-5">
-                            <div className="spinner-border" role="status">
-                                <span className="visually-hidden">Cargando...</span>
+                        <div className="text-center text-white py-5 flex-grow-1 d-flex align-items-center justify-content-center">
+                            <div>
+                                <div className="spinner-border" role="status">
+                                    <span className="visually-hidden">Cargando...</span>
+                                </div>
                             </div>
                         </div>
                     ) : (
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gridTemplateRows: 'repeat(6, 1fr)', gap: '8px', height: '500px' }}>
+                        <div 
+                            className="flex-grow-1"
+                            style={{ 
+                                display: 'grid', 
+                                gridTemplateColumns: 'repeat(7, 1fr)', 
+                                gridTemplateRows: 'repeat(6, 1fr)', 
+                                gap: '8px',
+                                minHeight: '300px' // Altura mínima para pantallas pequeñas
+                            }}
+                        >
                             {dias.map((diaInfo, index) => {
                                 const citasDelDia = obtenerCitasDelDia(diaInfo.fecha);
                                 const esHoy = diaInfo.fecha === fechaHoy;
                                 
                                 return (
-                                    <div key={index}>
+                                    <div key={index} className="d-flex">
                                         <div
                                             onClick={() => manejarClicDia(diaInfo)}
-                                            className={`bg-white rounded-5 p-2 h-100 cursor-pointer ${esHoy ? 'border border-info border-2' : ''} ${diaInfo.esOtroMes ? 'opacity-50' : ''}`}
+                                            className={`bg-white rounded-5 p-2 flex-grow-1 cursor-pointer ${esHoy ? 'border border-info border-2' : ''} ${diaInfo.esOtroMes ? 'opacity-50' : ''}`}
                                             role="button"
                                             style={{ 
                                                 cursor: 'pointer',
                                                 transition: 'all 0.2s',
-                                                minHeight: '100px',
-                                                maxHeight: '80px',
-                                                overflow: 'hidden'
+                                                overflow: 'hidden',
+                                                display: 'flex',
+                                                flexDirection: 'column'
                                             }}
                                         >
-                                            <div className={`fw-bold ${esHoy ? 'text-primary' : 'text-dark'} mb-1`}>
+                                            <div className={`fw-bold ${esHoy ? 'text-primary' : 'text-dark'} mb-1 flex-shrink-0`}>
                                                 {diaInfo.dia}
                                             </div>
                                             
-                                            {/* Mostrar hasta 2 citas para evitar overflow */}
-                                            {citasDelDia.slice(0, 2).map((cita, citaIndex) => (
-                                                <div key={citaIndex} className={`badge rounded-5 d-block text-truncate  mb-1 ${cita.estado_pago === 'Cancelado' ? 'bg-dark' : 'bg-secondary'}`} style={{ fontSize: '9px' }}>
-                                                    <i className="fa-solid fa-clock text-white me-1"></i>{formatearHora(cita.hora)} - {(cita.paciente?.nombre)}
-                                                </div>
-                                            ))}
-                                            
-                                            {/* Indicador de más citas */}
-                                            {citasDelDia.length > 2 && (
-                                                <div className="text-muted text-center" style={{ fontSize: '9px' }}>
-                                                    +{citasDelDia.length - 2} más
-                                                </div>
-                                            )}
+                                            <div className="flex-grow-1 overflow-hidden">
+                                                {/* Mostrar hasta 2 citas para evitar overflow */}
+                                                {citasDelDia.slice(0, 2).map((cita, citaIndex) => (
+                                                    <div key={citaIndex} className={`badge rounded-5 d-block text-truncate mb-1 ${cita.estado_pago === 'Cancelado' ? 'bg-dark' : 'bg-secondary'}`} style={{ fontSize: '9px' }}>
+                                                        <i className="fa-solid fa-clock text-white me-1"></i>{formatearHora(cita.hora)} - {(cita.paciente?.nombre)}
+                                                    </div>
+                                                ))}
+                                                
+                                                {/* Indicador de más citas */}
+                                                {citasDelDia.length > 2 && (
+                                                    <div className="text-muted text-center" style={{ fontSize: '9px' }}>
+                                                        +{citasDelDia.length - 2} más
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 );
