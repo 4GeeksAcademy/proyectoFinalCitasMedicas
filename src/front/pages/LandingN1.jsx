@@ -112,7 +112,7 @@ export const LandingN1 = () => {
 
 
             <div id="caracteristicas" className="container py-5 text-white  bg-dark rounded-5">
-                <h2  className="pb-2 border-bottom text-center">Características</h2>
+                <h2  className="pb-2 border-bottom text-center">Características <strong>Destacadas</strong></h2>
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center pt-5 text-center w-auto h-auto">
 
                     <div className="d-flex flex-column">
@@ -124,7 +124,7 @@ export const LandingN1 = () => {
                                 <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Organiza
                                 </h3>
-                                <p>Reorganiza citas en segundos, incluso sobre la marcha. Olvídate de perder tiempo reescribiendo horarios.</p>
+                                <p>Manten toda la información de tus pacientes en un solo lugar, modulos independientes para citas, pacientes, reporte financiero.</p>
                                 <p></p>
                             </div>
                         </div>
@@ -144,6 +144,19 @@ export const LandingN1 = () => {
                     </div>
                     <div className="d-flex flex-column">
                         <div>
+                            <i className="fa-solid fa-comments-dollar fa-2xl"></i>
+                        </div>
+                        <div className="col d-flex align-items-start">
+                            <div>
+                                <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
+                                    Reporte financiero 
+                                </h3>
+                                <p>Un módulo entero automatizado con datos sobre tus ingresos, comparativo sobre ingresos diarios, semanales y mesuales.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="d-flex flex-column">
+                        <div>
                             <i className="fa-solid fa-users-viewfinder fa-2xl"></i>
                         </div>
                         <div className="col d-flex align-items-start">
@@ -151,7 +164,7 @@ export const LandingN1 = () => {
                                 <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Busqueda al instante
                                 </h3>
-                                <p>Encuentra cualquier paciente con búsqueda en tiempo real (por nombre, teléfono o diagnóstico). Filtra por últimos atendidos, frecuentes o morosos.</p>
+                                <p>Encuentra cualquier paciente con búsqueda en tiempo real por nombre. Filtra por últimas citas atendidas.</p>
                             </div>
                         </div>
                     </div>
@@ -164,7 +177,7 @@ export const LandingN1 = () => {
                                 <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Compara
                                 </h3>
-                                <p>Compara semana vs semana: pacientes atendidos. Identifica tendencias con gráficos de líneas/barras.</p>
+                                <p>Compara semana vs semana: pacientes atendidos. Identifica tendencias con gráficos de líneas/barras, información clara sobre tu próxima cita.</p>
                             </div>
                         </div>
                     </div>
@@ -177,7 +190,7 @@ export const LandingN1 = () => {
                                 <h3 className="fw-bold mb-0 fs-4 text-body-white mt-3 mb-3">
                                     Agenda visual
                                 </h3>
-                                <p>Ve tu día completo de un vistazo. Identifica espacios libres y tipos de cita al instante.</p>   
+                                <p>Ve tu día completo de un vistazo. Identifica espacios libres y tipos de cita y detalles del paciente al instante.</p>   
                             </div>
                         </div>
                     </div>
@@ -238,6 +251,9 @@ export const LandingN1 = () => {
                                     <li>
                                         <i className="fa-solid fa-user-check me-2"></i>Creación y edición de citas
                                     </li>
+                                    <li>
+                                        <i className="fa-solid fa-coins me-2"></i>Reporte financiero automatizado
+                                    </li>
                                 </ul>
                                 <Link to="sing-in">
                                     <button type="button" className="w-100 btn btn-lg btn-outline-dark">
@@ -256,12 +272,15 @@ export const LandingN1 = () => {
                             </div>
                             <div className="card-body">
                                 <h1 className="card-title pricing-card-title">
-                                    $10
+                                    $20
                                     <small className="text-body-secondary fw-light">
                                         /mo
                                     </small>
                                 </h1>
                                 <ul className="list-unstyled mt-3 mb-4">
+                                    <li>
+                                        <i className="fa-solid fa-plus text-center"></i> 
+                                    </li>
                                     <li>
                                         <i className="fa-solid fa-user-group me-2"></i>Múltiples usuarios 
                                     </li>
@@ -269,10 +288,10 @@ export const LandingN1 = () => {
                                         <i className="fa-solid fa-book-medical me-2"></i>Agenda compartida
                                     </li>
                                     <li>
-                                        <i className="fa-solid fa-coins me-2"></i>Reporte financiero
+                                        <i className="fa-solid fa-user-shield me-2"></i>Control de permisos
                                     </li>
                                     <li>
-                                        <i className="fa-solid fa-user-shield me-2"></i>Control de permisos
+                                        <i className="fa-solid fa-pen-to-square me-2"></i>Edición de citas drag and drop
                                     </li>
                                 </ul>
                                 <button type="button" disabled className="w-100 btn btn-lg btn-outline-dark">
