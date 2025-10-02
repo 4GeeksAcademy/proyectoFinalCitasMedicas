@@ -68,6 +68,9 @@ def register():
     if not body.get('name') or not body.get('phone'):
         return jsonify({"error": "Nombre y teléfono son requeridos"}), 400
 
+    if not body.get('password') or len(body['password']) < 8:
+        return jsonify({"error": "la contraseña debe tener al menos 8 carácteres"}), 400
+
     if User.query.filter_by(email=body['email']).first():
         return jsonify({"error": "Email ya existe"}), 400
 
