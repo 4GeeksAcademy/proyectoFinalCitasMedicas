@@ -12,6 +12,7 @@ from api.email_client import send_email
 import os
 from flask import current_app
 from werkzeug.security import check_password_hash, generate_password_hash
+import re
 
 
 api = Blueprint('api', __name__)
@@ -65,11 +66,20 @@ def login():
 def register():
     body = request.get_json()
 
+    #obtener password del body para validacion de requerimeinto de mayúscula y número en password
+    password = body.get('password', '')
+
     if not body.get('name') or not body.get('phone'):
         return jsonify({"error": "Nombre y teléfono son requeridos"}), 400
 
     if not body.get('password') or len(body['password']) < 8:
         return jsonify({"error": "la contraseña debe tener al menos 8 carácteres"}), 400
+
+    if not re.search(r'[A-Z]', password):
+        return jsonify({"error": "La contraseña debe tener al menos una mayúscula"}), 400
+
+    if not re.search(r'[0-9]', password):
+        return jsonify({"error": "La contraseña debe tener al menos un número"}), 400
 
     if User.query.filter_by(email=body['email']).first():
         return jsonify({"error": "Email ya existe"}), 400
@@ -82,7 +92,7 @@ def register():
         name=body['name'],
         email=body['email'],
         phone=body['phone'],
-        password=generate_password_hash(body['password']),
+        password=generate_password_hash(password),
         is_active=True
     )
 
