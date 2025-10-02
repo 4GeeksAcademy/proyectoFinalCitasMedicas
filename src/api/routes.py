@@ -11,6 +11,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from api.email_client import send_email
 import os
 from flask import current_app
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 api = Blueprint('api', __name__)
@@ -38,7 +39,7 @@ def login():
     password = request.json.get("password", None)
 
 # se pregunta si tiene email
-    if not email:
+    if not email or not password:
         return jsonify({"msg": "Bad email or password in body."}), 401
 # buscamos el usuario por email
     user = User.query.filter_by(email=email).one_or_none()
@@ -47,7 +48,7 @@ def login():
     if not user:
         return jsonify({"msg": "Bad username or password"}), 401
     # pregunta si está bien el password
-    if user.password != password:
+    if not check_password_hash(user.password, password):
         return jsonify({"msg": "Bad username or password"}), 401
 # si todo coincide crea el token y puede acceder
     access_token = create_access_token(identity=email)
@@ -78,7 +79,7 @@ def register():
         name=body['name'],
         email=body['email'],
         phone=body['phone'],
-        password=body['password'],
+        password=generate_password_hash(body['password']),
         is_active=True
     )
 

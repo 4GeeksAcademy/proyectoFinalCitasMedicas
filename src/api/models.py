@@ -10,7 +10,7 @@ class User(db.Model):
     name: Mapped[str] =mapped_column(String(80), nullable=True)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     phone: Mapped[str] = mapped_column(String(20), unique=True, nullable=True)
-    password: Mapped[str] = mapped_column(nullable=False)
+    password: Mapped[str] = mapped_column(String(), nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False)
 
     #Relaciones uno-a-muchos
